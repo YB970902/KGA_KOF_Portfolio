@@ -1,6 +1,7 @@
 #pragma once
 #include "Config.h"
 #include "GameEntity.h"
+#include "Character.h"
 
 class Image;
 class MainGame : public GameEntity
@@ -17,6 +18,10 @@ private:
 
 	Image* backBuffer;
 	Image* backGround;
+
+	Character Rect;
+
+
 
 public:
 	void Init();

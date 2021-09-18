@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "Image.h"
 
+
 void MainGame::Init()
 {
 	MGR_KEY->Init();
@@ -15,16 +16,23 @@ void MainGame::Init()
 	clickedMousePosX = 0;
 	clickedMousePosY = 0;
 
+	Rect.Init();
+
 	backBuffer = new Image;
 	backBuffer->Init(WIN_SIZE_X, WIN_SIZE_Y);
 
 	backGround = new Image;
 	backGround->Init("Image/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
+
 }
 
 void MainGame::Update()
 {
 	InvalidateRect(g_hWnd, NULL, false);
+
+	Rect.Update();
+
+
 }
 
 void MainGame::Render(HDC hdc)
@@ -34,14 +42,18 @@ void MainGame::Render(HDC hdc)
 	backGround->Render(hBackBufferDC);
 
 	// 이 부분에서 렌더링 작업
+	Rect.Render(hBackBufferDC);
 
 	backBuffer->Render(hdc);
 }
 
 void MainGame::Release()
 {
+
 	SAFE_RELEASE(backBuffer);
 	SAFE_RELEASE(backGround);
+
+	Rect.Release();
 
 	KillTimer(g_hWnd, 0);
 

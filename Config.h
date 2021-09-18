@@ -19,7 +19,7 @@ using namespace std;
 
 #define SAFE_RELEASE(p)	{ if (p) { p->Release(); delete p; p = nullptr; } }
 
-enum MoveDir { Left, Right, Up, Down };
+enum class MoveDir { Left, Right, Up, Down };
 
 extern HWND g_hWnd;
 extern HINSTANCE g_hInstance;
