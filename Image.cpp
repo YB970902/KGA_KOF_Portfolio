@@ -104,6 +104,8 @@ void Image::Render(HDC hdc)
 	BitBlt(hdc, 0, 0, imageInfo->width, imageInfo->height, imageInfo->hMemDc, 0, 0, SRCCOPY);		
 }
 
+//여기다가 숨겨뒀습니당다라당당
+
 void Image::Render(HDC hdc, int destX, int destY)
 {
 	if (isTransparent)
