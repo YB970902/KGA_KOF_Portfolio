@@ -7,10 +7,6 @@
 		이 함수 사용시 isTransparent가 false인 경우 정상작동 안함 수정해야함
 */
 
-// Image 클래스 기능 개선
-
-
-
 class Image
 {
 public:
