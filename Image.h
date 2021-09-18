@@ -7,6 +7,8 @@
 		이 함수 사용시 isTransparent가 false인 경우 정상작동 안함 수정해야함
 */
 
+// 수정 테스트
+
 class Image
 {
 public:
