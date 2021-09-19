@@ -47,10 +47,10 @@ void Character::Init()
 	bodySize = 25;
 	mHP = 100;
 	
-	shape.left = (LONG)pos.x - bodySize;
-	shape.top = (LONG)pos.y - bodySize;
-	shape.right = (LONG)pos.x + bodySize;
-	shape.bottom = (LONG)pos.y + bodySize;
+	shape.left = (int)pos.x - bodySize;
+	shape.top = (int)pos.y - bodySize;
+	shape.right = (int)pos.x + bodySize;
+	shape.bottom = (int)pos.y + bodySize;
 
 	moveSpeed = 10.0f;
 }
@@ -65,10 +65,10 @@ void Character::Update()
 		AllOffHitBox();
 	}
 
-	shape.left = (LONG)pos.x - bodySize;
-	shape.top = (LONG)pos.y - bodySize;
-	shape.right = (LONG)pos.x + bodySize;
-	shape.bottom = (LONG)pos.y + bodySize;
+	shape.left = (int)pos.x - bodySize;
+	shape.top = (int)pos.y - bodySize;
+	shape.right = (int)pos.x + bodySize;
+	shape.bottom = (int)pos.y + bodySize;
 }
 
 void Character::Render(HDC hdc)
@@ -76,14 +76,14 @@ void Character::Render(HDC hdc)
 	Rectangle(hdc, shape.left, shape.top, shape.right, shape.bottom);
 
 	if (mTarget && IsCollided(mSmallHitBox, mTarget->shape))
-	{
-		TextOut(hdc, mTarget->pos.x, mTarget->pos.y + 100 , "작은 공격 히트!!!!!!!!!!!!", strlen("작은 공격 히트!!!!!!!!!!!!"));
+	{	
+		TextOut(hdc,(int) mTarget->pos.x, (int)mTarget->pos.y + 100 , "작은 공격 히트!!!!!!!!!!!!", strlen("작은 공격 히트!!!!!!!!!!!!"));
 	}
 
 	if (mTarget && IsCollided(mBigHitBox, mTarget->shape))
 	{
 
-		TextOut(hdc, mTarget->pos.x, mTarget->pos.y + 100 , "큰 공격 히트!!!!!!!!!!!!", strlen("큰 공격 히트!!!!!!!!!!!!"));
+		TextOut(hdc, (int)mTarget->pos.x, (int)mTarget->pos.y + 100 , "큰 공격 히트!!!!!!!!!!!!", strlen("큰 공격 히트!!!!!!!!!!!!"));
 	}
 }
 
@@ -120,7 +120,6 @@ void Character::Move(int dir)
 			{
 				pos.x += moveSpeed * dir;
 			}
-
 		}
 		else
 		{
@@ -145,10 +144,10 @@ void Character::OnBigHitBox()
 	{
 		mFrame = 0;
 
-		mBigHitBox.left = pos.x;
-		mBigHitBox.top = pos.y - 50;
-		mBigHitBox.right = pos.x + 70;
-		mBigHitBox.bottom = pos.y + 50;
+		mBigHitBox.left = (int)pos.x;
+		mBigHitBox.top = (int)pos.y - 50;
+		mBigHitBox.right = (int)pos.x + 70;
+		mBigHitBox.bottom = (int)pos.y + 50;
 	}
 }
 
@@ -169,9 +168,9 @@ void Character::OnSmallHitBox()
 	{
 		mFrame = 0;
 
-		mSmallHitBox.left = pos.x;
-		mSmallHitBox.top = pos.y - 20;
-		mSmallHitBox.right = pos.x + 100;
-		mSmallHitBox.bottom = pos.y;
+		mSmallHitBox.left = (int)pos.x;
+		mSmallHitBox.top = (int)pos.y - 20;
+		mSmallHitBox.right = (int)pos.x + 100;
+		mSmallHitBox.bottom = (int)pos.y;
 	}
 }

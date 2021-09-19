@@ -16,25 +16,25 @@ class Character;
 class MainGame : public GameEntity
 {
 private:
-	HANDLE hTimer;
+	HANDLE hTimer = nullptr;
 
-	char text[128];
+	char text[128] = {} ;
 
-	int mousePosX;
-	int mousePosY;
-	int clickedMousePosX;
-	int clickedMousePosY;
+	int mousePosX = 0;
+	int mousePosY = 0;
+	int clickedMousePosX = 0;
+	int clickedMousePosY = 0;
 
-	Image* backBuffer;
-	Image* backGround;
+	Image* backBuffer = nullptr;
+	Image* backGround = nullptr;
 
-	Character* mRect1;
-	Character* mRect2;
+	Character* mRect1 = nullptr;
+	Character* mRect2 = nullptr;
 
-	Command* mLeftMoveCom;
-	Command* mRightMoveCom;
-	Command* mSmallAttack;
-	Command* mBigAttack;
+	Command* mLeftMoveCom = nullptr;
+	Command* mRightMoveCom = nullptr;
+	Command* mSmallAttack = nullptr;
+	Command* mBigAttack = nullptr;
 
 public:
 	void Init();
