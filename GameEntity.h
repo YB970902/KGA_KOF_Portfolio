@@ -4,9 +4,9 @@
 class GameEntity
 {
 public:
-	void Init();
-	void Update();
-	void Render(HDC hdc);
-	void Release();
+	virtual void Init() = 0;
+	virtual void Update() = 0;
+	virtual void Render(HDC hdc) = 0;
+	virtual void Release() = 0;
 };
 

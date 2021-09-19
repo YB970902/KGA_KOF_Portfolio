@@ -4,31 +4,32 @@
 #include "SceneManager.h"
 #include "Image.h"
 #include "Character.h"
-
+#include "Command.h"
 
 void MainGame::Init()
 {
 	MGR_KEY->Init();
 
-	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
+	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 100 , NULL);
 
 	mousePosX = 0;
 	mousePosY = 0;
 	clickedMousePosX = 0;
 	clickedMousePosY = 0;
 
-	Rect1 = new Character;
-	Rect1->Init();
+	mRect1 = new Character;
+	mRect1->Init();
 	POINTFLOAT pos;
-	pos.x = 200;
+	pos.x = 900;
 	pos.y = WIN_SIZE_Y/2;
-	Rect1->SetPos(pos);
-	Rect1->SetIsControl(true);
+	mRect1->SetPos(pos);
 
-	Rect2 = new Character;
-	Rect2->Init();
+	mRect2 = new Character;
+	mRect2->Init();
 	pos.x = 1000;
-	Rect2->SetPos(pos);
+	mRect2->SetPos(pos);
+
+	mRect1->SetTarget(mRect2);
 
 	backBuffer = new Image;
 	backBuffer->Init(WIN_SIZE_X, WIN_SIZE_Y);
@@ -36,17 +37,64 @@ void MainGame::Init()
 	backGround = new Image;
 	backGround->Init("Image/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 
+	mLeftMoveCom = new Command;
+	mLeftMoveCom->Init(mRect1, Character::LeftMove);
+	mRightMoveCom = new Command;
+	mRightMoveCom->Init(mRect1, Character::RightMove);
+	mSmallAttack = new Command;
+	mSmallAttack->Init(mRect1, Character::OnSmallHitBox);
+	mBigAttack = new Command;
+	mBigAttack->Init(mRect1, Character::OnBigHitBox);
 }
 
 void MainGame::Update()
 {
 	InvalidateRect(g_hWnd, NULL, false);
 	
-	Rect1->Update();
-	Rect2->Update();
-	cout << "Rect1 : " << Rect1->GetIsControl() << endl;
-	cout << "Rect2 : " << Rect2->GetIsControl() << endl;
+	mRect1->Update();
+	mRect2->Update();
 
+	if (mLeftMoveCom->GetCharacter()->GetFrame() >= 5)
+	{
+		if (MGR_KEY->IsOnceKeyDown('G'))
+		{
+			mSmallAttack->Execute();
+		}
+		else if (MGR_KEY->IsOnceKeyDown('Y'))
+		{
+			mBigAttack->Execute();
+		}
+		else if (MGR_KEY->IsStayKeyDown('A'))
+		{
+			mLeftMoveCom->Execute();
+		}
+		else if (MGR_KEY->IsStayKeyDown('D'))
+		{
+			mRightMoveCom->Execute();
+		}
+	}
+
+	if (MGR_KEY->IsOnceKeyDown(VK_SPACE))
+	{
+		if (mLeftMoveCom->GetCharacter() == mRect1)
+		{
+			mLeftMoveCom->Init(mRect2, Character::LeftMove);
+			mRightMoveCom->Init(mRect2, Character::RightMove);
+			mSmallAttack->Init(mRect2, Character::OnSmallHitBox);
+			mBigAttack->Init(mRect2, Character::OnBigHitBox);
+			mRect1->SetTarget(nullptr);
+			mRect2->SetTarget(mRect1);
+		}
+		else
+		{
+			mLeftMoveCom->Init(mRect1, Character::LeftMove);
+			mRightMoveCom->Init(mRect1, Character::RightMove);
+			mSmallAttack->Init(mRect1, Character::OnSmallHitBox);
+			mBigAttack->Init(mRect1, Character::OnBigHitBox);
+			mRect2->SetTarget(nullptr);
+			mRect1->SetTarget(mRect2);
+		}
+	}
 }
 
 void MainGame::Render(HDC hdc)
@@ -56,20 +104,24 @@ void MainGame::Render(HDC hdc)
 	backGround->Render(hBackBufferDC);
 
 	// 이 부분에서 렌더링 작업
-	Rect1->Render(hBackBufferDC);
-	Rect2->Render(hBackBufferDC);
+	mRect1->Render(hBackBufferDC);
+	mRect2->Render(hBackBufferDC);
 
 	backBuffer->Render(hdc);
 }
 
 void MainGame::Release()
 {
-	delete Rect1;
-	delete Rect2;
+	SAFE_RELEASE(mRect1);
+	SAFE_RELEASE(mRect2);
+
+	SAFE_RELEASE(mLeftMoveCom);
+	SAFE_RELEASE(mRightMoveCom);
+	SAFE_RELEASE(mSmallAttack);
+	SAFE_RELEASE(mBigAttack);
 
 	SAFE_RELEASE(backBuffer);
 	SAFE_RELEASE(backGround);
-
 
 	KillTimer(g_hWnd, 0);
 
@@ -81,15 +133,6 @@ LRESULT MainGame::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 {
 	switch (iMessage)
 	{
-	case WM_KEYDOWN:
-		switch (wParam)
-		{
-		case VK_SPACE:
-			//Rect1->ChangeIsControl();
-			//Rect2->ChangeIsControl();
-		default:
-			break;
-		}
 	case WM_LBUTTONDOWN:
 		clickedMousePosX = LOWORD(lParam);
 		clickedMousePosY = HIWORD(lParam);
