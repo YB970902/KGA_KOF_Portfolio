@@ -1,0 +1,13 @@
+Ralf_Idle : 66 * 120 - Rebuild
+Ralf_Walk : 66 * 120 - Rebuild
+Ralf_Damaged : 142 * 120 - Rebuild
+
+Ralf_Weak_Punch : 122 * 120 - Rebuild
+Ralf_Strong_Punch : 210 * 140 - Rebuild
+
+Ralf_Weak_Kick : 128 * 120 - Rebuild
+Ralf_Strong_Kick : 196 * 120 - Rebuild
+
+세로 120을 기준으로.
+
+Ralf
