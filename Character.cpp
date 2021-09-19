@@ -1,45 +1,5 @@
 #include "Character.h"
 
-
-/*
-	공격키를 누르면 빨간색히트박스가 켜짐
-
-	데미지는 100으로 텍스트아웃으로 표시
-	히트박스는 5프레임동안 유지
-	5프레임동안 키를 입력해도 움직이지 않음
-
-	상대방은 5프레임동안 영역안에 들어가면 데미지 10을 입음
-
-	힌트 : 
-
-	히트박스를 켜고 끄는 함수를 만들어야함
-
-	turnOnHitBox ();
-	turnOffHitBox();
-
-	공격키를 두개할것.
-	한개는 넓고 짧지만
-	한개는 짧고 길다.
-
-	두개의 히트박스 온오프는 따로따로 만들것
-
-	turnOn스몰HitBox ();
-	turnOff스몰HitBox();
-	turnOn빅HitBox ();
-	turnOff빅HitBox();
-	allhitboxoff();
-
-	캐릭터포인터가 들어가는 배열을 만들자 (벡터를 이용해보자) 
-
-	반복문 상대의 캐릭터 주소가 있는지 여부확인 후 없으면 삽입
-	삽입과 동시에 데미지 
-
-	히트박스 가시화
-
-	캐릭터의 방향전환까지
-
-*/
-
 void Character::Init()
 {
 	pos.x = WIN_SIZE_X / 2;
@@ -57,12 +17,33 @@ void Character::Init()
 
 void Character::Update()
 {
-	mFrame++;
-	cout << mFrame << endl;
-
-	if (mFrame >= 5)
+	if (mFrame == 5)
 	{
 		AllOffHitBox();
+	}
+
+	mFrame++;
+
+	if (mTarget && IsCollided(mSmallHitBox, mTarget->shape))
+	{
+		if (!CheckHitChar())
+		{
+			mHitChar.push_back(mTarget);
+			mTarget->mHP -= SMALL_DAMAGE;
+			cout << "HP -10 상대 현재 체력 : " << mTarget->mHP << endl;
+		}
+		cout << "작은 공격 프레임" << endl;
+	}
+
+	if (mTarget && IsCollided(mBigHitBox, mTarget->shape))
+	{
+		if (!CheckHitChar())
+		{
+			mHitChar.push_back(mTarget);
+			mTarget->mHP -= BIG_DAMAGE;
+			cout << "HP -20 상대 현재 체력 : " << mTarget->mHP << endl;
+		}
+		cout << "큰 공격 프레임" << endl;
 	}
 
 	shape.left = (int)pos.x - bodySize;
@@ -74,16 +55,19 @@ void Character::Update()
 void Character::Render(HDC hdc)
 {
 	Rectangle(hdc, shape.left, shape.top, shape.right, shape.bottom);
+	Rectangle(hdc, mSmallHitBox.left, mSmallHitBox.top, mSmallHitBox.right, mSmallHitBox.bottom);
+	Rectangle(hdc, mBigHitBox.left, mBigHitBox.top, mBigHitBox.right, mBigHitBox.bottom);
 
-	if (mTarget && IsCollided(mSmallHitBox, mTarget->shape))
-	{	
-		TextOut(hdc,(int) mTarget->pos.x, (int)mTarget->pos.y + 100 , "작은 공격 히트!!!!!!!!!!!!", strlen("작은 공격 히트!!!!!!!!!!!!"));
-	}
-
-	if (mTarget && IsCollided(mBigHitBox, mTarget->shape))
+	if (mFrame < 5)
 	{
-
-		TextOut(hdc, (int)mTarget->pos.x, (int)mTarget->pos.y + 100 , "큰 공격 히트!!!!!!!!!!!!", strlen("큰 공격 히트!!!!!!!!!!!!"));
+		if (mTarget && IsCollided(mSmallHitBox, mTarget->shape))
+		{
+			TextOut(hdc, (int)mTarget->pos.x, (int)mTarget->pos.y - 40, "HP -10", strlen("HP -10"));
+		}
+		if (mTarget && IsCollided(mBigHitBox, mTarget->shape))
+		{
+			TextOut(hdc, (int)mTarget->pos.x, (int)mTarget->pos.y - 40, "HP -20", strlen("HP -20"));
+		}
 	}
 }
 
@@ -111,6 +95,8 @@ void Character::Move(int dir)
 				this->pos.x -= (this->pos.x + bodySize) - (mTarget->pos.x - bodySize);
 			}
 		}
+
+		mDir = MoveDir::Right;
 	}
 	else
 	{
@@ -130,6 +116,39 @@ void Character::Move(int dir)
 				this->pos.x -= (this->pos.x - bodySize) - (mTarget->pos.x + bodySize);
 			}
 		}
+		mDir = MoveDir::Left;
+	}
+}
+
+bool Character::CheckHitChar()
+{
+	for (const auto& item : mHitChar)
+	{
+		if (item == mTarget)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void Character::OnSmallHitBox(int dir)
+{
+	mFrame = 0;
+
+	if (dir > 0)
+	{
+		mSmallHitBox.left = (int)pos.x;
+		mSmallHitBox.top = (int)pos.y - 20;
+		mSmallHitBox.right = (int)pos.x + 100;
+		mSmallHitBox.bottom = (int)pos.y;
+	}
+	else
+	{
+		mSmallHitBox.left = (int)pos.x - 100;
+		mSmallHitBox.top = (int)pos.y - 20;
+		mSmallHitBox.right = (int)pos.x;
+		mSmallHitBox.bottom = (int)pos.y;
 	}
 }
 
@@ -138,15 +157,22 @@ void Character::OffSmallHitBox()
 	mSmallHitBox = RECT();
 }
 
-void Character::OnBigHitBox()
+void Character::OnBigHitBox(int dir)
 {
-	if (mFrame >= 5)
-	{
-		mFrame = 0;
+	mFrame = 0;
 
+	if (dir > 0)
+	{
 		mBigHitBox.left = (int)pos.x;
 		mBigHitBox.top = (int)pos.y - 50;
 		mBigHitBox.right = (int)pos.x + 70;
+		mBigHitBox.bottom = (int)pos.y + 50;
+	}
+	else
+	{
+		mBigHitBox.left = (int)pos.x - 70;
+		mBigHitBox.top = (int)pos.y - 50;
+		mBigHitBox.right = (int)pos.x;
 		mBigHitBox.bottom = (int)pos.y + 50;
 	}
 }
@@ -159,18 +185,6 @@ void Character::OffBigHitBox()
 void Character::AllOffHitBox()
 {
 	mSmallHitBox = RECT();
-	mBigHitBox = RECT();
-}
-
-void Character::OnSmallHitBox()
-{
-	if (mFrame >= 5)
-	{
-		mFrame = 0;
-
-		mSmallHitBox.left = (int)pos.x;
-		mSmallHitBox.top = (int)pos.y - 20;
-		mSmallHitBox.right = (int)pos.x + 100;
-		mSmallHitBox.bottom = (int)pos.y;
-	}
+	mBigHitBox = RECT();		
+	mHitChar.clear();
 }
