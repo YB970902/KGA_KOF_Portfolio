@@ -46,8 +46,6 @@ void MainGame::Init()
 	mSmallAttack->Init(mRect1, Character::OnSmallHitBox);
 	mBigAttack = new Command;
 	mBigAttack->Init(mRect1, Character::OnBigHitBox);
-	mLeftMoveCom2 = new Command;
-	mLeftMoveCom2->Init(mRect2, Character::LeftMove);
 }
 
 void MainGame::Update()
@@ -90,11 +88,6 @@ void MainGame::Update()
 	else if (MGR_KEY->IsStayKeyDown('D') && mLeftMoveCom->GetCharacter()->GetFrame() > 5)
 	{
 		mRightMoveCom->Execute();
-	}
-
-	else if (MGR_KEY->IsStayKeyDown(VK_LEFT))
-	{
-		mLeftMoveCom2->Execute();
 	}
 
 	mRect1->Update();

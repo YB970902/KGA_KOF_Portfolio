@@ -35,7 +35,6 @@ private:
 	Command* mRightMoveCom = nullptr;
 	Command* mSmallAttack = nullptr;
 	Command* mBigAttack = nullptr;
-	Command* mLeftMoveCom2 = nullptr;
 
 public:
 	void Init();
