@@ -32,7 +32,7 @@ bool KeyManager::IsOnceKeyDown(int key)
 		if (keyDown[key] == false)
 		{
 			keyDown[key] = true;
-			return true;
+			return true; 
 		}
 	}
 	else

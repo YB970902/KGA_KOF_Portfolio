@@ -20,11 +20,13 @@ void Character::Init()
 	shape.bottom = (LONG)pos.y + bodySize;
 
 	moveSpeed = 10.0f;
-	
+
 	mLeftMove = new Command(this);
 	mLeftMove->Init(Character::LeftMove);
 	mRightMove = new Command(this);
 	mRightMove->Init(Character::RightMove);
+	mChangeIsControl = new Command(this);
+	mChangeIsControl->Init(Character::ChangeIsControl);
 
 }
 
@@ -34,7 +36,7 @@ void Character::Update()
 	shape.top = (LONG)pos.y - bodySize;
 	shape.right = (LONG)pos.x + bodySize;
 	shape.bottom = (LONG)pos.y + bodySize;
-
+	
 	ProcessInputKey();
 }
 
@@ -47,14 +49,32 @@ void Character::Release()
 {
 }
 
+void Character::Move(int dir)
+{
+	pos.x += moveSpeed * dir; 
+}
+
+void Character::ChangeIsControl()
+{
+	isControl = !isControl;
+}
+
 void Character::ProcessInputKey()
 {
-	if (MGR_KEY->IsStayKeyDown('A'))
+	if (isControl)
 	{
-		mLeftMove->Execute();
+		if (MGR_KEY->IsStayKeyDown('A'))
+		{
+			mLeftMove->Execute();
+		}
+		if (MGR_KEY->IsStayKeyDown('D'))
+		{
+			mRightMove->Execute();
+		}
 	}
-	if (MGR_KEY->IsStayKeyDown('D'))
+
+	if (MGR_KEY->IsStayKeyDown(VK_SPACE))
 	{
-		mRightMove->Execute();
-	}
+		mChangeIsControl->Execute();
+	}	
 }
