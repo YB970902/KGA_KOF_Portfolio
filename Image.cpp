@@ -2,19 +2,27 @@
 
 HRESULT Image::Init(int width, int height)
 {
-	HDC hdc = GetDC(g_hWnd);
+	HDC hdc = GetDC(g_hWnd);		// 권한이 굉장히 많은 총지배인
 
+	// 빈 비트맵 생성
 	imageInfo = new IMAGE_INFO;
 	imageInfo->width = width;
 	imageInfo->height = height;
 	imageInfo->loadType = ImageLoadType::Empty;
-	imageInfo->hBitmap = CreateCompatibleBitmap(hdc, width, height);
-	imageInfo->hMemDc = CreateCompatibleDC(hdc);
-	imageInfo->hOldBit = (HBITMAP)SelectObject(imageInfo->hMemDc, imageInfo->hBitmap);
+	imageInfo->hBitmap = CreateCompatibleBitmap(hdc, width,height);
+	imageInfo->hMemDc = CreateCompatibleDC(hdc);	// 새로 생성된 DC 
+											// 기본적으로 Bitmap에 연결되어 있다.
+	imageInfo->hOldBit =
+		(HBITMAP)SelectObject(imageInfo->hMemDc, imageInfo->hBitmap);
 
 	ReleaseDC(g_hWnd, hdc);
 
-	if (imageInfo->hBitmap == NULL)
+	//if (SUCCEEDED(E_FAIL))
+	//{
+
+	//}
+
+	if (imageInfo->hBitmap == NULL)	// 비트맵 생성에 실패했을 때
 	{
 		Release();
 		return E_FAIL;
@@ -24,7 +32,7 @@ HRESULT Image::Init(int width, int height)
 }
 
 HRESULT Image::Init(const char* fileName, int width, int height,
-	bool isTrans, COLORREF transColor)
+	bool isTrans/* = false*/, COLORREF transColor/* = NULL*/)
 {
 	HDC hdc = GetDC(g_hWnd);
 
@@ -32,8 +40,10 @@ HRESULT Image::Init(const char* fileName, int width, int height,
 	imageInfo->width = width;
 	imageInfo->height = height;
 	imageInfo->loadType = ImageLoadType::File;
-	imageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
-	imageInfo->hMemDc = CreateCompatibleDC(hdc);
+	imageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName, IMAGE_BITMAP, width, height,
+		LR_LOADFROMFILE);
+	imageInfo->hMemDc = CreateCompatibleDC(hdc);	// 새로 생성된 DC 
+											// 기본적으로 Bitmap에 연결되어 있다.
 	imageInfo->hOldBit =
 		(HBITMAP)SelectObject(imageInfo->hMemDc, imageInfo->hBitmap);
 
@@ -60,10 +70,12 @@ HRESULT Image::Init(const char* fileName, int width, int height, int maxFrameX, 
 	imageInfo->width = width;
 	imageInfo->height = height;
 	imageInfo->loadType = ImageLoadType::File;
-	imageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
-	imageInfo->hMemDc = CreateCompatibleDC(hdc);
-
-	imageInfo->hOldBit = (HBITMAP)SelectObject(imageInfo->hMemDc, imageInfo->hBitmap);
+	imageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName, IMAGE_BITMAP, width, height,
+		LR_LOADFROMFILE);
+	imageInfo->hMemDc = CreateCompatibleDC(hdc);	// 새로 생성된 DC 
+											// 기본적으로 Bitmap에 연결되어 있다.
+	imageInfo->hOldBit =
+		(HBITMAP)SelectObject(imageInfo->hMemDc, imageInfo->hBitmap);
 
 	ReleaseDC(g_hWnd, hdc);
 
@@ -101,7 +113,15 @@ void Image::Release()
 
 void Image::Render(HDC hdc)
 {
-	BitBlt(hdc, 0, 0, imageInfo->width, imageInfo->height, imageInfo->hMemDc, 0, 0, SRCCOPY);		
+	BitBlt(hdc,				// 복사 목적지 DC
+		0,					// 복사될 비트맵의 시작 위치 x
+		0,					// 복사될 비트맵의 시작 위치 y
+		imageInfo->width,	// 원본 복사할 가로 크기
+		imageInfo->height,	// 원본 복사할 세로 크기
+		imageInfo->hMemDc,	// 원본 DC
+		0,					// 원본 비트맵 복사 시작 위치 x
+		0,					// 원본 비트맵 복사 시작 위치 y
+		SRCCOPY);			// 복사 옵션
 }
 
 void Image::Render(HDC hdc, int destX, int destY)
@@ -122,49 +142,134 @@ void Image::Render(HDC hdc, int destX, int destY)
 	}
 	else
 	{
-		BitBlt(hdc,	
-			destX - (imageInfo->width / 2),	
-			destY - (imageInfo->height / 2),
-			imageInfo->width,	
-			imageInfo->height,	
-			imageInfo->hMemDc,	
-			0,					
-			0,					
-			SRCCOPY);			
+		BitBlt(hdc,				// 복사 목적지 DC
+			destX - (imageInfo->width / 2),				// 복사될 비트맵의 시작 위치 x
+			destY - (imageInfo->height / 2),			// 복사될 비트맵의 시작 위치 y
+			imageInfo->width,	// 원본 복사할 가로 크기
+			imageInfo->height,	// 원본 복사할 세로 크기
+			imageInfo->hMemDc,	// 원본 DC
+			0,					// 원본 비트맵 복사 시작 위치 x
+			0,					// 원본 비트맵 복사 시작 위치 y
+			SRCCOPY);			// 복사 옵션
 	}
 
 }
 
-void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY)
+void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int imgWidth,int imgHeight, ChAnimData::Lookat playerLookat)
 {
-
+	// frameX : 0, frameY : 0 => 시작 (68 * 0, 0) (0,     0)	(68, 104)
+	// frameX : 1, frameY : 0 => 시작 (68 * 1, 0) (68,  104)	(136, 104)
+	// frameX : 2, frameY : 0 => 시작 (68 * 2, 0) (136, 104)	(204, 104)
+	// frameX : 3, frameY : 0 => 시작 (68 * 3, 0) (204, 104)	(272, 104)
+	//											  (68,	104)	(0,0)
 	if (isTransparent)
 	{
-		GdiTransparentBlt(
-			hdc,
-			destX - (imageInfo->frameWidth / 2),
-			destY - (imageInfo->frameHeight / 2),
-			imageInfo->frameWidth, imageInfo->frameHeight,	
+		if (playerLookat == Left)
+		{
+			StretchBlt(
+				imageInfo->hMemDc,
+				imageInfo->frameWidth,//==66? 66 : imageInfo->frameWidth-(imageInfo->frameWidth-66)/2,
+				0,
+				-imageInfo->frameWidth,
+				imageInfo->frameHeight,	// 전체 프레임 수
 
-			imageInfo->hMemDc,
-			imageInfo->frameWidth* frameX,
-			imageInfo->frameHeight * frameY ,
-			imageInfo->frameWidth, imageInfo->frameHeight,
-			transColor
-		);
+				imageInfo->hMemDc,
+				imageInfo->frameWidth * frameX,
+				imageInfo->frameHeight * frameY,
+				imageInfo->frameWidth,
+				imageInfo->frameHeight,
+				SRCCOPY
+			);
+
+			GdiTransparentBlt(
+				hdc,
+				destX - (imageInfo->frameWidth == 66 ? 66 : imageInfo->frameWidth - (imageInfo->frameWidth - 66) / 2),
+				destY - (imageInfo->frameHeight == 120 ? 120 : imageInfo->frameHeight - (imageInfo->frameHeight - 120) / 2),// - (imageInfo->frameHeight / 2),
+				imageInfo->frameWidth,
+				imageInfo->frameHeight,	// 전체 프레임 수
+
+				imageInfo->hMemDc,
+				0,
+				0,
+				imageInfo->frameWidth,
+				imageInfo->frameHeight,
+				RGB(255, 0, 255)
+			);
+		}
+		else if (playerLookat == Right)
+		{
+			GdiTransparentBlt(
+				hdc,
+				destX - (imageInfo->frameWidth == 66 ? 66 : imageInfo->frameWidth - (imageInfo->frameWidth - 66) / 2),
+				destY - (imageInfo->frameHeight == 120 ? 120 : imageInfo->frameHeight - (imageInfo->frameHeight - 120) / 2),
+				imageInfo->frameWidth,
+				imageInfo->frameHeight,	// 전체 프레임 수
+
+				imageInfo->hMemDc,
+				imageInfo->frameWidth * frameX,
+				imageInfo->frameHeight * frameY,
+				imageInfo->frameWidth,
+				imageInfo->frameHeight,
+				RGB(255,0,255)
+			);
+		}
+
+		//GdiTransparentBlt(
+		//	hdc,
+		//	destX - (imageInfo->frameWidth / 2),// + imageInfo->frameWidth,
+		//	destY - (imageInfo->frameHeight / 2),
+		//	imageInfo->frameWidth,
+		//	imageInfo->frameHeight,	// 전체 프레임 수
+
+		//	imageInfo->hMemDc,
+		//	imageInfo->frameWidth * frameX,
+		//	imageInfo->frameHeight * frameY,
+		//	imageInfo->frameWidth,
+		//	imageInfo->frameHeight,
+		//	RGB(255,0,255)
+		//);
+
+		//StretchBlt(
+		//	hdc,
+		//	imageInfo->frameWidth,
+		//	0,
+		//	-imageInfo->frameWidth,
+		//	imageInfo->frameHeight,	// 전체 프레임 수
+
+		//	imageInfo->hMemDc,
+		//	0,
+		//	0,
+		//	imageInfo->frameWidth,
+		//	imageInfo->frameHeight, SRCAND
+		//);
+
+		//GdiTransparentBlt(
+		//	hdc,
+		//	destX - (imageInfo->frameWidth / 2),
+		//	destY - (imageInfo->frameHeight / 2),
+		//	imageInfo->frameWidth,
+		//	imageInfo->frameHeight,	// 전체 프레임 수
+
+		//	imageInfo->hMemDc,
+		//	imageInfo->frameWidth * frameX,
+		//	imageInfo->frameHeight * frameY,
+		//	imageInfo->frameWidth,
+		//	imageInfo->frameHeight,
+		//	RGB(255,0,255)
+		//);
+
+
 	}
 	else
 	{
-		// 정상작동 안하는 부분이니 필요할때 수정 필요
-		// 수정 완료시 주석 삭제 부탁 드립니다.
-		BitBlt(hdc,				
-			destX - (imageInfo->width / 2),	
-			destY - (imageInfo->height / 2),
-			imageInfo->width,
-			imageInfo->height,
-			imageInfo->hMemDc,
-			0,				
-			0,				
-			SRCCOPY);		
+		BitBlt(hdc,				// 복사 목적지 DC
+			destX - (imageInfo->width / 2),				// 복사될 비트맵의 시작 위치 x
+			destY - (imageInfo->height / 2),			// 복사될 비트맵의 시작 위치 y
+			imageInfo->width,	// 원본 복사할 가로 크기
+			imageInfo->height,	// 원본 복사할 세로 크기
+			imageInfo->hMemDc,	// 원본 DC
+			0,					// 원본 비트맵 복사 시작 위치 x
+			0,					// 원본 비트맵 복사 시작 위치 y
+			SRCCOPY);			// 복사 옵션
 	}
 }

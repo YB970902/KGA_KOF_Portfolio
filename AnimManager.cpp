@@ -3,92 +3,36 @@
 #include "KeyManager.h"
 #include <map>
 
+
 using namespace std;
-
-class ChAnimData
-{
-public:
-	enum AnimStatus
-	{
-		Idle,
-		Move,
-		Damaged,
-		Weak_Punch,
-		Weak_Kick,
-		Strong_Punch,
-		Strong_Kick,
-	};
-
-	map<AnimStatus, int> Animframe;
-	map<AnimStatus, int> sizeX;
-	map<AnimStatus, int> sizeY;
-	map<AnimStatus, const char*> Path;
-};
-
-class Ralf
-{
-public:
-	ChAnimData mData;
-
-	void init();
-};
-
-void Ralf::init()
-{
-	mData.Path.insert(pair<ChAnimData::AnimStatus, const char*>(ChAnimData::AnimStatus::Idle, "Image/Ralf_Database_IMG/Ralf_Idle.bmp"));
-	mData.Path.insert(pair<ChAnimData::AnimStatus, const char*>(ChAnimData::AnimStatus::Move, "Image/Ralf_Database_IMG/Ralf_Walk_Cycle.bmp"));
-	mData.Path.insert(pair<ChAnimData::AnimStatus, const char*>(ChAnimData::AnimStatus::Damaged, "Image/Ralf_Database_IMG/Ralf_Damaged.bmp"));
-	mData.Path.insert(pair<ChAnimData::AnimStatus, const char*>(ChAnimData::AnimStatus::Weak_Punch, "Image/Ralf_Database_IMG/Ralf_Weak_Punch.bmp"));
-	mData.Path.insert(pair<ChAnimData::AnimStatus, const char*>(ChAnimData::AnimStatus::Weak_Kick, "Image/Ralf_Database_IMG/Ralf_Weak_kick.bmp"));
-	mData.Path.insert(pair<ChAnimData::AnimStatus, const char*>(ChAnimData::AnimStatus::Strong_Punch, "Image/Ralf_Database_IMG/Ralf_Strong_Punch.bmp"));
-	mData.Path.insert(pair<ChAnimData::AnimStatus, const char*>(ChAnimData::AnimStatus::Strong_Kick, "Image/Ralf_Database_IMG/Ralf_Strong_kick.bmp"));
-
-	mData.Animframe.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Idle, 18));
-	mData.Animframe.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Move, 8));
-	mData.Animframe.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Damaged, 4));
-	mData.Animframe.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Weak_Punch, 4));
-	mData.Animframe.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Weak_Kick, 6));
-	mData.Animframe.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Strong_Punch, 8));
-	mData.Animframe.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Strong_Kick, 12));
-
-	mData.sizeX.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Idle, 1188));
-	mData.sizeX.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Move, 528));
-	mData.sizeX.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Damaged, 568));
-	mData.sizeX.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Weak_Punch, 488));
-	mData.sizeX.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Weak_Kick, 768));
-	mData.sizeX.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Strong_Punch, 1680));
-	mData.sizeX.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Strong_Kick, 2352));
-
-	mData.sizeY.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Idle, 120));
-	mData.sizeY.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Move, 120));
-	mData.sizeY.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Damaged, 120));
-	mData.sizeY.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Weak_Kick, 120));
-	mData.sizeY.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Weak_Punch, 130));
-	mData.sizeY.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Strong_Kick, 120));
-	mData.sizeY.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Strong_Punch, 140));
-}
 
 //img->Init(mData.Path[i], mData.sizeX[i], mData.sizeY[i], mData.Animframe[i], 1, true, RGB(255, 0, 255));
 
+//static ChAnimData::AnimStatus playerStatus; // 추후에 전역변수로 설정요망?
+
+Ralf RalfPlayer;
+static bool isAttack = false;
+
 void AnimManager::Init()
 {	
-	Ralf Player;
-	Player.init();
+	RalfPlayer.init();
+	
+	playerAct = ChAnimData::Acting::Act_Idle;
+	playerStatus = ChAnimData::AnimStatus::Idle;
+	playerLookat = ChAnimData::Lookat::Right;
 
-	ChAnimData::AnimStatus playerStatus;
-	playerStatus = ChAnimData::AnimStatus::Move;
-
-	map<ChAnimData::AnimStatus, int> CharacterData;
-	map<ChAnimData::AnimStatus, const char*> CharacterImgPath;
-
-	//player.selectedCharacter = ralf
+	//RalfPlayer.selectedCharacter = ralf
 	
 	img = new Image;
 
 	//"Image/Ralf_Database_IMG/Ralf_Walk_Cycle.bmp"
 	//Waystring = PlayerCharacter1.Import_Image(PlayerCharacter1.m_Setcharacter,PlayerCharacter1.m_PlayerStatus);
-		
-	img->Init(Player.mData.Path[playerStatus], (int)Player.mData.sizeX[playerStatus], (int)Player.mData.sizeY[playerStatus], (int)Player.mData.Animframe[playerStatus], 1, true, RGB(255, 0, 255));
+	
+	img->Init(RalfPlayer.mData.Path[playerStatus], (int)RalfPlayer.mData.sizeX[playerStatus], (int)RalfPlayer.mData.sizeY[playerStatus],
+		(int)RalfPlayer.mData.Animframe[playerStatus], 1, true, RGB(255, 0, 255));
+
+	//img->Init(RalfPlayer.mData.Path[playerStatus], (int)RalfPlayer.mData.sizeX[playerStatus], (int)RalfPlayer.mData.sizeY[playerStatus],
+	//	(int)RalfPlayer.mData.Animframe[playerStatus], 1, true, RGB(255, 0, 255));
 
 	frameX = frameY = 0;
 	elapsedCount = 0;
@@ -97,53 +41,231 @@ void AnimManager::Init()
 	moveSpeed = 10.0f;
 }
 
+void AnimManager::ImgUpdate(ChAnimData::AnimStatus playerStatus)
+{
+	img->Release();
+	img->Init(RalfPlayer.mData.Path[playerStatus], (int)RalfPlayer.mData.sizeX[playerStatus], (int)RalfPlayer.mData.sizeY[playerStatus],
+		(int)RalfPlayer.mData.Animframe[playerStatus], 1, true, RGB(255, 0, 255));
+}
+
 void AnimManager::Update()
 {
-	// 왼쪽으로 움직이기
-	if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT))
+	// 공격
+	// 입력키 수정 용이하게 하려면 저 값안에 변수를 넣어야 할듯
+	// 어디다 만들지...
+	
+	if (KeyManager::GetSingleton()->IsOnceKeyDown('A'))
 	{
-		elapsedCount++;
-		if (elapsedCount >= 9)
+		playerLookat = ChAnimData::Lookat::Left;
+	}
+
+	if (isAttack == false)
+	{
+		if (KeyManager::GetSingleton()->IsOnceKeyDown('Z'))
 		{
-			frameX++;
-			pos.x -= moveSpeed;
-			if (frameX >= 8)
+			//playerLookat = ChAnimData::Lookat::Left; // 추후에 값 받아야함
+			if (playerStatus != ChAnimData::AnimStatus::Weak_Punch)
 			{
 				frameX = 0;
 			}
-			elapsedCount = 0;
+			isAttack = true;
+			playerAct = ChAnimData::Acting::Act_Attack;
+			playerStatus = ChAnimData::AnimStatus::Weak_Punch;
 		}
-	}
-	// 오른쪽으로 움직이기
-	else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_RIGHT))
-	{
-		elapsedCount++;
-		if (elapsedCount >= 9)
+		else if (KeyManager::GetSingleton()->IsOnceKeyDown('X'))
 		{
-			frameX--;
-			pos.x += moveSpeed;
-			if (frameX < 0)
+			//playerLookat = ChAnimData::Lookat::Left; // 추후에 값 받아야함
+			if (playerStatus != ChAnimData::AnimStatus::Strong_Punch)
 			{
-				frameX = 7;
+				frameX = 0;
 			}
-			elapsedCount = 0;
+			isAttack = true;
+			playerAct = ChAnimData::Acting::Act_Attack;
+			playerStatus = ChAnimData::AnimStatus::Strong_Punch;
 		}
-	}
-	// 약한 펀치 공격
-	//else if (KeyManager::GetSingleton()->IsOnceKeyDown('Z'))
-	/*{
-		frameX++;
-		if (frameX >= 4)
+		else if (KeyManager::GetSingleton()->IsOnceKeyDown('C'))
 		{
-			frameX = 0;
+			//playerLookat = ChAnimData::Lookat::Left; // 추후에 값 받아야함
+			if (playerStatus != ChAnimData::AnimStatus::Weak_Kick)
+			{
+				frameX = 0;
+			}
+			isAttack = true;
+			playerAct = ChAnimData::Acting::Act_Attack;
+			playerStatus = ChAnimData::AnimStatus::Weak_Kick;
 		}
-		
+		else if (KeyManager::GetSingleton()->IsOnceKeyDown('V'))
+		{
+			//playerLookat = ChAnimData::Lookat::Left; // 추후에 값 받아야함
+			if (playerStatus != ChAnimData::AnimStatus::Strong_Kick)
+			{
+				frameX = 0;
+			}
+			isAttack = true;
+			playerAct = ChAnimData::Acting::Act_Attack;
+			playerStatus = ChAnimData::AnimStatus::Strong_Kick;
+		}
 	}
-	else
+
+	if (playerAct != ChAnimData::Acting::Act_Attack)
 	{
-		elapsedCount = 0;
-		PlayerCharacter1.m_PlayerStatus = Status::Idle;
-	}*/
+		if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT))
+		{
+			//playerLookat = ChAnimData::Lookat::Left; // 추후에 값 받아야함
+			if (playerStatus != ChAnimData::AnimStatus::Move)
+			{
+				frameX = 0;
+			}
+			playerAct = ChAnimData::Acting::Act_Forward;
+			playerStatus = ChAnimData::AnimStatus::Move;
+		}
+		else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_RIGHT))
+		{
+			//playerLookat = ChAnimData::Lookat::Left; // 추후에 값 받아야함
+			if (playerStatus != ChAnimData::AnimStatus::Move)
+			{
+				frameX = 0;
+			}
+			playerAct = ChAnimData::Acting::Act_Backward;
+			playerStatus = ChAnimData::AnimStatus::Move;
+		}
+		else
+		{
+			//playerLookat = ChAnimData::Lookat::Left; // 추후에 값 받아야함
+			if (playerAct != ChAnimData::Acting::Act_Idle)
+			{
+				frameX = 0;
+			}
+			playerAct = ChAnimData::Acting::Act_Idle;
+			playerStatus = ChAnimData::AnimStatus::Idle;
+		}
+	}
+	
+	if (playerAct == ChAnimData::Acting::Act_Attack)
+		{
+		if (playerStatus == ChAnimData::AnimStatus::Weak_Punch)
+		{
+			AnimManager::ImgUpdate(playerStatus);
+			elapsedCount++;
+			if (elapsedCount >= 4)
+			{
+				frameX++;
+				if (frameX >= RalfPlayer.mData.Animframe[playerStatus])
+				{
+					frameX = 0;
+					isAttack = false;
+					playerAct = ChAnimData::Acting::Act_Idle;					
+				}
+				elapsedCount = 0;
+			}
+		}
+		else if (playerStatus == ChAnimData::AnimStatus::Strong_Punch)
+		{
+			AnimManager::ImgUpdate(playerStatus);
+			elapsedCount++;
+			if (elapsedCount >= 4)
+			{
+				frameX++;
+				if (frameX >= RalfPlayer.mData.Animframe[playerStatus])
+				{
+					frameX = 0;
+					isAttack = false;
+					playerAct = ChAnimData::Acting::Act_Idle;					
+				}
+				elapsedCount = 0;
+			}
+		}
+		else if (playerStatus == ChAnimData::AnimStatus::Weak_Kick)
+		{
+			AnimManager::ImgUpdate(playerStatus);
+			elapsedCount++;
+			if (elapsedCount >= 4)
+			{
+				frameX++;
+				if (frameX >= RalfPlayer.mData.Animframe[playerStatus])
+				{
+					frameX = 0;
+					isAttack = false;
+					playerAct = ChAnimData::Acting::Act_Idle;					
+				}
+				elapsedCount = 0;
+			}
+		}
+		else if (playerStatus == ChAnimData::AnimStatus::Strong_Kick)
+		{
+			AnimManager::ImgUpdate(playerStatus);
+			elapsedCount++;
+			if (elapsedCount >= 4)
+			{
+				frameX++;
+				if (frameX >= RalfPlayer.mData.Animframe[playerStatus])
+				{
+					frameX = 0;
+					isAttack = false;
+					playerAct = ChAnimData::Acting::Act_Idle;
+				}
+				elapsedCount = 0;
+			}
+		}
+	}
+
+	else if (playerAct != ChAnimData::Acting::Act_Attack) // 공격상태에서는 Idle과 Move가 작동하면 안되므로 공격상태인지 아닌지 판별
+	{
+		if (playerStatus == ChAnimData::AnimStatus::Move) //Move일때
+		{
+			// 왼쪽으로 움직이기
+			if (playerAct == ChAnimData::Acting::Act_Forward)
+			{
+				AnimManager::ImgUpdate(playerStatus);
+				elapsedCount++;
+				if (elapsedCount >= 8)
+				{
+					frameX++;
+					pos.x -= moveSpeed;
+					if (frameX >= 7)
+					{
+						frameX = 0;
+					}
+					elapsedCount = 0;
+				}
+
+			}
+			// 오른쪽으로 움직이기
+			else if (playerAct == ChAnimData::Acting::Act_Backward)
+			{
+				AnimManager::ImgUpdate(playerStatus);
+				
+				elapsedCount++;
+				if (elapsedCount >= 9)
+				{
+					frameX--;
+					pos.x += moveSpeed;
+					if (frameX < 0)
+					{
+						frameX = 7;
+					}
+					elapsedCount = 0;
+				}
+			}
+		}
+
+		else if (playerAct == ChAnimData::Acting::Act_Idle) // Idle 일때
+		{
+			AnimManager::ImgUpdate(playerStatus);
+			
+			elapsedCount++;
+			if (elapsedCount >= 8)
+			{
+				frameX++;
+				if (frameX >= RalfPlayer.mData.Animframe[playerStatus])
+				{
+					frameX = 0;
+				}
+				elapsedCount = 0;
+			}
+		} 
+	}
+
 }
 
 	// 실습1. 뒤로 움직이기 + 실제 위치 이동
@@ -155,7 +277,7 @@ void AnimManager::Render(HDC hdc)
 {
 	if (img)
 	{
-		img->Render(hdc, pos.x, pos.y, frameX, frameY);
+		img->Render(hdc, pos.x, pos.y, frameX, frameY, RalfPlayer.mData.sizeX[playerStatus], RalfPlayer.mData.sizeY[playerStatus],playerLookat);
 	}
 }
 
