@@ -52,42 +52,24 @@ void MainGame::Update()
 {
 	InvalidateRect(g_hWnd, NULL, false);
 	
-	// 질문해야돼서 주석 남겨뒀습니다 21.09.20
-	//if (mLeftMoveCom->GetCharacter()->GetFrame() >= 5)
-	//{
-	//	if (MGR_KEY->IsOnceKeyDown('G'))
-	//	{
-	//		mSmallAttack->Execute();
-	//	}
-	//	else if (MGR_KEY->IsOnceKeyDown('Y'))
-	//	{
-	//		mBigAttack->Execute();
-	//	}
-	//	else if (MGR_KEY->IsStayKeyDown('A'))
-	//	{
-	//		mLeftMoveCom->Execute();
-	//	}
-	//	else if (MGR_KEY->IsStayKeyDown('D'))
-	//	{
-	//		mRightMoveCom->Execute();
-	//	}
-	//}
-
-	if (MGR_KEY->IsOnceKeyDown('G') && mLeftMoveCom->GetCharacter()->GetFrame() > 5)
+	if (mLeftMoveCom->GetCharacter()->GetFrame() > 5)
 	{
-		mSmallAttack->Execute();
-	}
-	else if (MGR_KEY->IsOnceKeyDown('Y') && mLeftMoveCom->GetCharacter()->GetFrame() > 5)
-	{
-		mBigAttack->Execute();
-	}
-	else if (MGR_KEY->IsStayKeyDown('A') && mLeftMoveCom->GetCharacter()->GetFrame() > 5)
-	{
-		mLeftMoveCom->Execute();
-	}
-	else if (MGR_KEY->IsStayKeyDown('D') && mLeftMoveCom->GetCharacter()->GetFrame() > 5)
-	{
-		mRightMoveCom->Execute();
+		if (MGR_KEY->IsOnceKeyDown('G'))
+		{
+			mSmallAttack->Execute();
+		}
+		else if (MGR_KEY->IsOnceKeyDown('Y'))
+		{
+			mBigAttack->Execute();
+		}
+		else if (MGR_KEY->IsStayKeyDown('A'))
+		{
+			mLeftMoveCom->Execute();
+		}
+		else if (MGR_KEY->IsStayKeyDown('D'))
+		{
+			mRightMoveCom->Execute();
+		}
 	}
 
 	mRect1->Update();
