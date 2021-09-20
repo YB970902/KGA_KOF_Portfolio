@@ -19,7 +19,7 @@ void AnimManager::Init()
 	
 	playerAct = ChAnimData::Acting::Act_Idle;
 	playerStatus = ChAnimData::AnimStatus::Idle;
-	playerLookat = ChAnimData::Lookat::Right;
+	playerLookat = ChAnimData::Lookat::Left;
 
 	//RalfPlayer.selectedCharacter = ralf
 	
@@ -56,7 +56,14 @@ void AnimManager::Update()
 	
 	if (KeyManager::GetSingleton()->IsOnceKeyDown('A'))
 	{
-		playerLookat = ChAnimData::Lookat::Left;
+		if (playerLookat == ChAnimData::Lookat::Right)
+		{
+			playerLookat = ChAnimData::Lookat::Left;
+		}
+		else if (playerLookat == ChAnimData::Lookat::Left)
+		{
+			playerLookat = ChAnimData::Lookat::Right;
+		}
 	}
 
 	if (isAttack == false)
@@ -220,12 +227,23 @@ void AnimManager::Update()
 				elapsedCount++;
 				if (elapsedCount >= 8)
 				{
-					frameX++;
-					pos.x -= moveSpeed;
-					if (frameX >= 7)
+					if (playerLookat == ChAnimData::Lookat::Right)
 					{
-						frameX = 0;
+						frameX--;
+						if (frameX < 0)
+						{
+							frameX = 7;
+						}
 					}
+					else if (playerLookat == ChAnimData::Lookat::Left)
+					{
+						frameX++;
+						if (frameX >= 7)
+						{
+							frameX = 0;
+						}
+					}
+					pos.x -= moveSpeed;
 					elapsedCount = 0;
 				}
 
@@ -236,14 +254,25 @@ void AnimManager::Update()
 				AnimManager::ImgUpdate(playerStatus);
 				
 				elapsedCount++;
-				if (elapsedCount >= 9)
+				if (elapsedCount >= 8)
 				{
-					frameX--;
-					pos.x += moveSpeed;
-					if (frameX < 0)
+					if (playerLookat == ChAnimData::Lookat::Right)
 					{
-						frameX = 7;
+						frameX++;
+						if (frameX >= 7)
+						{
+							frameX = 0;
+						}
 					}
+					else if (playerLookat == ChAnimData::Lookat::Left)
+					{
+						frameX--;
+						if (frameX < 0)
+						{
+							frameX = 7;
+						}
+					}
+					pos.x += moveSpeed;
 					elapsedCount = 0;
 				}
 			}
