@@ -164,7 +164,7 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int img
 	//											  (68,	104)	(0,0)
 	if (isTransparent)
 	{
-		if (playerLookat == Right)
+		if (playerLookat == ChAnimData::Lookat::Right)
 		{
 			StretchBlt(
 				imageInfo->hMemDc,
@@ -196,7 +196,7 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int img
 				RGB(255, 0, 255)
 			);
 		}
-		else if (playerLookat == Left)
+		else if (playerLookat == ChAnimData::Lookat::Left)
 		{
 			GdiTransparentBlt(
 				hdc,
