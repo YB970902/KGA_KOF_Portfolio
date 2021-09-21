@@ -148,6 +148,8 @@ void AnimManager::Update()
 		}
 	}
 	
+	////////////////
+
 	if (playerAct == ChAnimData::Acting::Act_Attack)
 		{
 		if (playerStatus == ChAnimData::AnimStatus::Weak_Punch)
@@ -161,6 +163,7 @@ void AnimManager::Update()
 				{
 					frameX = 0;
 					isAttack = false;
+
 					playerAct = ChAnimData::Acting::Act_Idle;					
 				}
 				elapsedCount = 0;

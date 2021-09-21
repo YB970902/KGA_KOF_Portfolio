@@ -21,7 +21,7 @@ using namespace std;
 #define SAFE_RELEASE(p)	{ if (p) { p->Release(); delete p; p = nullptr; } }
 
 enum class MoveDir { Left = -1, Right = 1, Up, Down };
-enum class eSceneTag { HitBoxSnene, };
+enum class eSceneTag { HitBoxSnene, ImageAnimationScene,};
 
 extern HWND g_hWnd;
 extern HINSTANCE g_hInstance;

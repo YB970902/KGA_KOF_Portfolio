@@ -18,7 +18,5 @@ class HitBoxScene : public Scene
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 	virtual void Exit() override;
-
-
 };
 

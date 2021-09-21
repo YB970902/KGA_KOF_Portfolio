@@ -20,8 +20,6 @@ private:
 	Image* backBuffer;
 
 	Image* backGround;
-
-
 public:
 	void Init();
 	void Update();
