@@ -63,6 +63,12 @@
     <ClInclude Include="HitBoxScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="AnimManager.h">
+      <Filter>2DFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="Ralf.h">
+      <Filter>2DFramework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -97,6 +103,12 @@
     </ClCompile>
     <ClCompile Include="HitBoxScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimManager.cpp">
+      <Filter>2DFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="Ralf.cpp">
+      <Filter>2DFramework</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
