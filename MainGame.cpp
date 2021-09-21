@@ -6,6 +6,7 @@
 #include "Character.h"
 #include "Command.h"
 
+
 void MainGame::Init()
 {
 	MGR_KEY->Init();
