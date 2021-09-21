@@ -1,15 +1,15 @@
 #pragma once
-#include "Singleton.h"
 #include "Config.h"
+#include "Singleton.h"
+#include <map>
 
 class Scene;
 class SceneManager : public Singleton<SceneManager>
 {
 private:
-	Scene* mpHitBoxScene = nullptr;
+	map<eSceneTag, Scene*> mScene;
 
 	Scene* mpCurScene = nullptr;
-
 public:
 	void Init();
 	void Update();

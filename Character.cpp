@@ -24,25 +24,46 @@ void Character::Update()
 
 	mFrame++;
 
-	if (mTarget && IsCollided(mSmallHitBox, mTarget->shape))
+	if (mpTarget && IsCollided(mSmallHitBox, mpTarget->shape))
 	{
 		if (!CheckHitChar())
 		{
-			mHitChar.push_back(mTarget);
-			mTarget->mHP -= 10;
-			cout << "HP -10 상대 현재 체력 : " << mTarget->mHP << endl;
+			mHitChar.push_back(mpTarget);
+			mpTarget->mHP -= mSmallDamage;
+			cout << "HP -10 상대 현재 체력 : " << mpTarget->mHP << endl;
 		}
 	}
 
-	if (mTarget && IsCollided(mBigHitBox, mTarget->shape))
-	{
-		if (!CheckHitChar())
+	//if (mBigHitBox.right != 0)
+	//{
+	//	Move((int)mDir);
+
+	//	if ((int)mDir > 0)
+	//	{
+	//		mBigHitBox.left = (int)pos.x;
+	//		mBigHitBox.top = (int)pos.y - 50;
+	//		mBigHitBox.right = (int)pos.x + 70;
+	//		mBigHitBox.bottom = (int)pos.y + 50;
+	//	}
+	//	else
+	//	{
+	//		mBigHitBox.left = (int)pos.x - 70;
+	//		mBigHitBox.top = (int)pos.y - 50;
+	//		mBigHitBox.right = (int)pos.x;
+	//		mBigHitBox.bottom = (int)pos.y + 50;
+	//	}
+
+		if (mpTarget && IsCollided(mBigHitBox, mpTarget->shape))
 		{
-			mHitChar.push_back(mTarget);
-			mTarget->mHP -= 20;
-			cout << "HP -20 상대 현재 체력 : " << mTarget->mHP << endl;
-		}
-	}
+			if (!CheckHitChar())
+			{
+				mHitChar.push_back(mpTarget);
+				mpTarget->mHP -= mBigDamage;
+				cout << "HP -20 상대 현재 체력 : " << mpTarget->mHP << endl;
+			}
+		}			
+	//}
+
 
 	shape.left = (int)pos.x - bodySize;
 	shape.top = (int)pos.y - bodySize;
@@ -58,13 +79,13 @@ void Character::Render(HDC hdc)
 
 	if (mFrame < 5)
 	{
-		if (mTarget && IsCollided(mSmallHitBox, mTarget->shape))
+		if (mpTarget && IsCollided(mSmallHitBox, mpTarget->shape))
 		{
-			TextOut(hdc, (int)mTarget->pos.x, (int)mTarget->pos.y - 40, "HP -10", strlen("HP -10"));
+			TextOut(hdc, (int)mpTarget->pos.x, (int)mpTarget->pos.y - 40, "HP -10", strlen("HP -10"));
 		}
-		if (mTarget && IsCollided(mBigHitBox, mTarget->shape))
+		if (mpTarget && IsCollided(mBigHitBox, mpTarget->shape))
 		{
-			TextOut(hdc, (int)mTarget->pos.x, (int)mTarget->pos.y - 40, "HP -20", strlen("HP -20"));
+			TextOut(hdc, (int)mpTarget->pos.x, (int)mpTarget->pos.y - 40, "HP -20", strlen("HP -20"));
 		}
 	}
 }
@@ -77,9 +98,9 @@ void Character::Move(int dir)
 {
 	if (dir > 0)
 	{
-		if (IsCollided(this->shape,mTarget->shape))
+		if (IsCollided(this->shape,mpTarget->shape))
 		{
-			if (mTarget->pos.x < this->pos.x)
+			if (mpTarget->pos.x < this->pos.x)
 			{
 				pos.x += moveSpeed * dir;
 			}
@@ -88,9 +109,9 @@ void Character::Move(int dir)
 		{
 			pos.x += moveSpeed * dir;
 
-			if (this->pos.x + bodySize > mTarget->pos.x - bodySize && !(mTarget->pos.x < this->pos.x))
+			if (this->pos.x + bodySize > mpTarget->pos.x - bodySize && !(mpTarget->pos.x < this->pos.x))
 			{
-				this->pos.x -= (this->pos.x + bodySize) - (mTarget->pos.x - bodySize);
+				this->pos.x -= (this->pos.x + bodySize) - (mpTarget->pos.x - bodySize);
 			}
 		}
 
@@ -98,9 +119,9 @@ void Character::Move(int dir)
 	}
 	else
 	{
-		if (IsCollided(this->shape, mTarget->shape))
+		if (IsCollided(this->shape, mpTarget->shape))
 		{
-			if (mTarget->pos.x > this->pos.x)
+			if (mpTarget->pos.x > this->pos.x)
 			{
 				pos.x += moveSpeed * dir;
 			}
@@ -109,9 +130,9 @@ void Character::Move(int dir)
 		{
 			pos.x += moveSpeed * dir;
 
-			if (this->pos.x - bodySize < mTarget->pos.x + bodySize && !(mTarget->pos.x > this->pos.x))
+			if (this->pos.x - bodySize < mpTarget->pos.x + bodySize && !(mpTarget->pos.x > this->pos.x))
 			{
-				this->pos.x -= (this->pos.x - bodySize) - (mTarget->pos.x + bodySize);
+				this->pos.x -= (this->pos.x - bodySize) - (mpTarget->pos.x + bodySize);
 			}
 		}
 		mDir = MoveDir::Left;
@@ -122,7 +143,7 @@ bool Character::CheckHitChar()
 {
 	for (const auto& item : mHitChar)
 	{
-		if (item == mTarget)
+		if (item == mpTarget)
 		{
 			return true;
 		}

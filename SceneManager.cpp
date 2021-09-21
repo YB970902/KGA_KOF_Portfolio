@@ -1,9 +1,10 @@
-#include "SceneManager.h"
 #include "HitBoxScene.h"
+#include "SceneManager.h"
 
 void SceneManager::Init()
 {
-	mpHitBoxScene = new HitBoxScene;
+	mScene[eSceneTag::HitBoxSnene] = new HitBoxScene;
+
 	mpCurScene = nullptr;
 }
 
@@ -20,24 +21,13 @@ void SceneManager::Render(HDC hdc)
 void SceneManager::Release()
 {
 	if (mpCurScene) { mpCurScene->Exit(); }
-
-	delete mpHitBoxScene;
-	mpHitBoxScene = nullptr;
 }
 
 void SceneManager::ChangeScene(eSceneTag tag)
 {
 	if (mpCurScene) { mpCurScene->Exit(); }
 
-	switch (tag)
-	{
-	case eSceneTag::HitBoxSnene:
-		mpCurScene = mpHitBoxScene;
-		break;
-	default:
-		cout << "씬 매니저의 체인지 함수에 뭘 넣은거야 영민아" << endl;
-		break;
-	}
+	mpCurScene = mScene[tag];
 
 	if (mpCurScene) { mpCurScene->Enter(); }
 }

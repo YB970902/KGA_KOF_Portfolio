@@ -6,13 +6,13 @@ class Character;
 class Command;
 class HitBoxScene : public Scene
 {
-	Character* mRect1 = nullptr;
-	Character* mRect2 = nullptr;
+	Character* mpRect1 = nullptr;
+	Character* mpRect2 = nullptr;
 
-	Command* mLeftMoveCom = nullptr;
-	Command* mRightMoveCom = nullptr;
-	Command* mSmallAttack = nullptr;
-	Command* mBigAttack = nullptr;
+	Command* mpLeftMoveCom = nullptr;
+	Command* mpRightMoveCom = nullptr;
+	Command* mpSmallAttack = nullptr;
+	Command* mpBigAttack = nullptr;
 	
 	virtual void Enter() override;
 	virtual void Update() override;

@@ -4,12 +4,10 @@
 #include "CommonFunction.h"
 #include <vector>
 
-using namespace std;
-
 class Character : public GameObject
 {
 protected:
-	Character* mTarget = nullptr;
+	Character* mpTarget = nullptr;
 	RECT mSmallHitBox = RECT();
 	RECT mBigHitBox = RECT();
 	int mFrame = 0;
@@ -37,9 +35,9 @@ public:
 
 	void AllOffHitBox();
 
-	inline void SetTarget(Character* ch) { this->mTarget = ch; }
+	inline void SetTarget(Character* ch) { this->mpTarget = ch; }
 
-	inline Character* GetTarget() { return mTarget; }
+	inline Character* GetTarget() { return mpTarget; }
 	inline RECT GetShape() { return shape; }
 	inline RECT GetSmallHitBox() { return mSmallHitBox; }
 	inline int GetFrame() { return mFrame; }
@@ -50,5 +48,3 @@ public:
 	static void OnSmallHitBox(Character* ch) { ch->OnSmallHitBox((int)ch->GetDir()); }
 	static void OnBigHitBox(Character* ch) { ch->OnBigHitBox((int)ch->GetDir()); }
 };
-
- 
