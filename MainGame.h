@@ -1,38 +1,51 @@
 #pragma once
 #include "Config.h"
 #include "GameEntity.h"
+#include "Tank.h"
+#include "Ammo.h"
+#include "AnimManager.h"
 
-/*
-
- 킹오파에서  상대방이 서있고 히트박스가 몸만큼 있고 그옆에서 한명이 걸어가고 있고 히트박스가 머리부터 몸까지
-
- 캐릭터끼리 부딪혔을때 움직이지 못하게 해보자.
-
-*/
-
-class Command;
+// 우리가 구성할 게임 월드
 class Image;
-class Character;
+class AnimManager;
 class MainGame : public GameEntity
 {
 private:
-	HANDLE hTimer = nullptr;
+	// 타이머
+	HANDLE hTimer;
 
-	char text[128] = {} ;
+	// UI
+	char text[128];
 
-	int mousePosX = 0;
-	int mousePosY = 0;
-	int clickedMousePosX = 0;
-	int clickedMousePosY = 0;
+	int mousePosX;
+	int mousePosY;
+	int clickedMousePosX;
+	int clickedMousePosY;
 
-	Image* backBuffer = nullptr;
-	Image* backGround = nullptr;
+	// 탱크 (플레이어)
+	Tank playerTank;
+	
+	// 탱크 (적 AI)
+	Tank enemyTank;
+
+	// 백버퍼
+	Image* backBuffer;
+
+	// 배경 이미지
+	Image* backGround;
+
+	// 플레이어 1
+	AnimManager* Player1_anim;
+
 
 public:
 	void Init();
 	void Update();
-	void Render(HDC hdc);
+	//void Render();			// 오버라이딩 : 상속 관계에서 부모클래스의 함수를 재정의
+	void Render(HDC hdc);	// 오버로딩
 	void Release();
 
 	LRESULT MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 };
+
+//int MainGame::clickedMousePosX = 0;
