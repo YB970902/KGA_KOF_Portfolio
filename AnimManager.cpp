@@ -19,7 +19,7 @@ void AnimManager::Init()
 	
 	playerAct = ChAnimData::Acting::Act_Idle;
 	playerStatus = ChAnimData::AnimStatus::Idle;
-	playerLookat = ChAnimData::Lookat::Left;
+	playerLookat = ChAnimData::Lookat::Left_Lookat;
 
 	//RalfPlayer.selectedCharacter = ralf
 	
@@ -56,13 +56,13 @@ void AnimManager::Update()
 	
 	if (KeyManager::GetSingleton()->IsOnceKeyDown('A'))
 	{
-		if (playerLookat == ChAnimData::Lookat::Right)
+		if (playerLookat == ChAnimData::Lookat::Right_Lookat)
 		{
-			playerLookat = ChAnimData::Lookat::Left;
+			playerLookat = ChAnimData::Lookat::Left_Lookat;
 		}
-		else if (playerLookat == ChAnimData::Lookat::Left)
+		else if (playerLookat == ChAnimData::Lookat::Left_Lookat)
 		{
-			playerLookat = ChAnimData::Lookat::Right;
+			playerLookat = ChAnimData::Lookat::Right_Lookat;
 		}
 	}
 
@@ -119,22 +119,22 @@ void AnimManager::Update()
 		if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT))
 		{
 			//playerLookat = ChAnimData::Lookat::Left; // 추후에 값 받아야함
-			if (playerStatus != ChAnimData::AnimStatus::Move)
+			if (playerStatus != ChAnimData::Acting::Act_Left_Move)
 			{
 				frameX = 0;
 			}
-			playerAct = ChAnimData::Acting::Act_Forward;
-			playerStatus = ChAnimData::AnimStatus::Move;
+			playerAct = ChAnimData::Acting::Act_Left_Move;
+			playerStatus = ChAnimData::AnimStatus::Move_Front;
 		}
 		else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_RIGHT))
 		{
 			//playerLookat = ChAnimData::Lookat::Left; // 추후에 값 받아야함
-			if (playerStatus != ChAnimData::AnimStatus::Move)
+			if (playerStatus != ChAnimData::AnimStatus::Move_Backward)
 			{
 				frameX = 0;
 			}
-			playerAct = ChAnimData::Acting::Act_Backward;
-			playerStatus = ChAnimData::AnimStatus::Move;
+			playerAct = ChAnimData::Acting::Act_Right_Move;
+			playerStatus = ChAnimData::AnimStatus::Move_Backward;
 		}
 		else
 		{
@@ -218,16 +218,16 @@ void AnimManager::Update()
 
 	else if (playerAct != ChAnimData::Acting::Act_Attack) // 공격상태에서는 Idle과 Move가 작동하면 안되므로 공격상태인지 아닌지 판별
 	{
-		if (playerStatus == ChAnimData::AnimStatus::Move) //Move일때
+		if (playerStatus == ChAnimData::AnimStatus::Move_Front || playerStatus == ChAnimData::AnimStatus::Move_Backward) //Move일때
 		{
 			// 왼쪽으로 움직이기
-			if (playerAct == ChAnimData::Acting::Act_Forward)
+			if (playerAct == ChAnimData::Acting::Act_Left_Move)
 			{
 				AnimManager::ImgUpdate(playerStatus);
 				elapsedCount++;
 				if (elapsedCount >= 8)
 				{
-					if (playerLookat == ChAnimData::Lookat::Right)
+					if (playerLookat == ChAnimData::Lookat::Right_Lookat)
 					{
 						frameX--;
 						if (frameX < 0)
@@ -235,7 +235,7 @@ void AnimManager::Update()
 							frameX = 7;
 						}
 					}
-					else if (playerLookat == ChAnimData::Lookat::Left)
+					else if (playerLookat == ChAnimData::Lookat::Left_Lookat)
 					{
 						frameX++;
 						if (frameX >= 7)
@@ -249,14 +249,14 @@ void AnimManager::Update()
 
 			}
 			// 오른쪽으로 움직이기
-			else if (playerAct == ChAnimData::Acting::Act_Backward)
+			else if (playerAct == ChAnimData::Acting::Act_Right_Move)
 			{
 				AnimManager::ImgUpdate(playerStatus);
 				
 				elapsedCount++;
 				if (elapsedCount >= 8)
 				{
-					if (playerLookat == ChAnimData::Lookat::Right)
+					if (playerLookat == ChAnimData::Lookat::Right_Lookat)
 					{
 						frameX++;
 						if (frameX >= 7)
@@ -264,7 +264,7 @@ void AnimManager::Update()
 							frameX = 0;
 						}
 					}
-					else if (playerLookat == ChAnimData::Lookat::Left)
+					else if (playerLookat == ChAnimData::Lookat::Left_Lookat)
 					{
 						frameX--;
 						if (frameX < 0)
