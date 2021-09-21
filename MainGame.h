@@ -21,11 +21,6 @@ private:
 
 	Image* backGround;
 
-	int mousePosX = 0;
-	int mousePosY = 0;
-	int clickedMousePosX = 0;
-	int clickedMousePosY = 0;
-
 
 public:
 	void Init();

@@ -29,7 +29,7 @@ void Character::Update()
 		if (!CheckHitChar())
 		{
 			mHitChar.push_back(mpTarget);
-			mpTarget->mHP -= mSmallDamage;
+			mpTarget->mHP -= 10;
 			cout << "HP -10 상대 현재 체력 : " << mpTarget->mHP << endl;
 		}
 	}
@@ -58,7 +58,7 @@ void Character::Update()
 			if (!CheckHitChar())
 			{
 				mHitChar.push_back(mpTarget);
-				mpTarget->mHP -= mBigDamage;
+				mpTarget->mHP -= 20;
 				cout << "HP -20 상대 현재 체력 : " << mpTarget->mHP << endl;
 			}
 		}			
