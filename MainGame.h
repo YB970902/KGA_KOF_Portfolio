@@ -28,14 +28,6 @@ private:
 	Image* backBuffer = nullptr;
 	Image* backGround = nullptr;
 
-	Character* mRect1 = nullptr;
-	Character* mRect2 = nullptr;
-
-	Command* mLeftMoveCom = nullptr;
-	Command* mRightMoveCom = nullptr;
-	Command* mSmallAttack = nullptr;
-	Command* mBigAttack = nullptr;
-
 public:
 	void Init();
 	void Update();

@@ -29,10 +29,9 @@ void Character::Update()
 		if (!CheckHitChar())
 		{
 			mHitChar.push_back(mTarget);
-			mTarget->mHP -= SMALL_DAMAGE;
+			mTarget->mHP -= 10;
 			cout << "HP -10 상대 현재 체력 : " << mTarget->mHP << endl;
 		}
-		cout << "작은 공격 프레임" << endl;
 	}
 
 	if (mTarget && IsCollided(mBigHitBox, mTarget->shape))
@@ -40,10 +39,9 @@ void Character::Update()
 		if (!CheckHitChar())
 		{
 			mHitChar.push_back(mTarget);
-			mTarget->mHP -= BIG_DAMAGE;
+			mTarget->mHP -= 20;
 			cout << "HP -20 상대 현재 체력 : " << mTarget->mHP << endl;
 		}
-		cout << "큰 공격 프레임" << endl;
 	}
 
 	shape.left = (int)pos.x - bodySize;

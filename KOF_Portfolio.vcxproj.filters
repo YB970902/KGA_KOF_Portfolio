@@ -19,6 +19,9 @@
     <Filter Include="2DFramework\Manager">
       <UniqueIdentifier>{dae50390-c81a-4d1e-ac71-be2f1828f641}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{adb66638-83b8-4a65-a5bb-6175706028ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFunction.h">
@@ -54,6 +57,12 @@
     <ClInclude Include="Character.h">
       <Filter>2DFramework</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="HitBoxScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -82,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="Command.cpp">
       <Filter>2DFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="HitBoxScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

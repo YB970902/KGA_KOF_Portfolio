@@ -145,9 +145,11 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="HitBoxScene.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Singleton.h" />
   </ItemGroup>
@@ -156,10 +158,12 @@
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="HitBoxScene.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -13,16 +13,15 @@ using namespace std;
 #define PI 3.141592653578979
 #define PI2 (3.14159265358979 * 2)
 
-#define SMALL_DAMAGE 10
-#define BIG_DAMAGE 20
-
 #define MGR_KEY (KeyManager::GetSingleton())
+#define MGR_SCN (SceneManager::GetSingleton())
 
 #define DEGREE_TO_RADIAN(x)		(x * PI / 180.0f)
 
 #define SAFE_RELEASE(p)	{ if (p) { p->Release(); delete p; p = nullptr; } }
 
 enum class MoveDir { Left = -1, Right = 1, Up, Down };
+enum class eSceneTag { HitBoxSnene, };
 
 extern HWND g_hWnd;
 extern HINSTANCE g_hInstance;
