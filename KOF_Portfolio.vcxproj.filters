@@ -60,10 +60,12 @@
     <ClInclude Include="HitBoxScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Singleton.h">
+	<ClInclude Include="AnimManager.h">
       <Filter>2DFramework</Filter>
     </ClInclude>
-  </ItemGroup>
+    <ClInclude Include="Ralf.h">
+      <Filter>2DFramework</Filter>
+    </ClInclude>  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
@@ -97,6 +99,12 @@
     </ClCompile>
     <ClCompile Include="HitBoxScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimManager.cpp">
+      <Filter>2DFramework</Filter>
+    </ClCompile>
+    <ClCompile Include="Ralf.cpp">
+      <Filter>2DFramework</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

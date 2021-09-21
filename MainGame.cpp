@@ -1,23 +1,24 @@
-#include "MainGame.h"
+ï»¿#include "MainGame.h"
 #include "Singleton.h"
 #include "KeyManager.h"
 #include "SceneManager.h"
 #include "Image.h"
-#include "Character.h"
-#include "Command.h"
-
+#include "AnimManager.h"
 
 void MainGame::Init()
 {
 	MGR_KEY->Init();
 	MGR_SCN->Init();
 
-	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 100 , NULL);
+	KeyManager::GetSingleton()->Init();
+	SceneManager::GetSingleton();
+
+	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
 
 	mousePosX = 0;
 	mousePosY = 0;
-	clickedMousePosX = 0;
-	clickedMousePosY = 0;
+	clickedMousePosX = 0; 
+	clickedMousePosY = 0; 
 
 	backBuffer = new Image;
 	backBuffer->Init(WIN_SIZE_X, WIN_SIZE_Y);
@@ -112,14 +113,9 @@ void MainGame::Render(HDC hdc)
 {
 	HDC hBackBufferDC = backBuffer->GetMemDC();
 
-
 	backGround->Render(hBackBufferDC);
 
 	MGR_SCN->Render(hBackBufferDC);
-
-	//// ÀÌ ºÎºÐ¿¡¼­ ·»´õ¸µ ÀÛ¾÷
-	//mRect1->Render(hBackBufferDC);
-	//mRect2->Render(hBackBufferDC);
 
 	backBuffer->Render(hdc);
 
@@ -127,20 +123,10 @@ void MainGame::Render(HDC hdc)
 
 void MainGame::Release()
 {
-	//SAFE_RELEASE(mRect1);
-	//SAFE_RELEASE(mRect2);
-
-	//SAFE_RELEASE(mLeftMoveCom);
-	//SAFE_RELEASE(mRightMoveCom);
-	//SAFE_RELEASE(mSmallAttack);
-	//SAFE_RELEASE(mBigAttack);
-
 	SAFE_RELEASE(backBuffer);
 	SAFE_RELEASE(backGround);
 
 	KillTimer(g_hWnd, 0);
-
-	MGR_KEY->ReleaseSingleton();
 }
 
 

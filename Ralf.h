@@ -8,7 +8,8 @@ public:
 	enum AnimStatus
 	{
 		Idle,
-		Move,
+		Move_Front,
+		Move_Backward,
 		Damaged,
 		Weak_Punch,
 		Weak_Kick,
@@ -19,15 +20,15 @@ public:
 	enum Acting
 	{
 		Act_Attack,
-		Act_Forward,
-		Act_Backward,
+		Act_Left_Move,
+		Act_Right_Move,
 		Act_Idle,
 	};
 
 	enum Lookat
 	{
-		Left,
-		Right
+		Left_Lookat,
+		Right_Lookat
 	};
 
 	map<AnimStatus, int> Animframe;
