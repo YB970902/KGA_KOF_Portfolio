@@ -4,9 +4,10 @@ void Character::Init()
 {
 	pos.x = WIN_SIZE_X / 2;
 	pos.y = WIN_SIZE_Y / 2;
+
 	bodySize = 25;
 	mHP = 100;
-	
+
 	shape.left = (int)pos.x - bodySize;
 	shape.top = (int)pos.y - bodySize;
 	shape.right = (int)pos.x + bodySize;
@@ -24,7 +25,7 @@ void Character::Update()
 
 	mFrame++;
 
-	if (mpTarget && IsCollided(mSmallHitBox, mpTarget->shape))
+	if (mpTarget && IsCollided(mWeakPunchHitBox, mpTarget->shape))
 	{
 		if (!CheckHitChar())
 		{
@@ -33,37 +34,33 @@ void Character::Update()
 			cout << "HP -10 상대 현재 체력 : " << mpTarget->mHP << endl;
 		}
 	}
-
-	//if (mBigHitBox.right != 0)
-	//{
-	//	Move((int)mDir);
-
-	//	if ((int)mDir > 0)
-	//	{
-	//		mBigHitBox.left = (int)pos.x;
-	//		mBigHitBox.top = (int)pos.y - 50;
-	//		mBigHitBox.right = (int)pos.x + 70;
-	//		mBigHitBox.bottom = (int)pos.y + 50;
-	//	}
-	//	else
-	//	{
-	//		mBigHitBox.left = (int)pos.x - 70;
-	//		mBigHitBox.top = (int)pos.y - 50;
-	//		mBigHitBox.right = (int)pos.x;
-	//		mBigHitBox.bottom = (int)pos.y + 50;
-	//	}
-
-		if (mpTarget && IsCollided(mBigHitBox, mpTarget->shape))
+	else if (mpTarget && IsCollided(mStrongPunchHitBox, mpTarget->shape))
+	{
+		if (!CheckHitChar())
 		{
-			if (!CheckHitChar())
-			{
-				mHitChar.push_back(mpTarget);
-				mpTarget->mHP -= 20;
-				cout << "HP -20 상대 현재 체력 : " << mpTarget->mHP << endl;
-			}
-		}			
-	//}
-
+			mHitChar.push_back(mpTarget);
+			mpTarget->mHP -= 20;
+			cout << "HP -20 상대 현재 체력 : " << mpTarget->mHP << endl;
+		}
+	}
+	else if (mpTarget && IsCollided(mWeakPunchHitBox, mpTarget->shape))
+	{
+		if (!CheckHitChar())
+		{
+			mHitChar.push_back(mpTarget);
+			mpTarget->mHP -= 15;
+			cout << "HP -15 상대 현재 체력 : " << mpTarget->mHP << endl;
+		}
+	}
+	else if (mpTarget && IsCollided(mStrongPunchHitBox, mpTarget->shape))
+	{
+		if (!CheckHitChar())
+		{
+			mHitChar.push_back(mpTarget);
+			mpTarget->mHP -= 30;
+			cout << "HP -30 상대 현재 체력 : " << mpTarget->mHP << endl;
+		}
+	}
 
 	shape.left = (int)pos.x - bodySize;
 	shape.top = (int)pos.y - bodySize;
@@ -74,16 +71,26 @@ void Character::Update()
 void Character::Render(HDC hdc)
 {
 	Rectangle(hdc, shape.left, shape.top, shape.right, shape.bottom);
-	Rectangle(hdc, mSmallHitBox.left, mSmallHitBox.top, mSmallHitBox.right, mSmallHitBox.bottom);
-	Rectangle(hdc, mBigHitBox.left, mBigHitBox.top, mBigHitBox.right, mBigHitBox.bottom);
+	Rectangle(hdc, mWeakPunchHitBox.left, mWeakPunchHitBox.top, mWeakPunchHitBox.right, mWeakPunchHitBox.bottom);
+	Rectangle(hdc, mStrongPunchHitBox.left, mStrongPunchHitBox.top, mStrongPunchHitBox.right, mStrongPunchHitBox.bottom);
+	Rectangle(hdc, mWeakKickHitBox.left, mWeakKickHitBox.top, mWeakKickHitBox.right, mWeakKickHitBox.bottom);
+	Rectangle(hdc, mStrongKickHitBox.left, mStrongKickHitBox.top, mStrongKickHitBox.right, mStrongKickHitBox.bottom);
 
 	if (mFrame < 5)
 	{
-		if (mpTarget && IsCollided(mSmallHitBox, mpTarget->shape))
+		if (mpTarget && IsCollided(mWeakPunchHitBox, mpTarget->shape))
 		{
 			TextOut(hdc, (int)mpTarget->pos.x, (int)mpTarget->pos.y - 40, "HP -10", strlen("HP -10"));
 		}
-		if (mpTarget && IsCollided(mBigHitBox, mpTarget->shape))
+		else if (mpTarget && IsCollided(mStrongPunchHitBox, mpTarget->shape))
+		{
+			TextOut(hdc, (int)mpTarget->pos.x, (int)mpTarget->pos.y - 40, "HP -20", strlen("HP -20"));
+		}
+		else if (mpTarget && IsCollided(mWeakKickHitBox, mpTarget->shape))
+		{
+			TextOut(hdc, (int)mpTarget->pos.x, (int)mpTarget->pos.y - 40, "HP -20", strlen("HP -20"));
+		}
+		else if (mpTarget && IsCollided(mStrongKickHitBox, mpTarget->shape))
 		{
 			TextOut(hdc, (int)mpTarget->pos.x, (int)mpTarget->pos.y - 40, "HP -20", strlen("HP -20"));
 		}
@@ -98,7 +105,7 @@ void Character::Move(int dir)
 {
 	if (dir > 0)
 	{
-		if (IsCollided(this->shape,mpTarget->shape))
+		if (IsCollided(this->shape, mpTarget->shape))
 		{
 			if (mpTarget->pos.x < this->pos.x)
 			{
@@ -151,59 +158,108 @@ bool Character::CheckHitChar()
 	return false;
 }
 
-void Character::OnSmallHitBox(int dir)
+void Character::OnWeakPunchHitBox(int dir)
 {
 	mFrame = 0;
 
 	if (dir > 0)
 	{
-		mSmallHitBox.left = (int)pos.x;
-		mSmallHitBox.top = (int)pos.y - 20;
-		mSmallHitBox.right = (int)pos.x + 100;
-		mSmallHitBox.bottom = (int)pos.y;
+		mWeakPunchHitBox.left = (int)pos.x;
+		mWeakPunchHitBox.right = (int)pos.x + 70;
 	}
 	else
 	{
-		mSmallHitBox.left = (int)pos.x - 100;
-		mSmallHitBox.top = (int)pos.y - 20;
-		mSmallHitBox.right = (int)pos.x;
-		mSmallHitBox.bottom = (int)pos.y;
+		mWeakPunchHitBox.left = (int)pos.x - 70;
+		mWeakPunchHitBox.right = (int)pos.x;
 	}
+	mWeakPunchHitBox.top = (int)pos.y - 25;
+	mWeakPunchHitBox.bottom = (int)pos.y - 15;
 }
 
-void Character::OffSmallHitBox()
+void Character::OffWeakPunchHitBox()
 {
-	mSmallHitBox = RECT();
+	mWeakPunchHitBox = RECT();
+	mHitChar.clear();
 }
 
-void Character::OnBigHitBox(int dir)
+void Character::OnStrongPunchHitBox(int dir)
 {
 	mFrame = 0;
 
 	if (dir > 0)
 	{
-		mBigHitBox.left = (int)pos.x;
-		mBigHitBox.top = (int)pos.y - 50;
-		mBigHitBox.right = (int)pos.x + 70;
-		mBigHitBox.bottom = (int)pos.y + 50;
+		mStrongPunchHitBox.left = (int)pos.x;
+		mStrongPunchHitBox.right = (int)pos.x + 80;
 	}
 	else
 	{
-		mBigHitBox.left = (int)pos.x - 70;
-		mBigHitBox.top = (int)pos.y - 50;
-		mBigHitBox.right = (int)pos.x;
-		mBigHitBox.bottom = (int)pos.y + 50;
+		mStrongPunchHitBox.left = (int)pos.x - 80;
+		mStrongPunchHitBox.right = (int)pos.x;
 	}
+
+	mStrongPunchHitBox.top = (int)pos.y - 30;
+	mStrongPunchHitBox.bottom = (int)pos.y - 10;
 }
 
-void Character::OffBigHitBox()
+void Character::OffStrongPunchHitBox()
 {
-	mBigHitBox = RECT();
+	mStrongPunchHitBox = RECT();
+	mHitChar.clear();
+}
+
+void Character::OnWeakKickHitBox(int dir)
+{
+	mFrame = 0;
+
+	if (dir > 0)
+	{
+		mWeakKickHitBox.left = (int)pos.x;
+		mWeakKickHitBox.right = (int)pos.x + 78;
+	}
+	else
+	{
+		mWeakKickHitBox.left = (int)pos.x - 78;
+		mWeakKickHitBox.right = (int)pos.x;
+	}
+	mWeakKickHitBox.top = (int)pos.y - 40;
+	mWeakKickHitBox.bottom = (int)pos.y + 10;
+}
+
+void Character::OffWeakKickHitBox()
+{
+	mWeakKickHitBox = RECT();
+	mHitChar.clear();
+}
+
+void Character::OnStrongKickHitBox(int dir)
+{
+	mFrame = 0;
+
+	if (dir > 0)
+	{
+		mStrongKickHitBox.left = (int)pos.x;
+		mStrongKickHitBox.right = (int)pos.x + 135;
+	}
+	else
+	{
+		mStrongKickHitBox.left = (int)pos.x - 135;
+		mStrongKickHitBox.right = (int)pos.x;
+	}
+	mStrongKickHitBox.top = (int)pos.y - 45;
+	mStrongKickHitBox.bottom = (int)pos.y;
+}
+
+void Character::OffStrongKickHitBox()
+{
+	mStrongKickHitBox = RECT();
+	mHitChar.clear();
 }
 
 void Character::AllOffHitBox()
 {
-	mSmallHitBox = RECT();
-	mBigHitBox = RECT();		
+	mWeakPunchHitBox = RECT();
+	mStrongPunchHitBox = RECT();
+	mWeakKickHitBox = RECT();
+	mStrongKickHitBox = RECT();
 	mHitChar.clear();
 }

@@ -13,7 +13,7 @@ void MainGame::Init()
 	KeyManager::GetSingleton()->Init();
 	SceneManager::GetSingleton();
 
-	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
+	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 200, NULL);
 
 	mousePosX = 0;
 	mousePosY = 0;

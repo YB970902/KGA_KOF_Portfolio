@@ -135,7 +135,7 @@
       <Filter>2DFramework\Animator\2dData</Filter>
     </ClCompile>
     <ClCompile Include="AnimManager.cpp">
-      <Filter>2DFramework\Animator</Filter>
+      <Filter>2DFramework\Animator\2dData</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -11,8 +11,18 @@ class HitBoxScene : public Scene
 
 	Command* mpLeftMoveCom = nullptr;
 	Command* mpRightMoveCom = nullptr;
-	Command* mpSmallAttack = nullptr;
-	Command* mpBigAttack = nullptr;
+	Command* mpWeakPunchAttack = nullptr;
+	Command* mpStrongPunchAttack = nullptr;
+	Command* mpWeakKickAttack = nullptr;
+	Command* mpStrongKickAttack = nullptr;
+
+
+	Command* mpLeftMoveCom1 = nullptr;
+	Command* mpRightMoveCom1 = nullptr;
+	Command* mpWeakPunchAttack1 = nullptr;
+	Command* mpStrongPunchAttack1 = nullptr;
+	Command* mpWeakKickAttack1 = nullptr;
+	Command* mpStrongKickAttack1 = nullptr;
 	
 	virtual void Enter() override;
 	virtual void Update() override;

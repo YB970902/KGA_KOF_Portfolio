@@ -22,12 +22,32 @@ void HitBoxScene::Enter()
 
 	mpLeftMoveCom = new Command;
 	mpLeftMoveCom->Init(mpRect1, Character::LeftMove);
+
+
 	mpRightMoveCom = new Command;
 	mpRightMoveCom->Init(mpRect1, Character::RightMove);
-	mpSmallAttack = new Command;
-	mpSmallAttack->Init(mpRect1, Character::OnSmallHitBox);
-	mpBigAttack = new Command;
-	mpBigAttack->Init(mpRect1, Character::OnBigHitBox);
+	mpWeakPunchAttack = new Command;
+	mpWeakPunchAttack->Init(mpRect1, Character::OnWeakPunchHitBox);
+	mpStrongPunchAttack = new Command;
+	mpStrongPunchAttack->Init(mpRect1, Character::OnStrongPunchHitBox);
+	mpWeakKickAttack = new Command;
+	mpWeakKickAttack->Init(mpRect1, Character::OnWeakKickHitBox);
+	mpStrongKickAttack = new Command;
+	mpStrongKickAttack->Init(mpRect1, Character::OnStrongKickHitBox);
+
+
+	mpLeftMoveCom1 = new Command;
+	mpLeftMoveCom1->Init(mpRect2, Character::LeftMove); 
+	mpRightMoveCom1 = new Command;
+	mpRightMoveCom1->Init(mpRect2, Character::RightMove);
+	mpWeakPunchAttack1 = new Command;
+	mpWeakPunchAttack1->Init(mpRect2, Character::OnWeakPunchHitBox);
+	mpStrongPunchAttack1 = new Command;
+	mpStrongPunchAttack1->Init(mpRect2, Character::OnStrongPunchHitBox);
+	mpWeakKickAttack1 = new Command;
+	mpWeakKickAttack1->Init(mpRect2, Character::OnWeakKickHitBox);
+	mpStrongKickAttack1 = new Command;
+	mpStrongKickAttack1->Init(mpRect2, Character::OnStrongKickHitBox);
 }
 
 void HitBoxScene::Update()
@@ -36,11 +56,19 @@ void HitBoxScene::Update()
 	{
 		if (MGR_KEY->IsOnceKeyDown('G'))
 		{
-			mpSmallAttack->Execute();
+			mpWeakPunchAttack->Execute();
 		}
 		else if (MGR_KEY->IsOnceKeyDown('Y'))
 		{
-			mpBigAttack->Execute();
+			mpStrongPunchAttack->Execute();
+		}
+		else if (MGR_KEY->IsOnceKeyDown('H'))
+		{
+			mpWeakKickAttack->Execute();
+		}
+		else if (MGR_KEY->IsOnceKeyDown('U'))
+		{
+			mpStrongKickAttack->Execute();
 		}
 		else if (MGR_KEY->IsStayKeyDown('A'))
 		{
@@ -49,6 +77,34 @@ void HitBoxScene::Update()
 		else if (MGR_KEY->IsStayKeyDown('D'))
 		{
 			mpRightMoveCom->Execute();
+		}
+	}
+
+	if (mpLeftMoveCom1->GetCharacter()->GetFrame() > 5)
+	{
+		if (MGR_KEY->IsOnceKeyDown('N'))
+		{
+			mpWeakPunchAttack1->Execute();
+		}
+		else if (MGR_KEY->IsOnceKeyDown('J'))
+		{
+			mpStrongPunchAttack1->Execute();
+		}
+		else if (MGR_KEY->IsOnceKeyDown('M'))
+		{
+			mpWeakKickAttack1->Execute();
+		}
+		else if (MGR_KEY->IsOnceKeyDown('K'))
+		{
+			mpStrongKickAttack1->Execute();
+		}
+		else if (MGR_KEY->IsStayKeyDown(VK_LEFT))
+		{
+			mpLeftMoveCom1->Execute();
+		}
+		else if (MGR_KEY->IsStayKeyDown(VK_RIGHT))
+		{
+			mpRightMoveCom1->Execute();
 		}
 	}
 
@@ -61,8 +117,8 @@ void HitBoxScene::Update()
 		{
 			mpLeftMoveCom->Init(mpRect2, Character::LeftMove);
 			mpRightMoveCom->Init(mpRect2, Character::RightMove);
-			mpSmallAttack->Init(mpRect2, Character::OnSmallHitBox);
-			mpBigAttack->Init(mpRect2, Character::OnBigHitBox);
+			mpWeakPunchAttack->Init(mpRect2, Character::OnWeakPunchHitBox);
+			mpStrongPunchAttack->Init(mpRect2, Character::OnStrongPunchHitBox);
 			mpRect1->SetTarget(nullptr);
 			mpRect2->SetTarget(mpRect1);
 		}
@@ -70,8 +126,8 @@ void HitBoxScene::Update()
 		{
 			mpLeftMoveCom->Init(mpRect1, Character::LeftMove);
 			mpRightMoveCom->Init(mpRect1, Character::RightMove);
-			mpSmallAttack->Init(mpRect1, Character::OnSmallHitBox);
-			mpBigAttack->Init(mpRect1, Character::OnBigHitBox);
+			mpWeakPunchAttack->Init(mpRect1, Character::OnWeakPunchHitBox);
+			mpStrongPunchAttack->Init(mpRect1, Character::OnStrongPunchHitBox);
 			mpRect2->SetTarget(nullptr);
 			mpRect1->SetTarget(mpRect2);
 		}
@@ -92,6 +148,6 @@ void HitBoxScene::Exit()
 
 	SAFE_RELEASE(mpLeftMoveCom);
 	SAFE_RELEASE(mpRightMoveCom);
-	SAFE_RELEASE(mpSmallAttack);
-	SAFE_RELEASE(mpBigAttack);
+	SAFE_RELEASE(mpWeakPunchAttack);
+	SAFE_RELEASE(mpStrongPunchAttack);
 }
