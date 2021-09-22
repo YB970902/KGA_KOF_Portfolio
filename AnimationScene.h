@@ -5,7 +5,7 @@
 class AnimManager;
 class AnimationScene : public Scene
 {
-	AnimManager* Ralf;
+	AnimManager* Ralf = nullptr;
 
 	virtual void Enter() override;
 	virtual void Update() override;

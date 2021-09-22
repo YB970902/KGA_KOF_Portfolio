@@ -8,18 +8,18 @@ class AnimManager;
 class MainGame : public GameEntity
 {
 private:
-	HANDLE hTimer;
+	HANDLE hTimer = nullptr;
 
-	char text[128];
+	char text[128] = {};
 
-	int mousePosX;
-	int mousePosY;
-	int clickedMousePosX;
-	int clickedMousePosY;
+	int mousePosX = 0;
+	int mousePosY = 0;
+	int clickedMousePosX = 0;
+	int clickedMousePosY = 0;
 
-	Image* backBuffer;
+	Image* backBuffer = nullptr;
 
-	Image* backGround;
+	Image* backGround = nullptr; 
 public:
 	void Init();
 	void Update();
