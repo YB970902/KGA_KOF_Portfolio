@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimManager.h" />
+    <ClInclude Include="Bluemary.h" />
+    <ClInclude Include="ChAnimData.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommonFunction.h" />
@@ -150,6 +152,7 @@
     <ClInclude Include="Image.h" />
     <ClInclude Include="AnimationScene.h" />
     <ClInclude Include="KeyManager.h" />
+    <ClInclude Include="Leona.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Ralf.h" />
     <ClInclude Include="Scene.h" />
@@ -158,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimManager.cpp" />
+    <ClCompile Include="Bluemary.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="GameEntity.cpp" />
@@ -166,6 +170,7 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="AnimationScene.cpp" />
     <ClCompile Include="KeyManager.cpp" />
+    <ClCompile Include="Leona.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Ralf.cpp" />

@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
-#include "Ralf.h"
+#include "ChAnimData.h"
+
 //#include "Image.h"	// 컴파일 관계가 복잡, 컴파일 시간이 오래 걸림
 
 using namespace std;
@@ -20,3 +21,6 @@ public:
 	void Render(HDC hdc);
 	void Release();
 };
+
+static int baseX;
+static int baseY;

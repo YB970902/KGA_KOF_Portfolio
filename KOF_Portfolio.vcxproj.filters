@@ -22,6 +22,12 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{adb66638-83b8-4a65-a5bb-6175706028ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2DFramework\Animator">
+      <UniqueIdentifier>{9dceab16-a795-4e0b-9df2-934607f98147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DFramework\Animator\2dData">
+      <UniqueIdentifier>{dceae723-4c51-4ed1-8806-8c97ff0f0428}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFunction.h">
@@ -60,17 +66,26 @@
     <ClInclude Include="HitBoxScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="AnimManager.h">
-      <Filter>2DFramework</Filter>
-    </ClInclude>
-    <ClInclude Include="Ralf.h">
-      <Filter>2DFramework</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>2DFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="AnimationScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ChAnimData.h">
+      <Filter>2DFramework</Filter>
+    </ClInclude>
+    <ClInclude Include="Leona.h">
+      <Filter>2DFramework\Animator\2dData</Filter>
+    </ClInclude>
+    <ClInclude Include="Ralf.h">
+      <Filter>2DFramework\Animator\2dData</Filter>
+    </ClInclude>
+    <ClInclude Include="Bluemary.h">
+      <Filter>2DFramework\Animator\2dData</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimManager.h">
+      <Filter>2DFramework\Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -107,14 +122,20 @@
     <ClCompile Include="HitBoxScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="AnimManager.cpp">
-      <Filter>2DFramework</Filter>
-    </ClCompile>
-    <ClCompile Include="Ralf.cpp">
-      <Filter>2DFramework</Filter>
-    </ClCompile>
     <ClCompile Include="AnimationScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Leona.cpp">
+      <Filter>2DFramework\Animator\2dData</Filter>
+    </ClCompile>
+    <ClCompile Include="Ralf.cpp">
+      <Filter>2DFramework\Animator\2dData</Filter>
+    </ClCompile>
+    <ClCompile Include="Bluemary.cpp">
+      <Filter>2DFramework\Animator\2dData</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimManager.cpp">
+      <Filter>2DFramework\Animator</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

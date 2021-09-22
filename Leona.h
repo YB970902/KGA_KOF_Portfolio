@@ -1,7 +1,7 @@
 #pragma once
 #include "ChAnimData.h"
 
-class Ralf: public ChAnimData
+class Leona : public ChAnimData
 {
 public:
 	ChAnimData mData;

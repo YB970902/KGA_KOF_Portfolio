@@ -1,8 +1,10 @@
 #include "AnimManager.h"
 #include "Image.h"
 #include "KeyManager.h"
+#include "Bluemary.h"
+#include "Leona.h"
+#include "Ralf.h"
 #include <map>
-
 
 using namespace std;
 
@@ -10,8 +12,16 @@ using namespace std;
 
 //static ChAnimData::AnimStatus playerStatus; // 추후에 전역변수로 설정요망?
 
-Ralf RalfPlayer;
-static bool isAttack = false;
+Bluemary RalfPlayer;
+//static bool isAction = false;		// 추후에 아래 세개의 변수를 isAction으로 통합시킬수 있는지 판단필요 (조건문에 &&을 넣어야 하는건가;)
+static bool isAttack = false;		// 공격은 액션인데 공격중 다른공격을 할수는 없다.
+static bool isJump = false;			// 점프는 액션인데 점프중에는 공격을 할 수 있지만 자유로운 이동은 불가하다. 반드시 정해진 방향으로만 이동
+static bool isSit = false;			// 앉은상태는 액션인데 공격을 할수 있다.
+									// isAction이 켜진상태에서 이동을 할 수 없는것을 만들기위해 하나의 트리거로 조건을 거는것은 애매하다는 판단
+
+static ChAnimData::Lookat playerLookat;
+static ChAnimData::AnimStatus playerStatus;
+static ChAnimData::Acting playerAct;
 
 void AnimManager::Init()
 {	
@@ -48,6 +58,19 @@ void AnimManager::ImgUpdate(ChAnimData::AnimStatus playerStatus)
 		(int)RalfPlayer.mData.Animframe[playerStatus], 1, true, RGB(255, 0, 255));
 }
 
+FLOAT moveAfterAction(FLOAT pos)
+{
+	if (playerLookat == ChAnimData::Lookat::Right_Lookat)
+	{
+		pos = pos + (FLOAT)(RalfPlayer.mData.moveAfteraction[playerStatus]);
+	}
+	else if (playerLookat == ChAnimData::Lookat::Left_Lookat)
+	{
+		pos = pos - (FLOAT)(RalfPlayer.mData.moveAfteraction[playerStatus]);;
+	}
+	return pos;
+};
+
 void AnimManager::Update()
 {
 	// 공격
@@ -78,6 +101,7 @@ void AnimManager::Update()
 			isAttack = true;
 			playerAct = ChAnimData::Acting::Act_Attack;
 			playerStatus = ChAnimData::AnimStatus::Weak_Punch;
+			
 		}
 		else if (KeyManager::GetSingleton()->IsOnceKeyDown('X'))
 		{
@@ -89,6 +113,7 @@ void AnimManager::Update()
 			isAttack = true;
 			playerAct = ChAnimData::Acting::Act_Attack;
 			playerStatus = ChAnimData::AnimStatus::Strong_Punch;
+			
 		}
 		else if (KeyManager::GetSingleton()->IsOnceKeyDown('C'))
 		{
@@ -100,6 +125,7 @@ void AnimManager::Update()
 			isAttack = true;
 			playerAct = ChAnimData::Acting::Act_Attack;
 			playerStatus = ChAnimData::AnimStatus::Weak_Kick;
+			
 		}
 		else if (KeyManager::GetSingleton()->IsOnceKeyDown('V'))
 		{
@@ -111,6 +137,7 @@ void AnimManager::Update()
 			isAttack = true;
 			playerAct = ChAnimData::Acting::Act_Attack;
 			playerStatus = ChAnimData::AnimStatus::Strong_Kick;
+			
 		}
 	}
 
@@ -119,7 +146,7 @@ void AnimManager::Update()
 		if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT))
 		{
 			//playerLookat = ChAnimData::Lookat::Left; // 추후에 값 받아야함
-			if (playerStatus != ChAnimData::Acting::Act_Left_Move)
+			if (playerAct != ChAnimData::Acting::Act_Left_Move)
 			{
 				frameX = 0;
 			}
@@ -148,8 +175,6 @@ void AnimManager::Update()
 		}
 	}
 	
-	////////////////
-
 	if (playerAct == ChAnimData::Acting::Act_Attack)
 		{
 		if (playerStatus == ChAnimData::AnimStatus::Weak_Punch)
@@ -163,8 +188,8 @@ void AnimManager::Update()
 				{
 					frameX = 0;
 					isAttack = false;
-
-					playerAct = ChAnimData::Acting::Act_Idle;					
+					playerAct = ChAnimData::Acting::Act_Idle;
+					pos.x = moveAfterAction(pos.x);
 				}
 				elapsedCount = 0;
 			}
@@ -180,7 +205,8 @@ void AnimManager::Update()
 				{
 					frameX = 0;
 					isAttack = false;
-					playerAct = ChAnimData::Acting::Act_Idle;					
+					playerAct = ChAnimData::Acting::Act_Idle;
+					pos.x = moveAfterAction(pos.x);
 				}
 				elapsedCount = 0;
 			}
@@ -196,7 +222,8 @@ void AnimManager::Update()
 				{
 					frameX = 0;
 					isAttack = false;
-					playerAct = ChAnimData::Acting::Act_Idle;					
+					playerAct = ChAnimData::Acting::Act_Idle;
+					pos.x = moveAfterAction(pos.x);
 				}
 				elapsedCount = 0;
 			}
@@ -213,6 +240,7 @@ void AnimManager::Update()
 					frameX = 0;
 					isAttack = false;
 					playerAct = ChAnimData::Acting::Act_Idle;
+					pos.x = moveAfterAction(pos.x);
 				}
 				elapsedCount = 0;
 			}
@@ -235,13 +263,13 @@ void AnimManager::Update()
 						frameX--;
 						if (frameX < 0)
 						{
-							frameX = 7;
+							frameX = RalfPlayer.mData.Animframe[playerStatus] - 1;
 						}
 					}
 					else if (playerLookat == ChAnimData::Lookat::Left_Lookat)
 					{
 						frameX++;
-						if (frameX >= 7)
+						if (frameX >= RalfPlayer.mData.Animframe[playerStatus] - 1)
 						{
 							frameX = 0;
 						}
@@ -262,7 +290,7 @@ void AnimManager::Update()
 					if (playerLookat == ChAnimData::Lookat::Right_Lookat)
 					{
 						frameX++;
-						if (frameX >= 7)
+						if (frameX >= RalfPlayer.mData.Animframe[playerStatus] - 1)
 						{
 							frameX = 0;
 						}
@@ -272,7 +300,7 @@ void AnimManager::Update()
 						frameX--;
 						if (frameX < 0)
 						{
-							frameX = 7;
+							frameX = RalfPlayer.mData.Animframe[playerStatus] - 1;
 						}
 					}
 					pos.x += moveSpeed;
@@ -298,6 +326,9 @@ void AnimManager::Update()
 		} 
 	}
 
+	baseX = RalfPlayer.mData.sizeX[playerStatus] / (int)RalfPlayer.mData.Animframe[ChAnimData::AnimStatus::Idle];
+	baseY = (int)RalfPlayer.mData.sizeY[ChAnimData::AnimStatus::Idle];
+
 }
 
 	// 실습1. 뒤로 움직이기 + 실제 위치 이동
@@ -309,7 +340,7 @@ void AnimManager::Render(HDC hdc)
 {
 	if (img)
 	{
-		img->Render(hdc, pos.x, pos.y, frameX, frameY, RalfPlayer.mData.sizeX[playerStatus], RalfPlayer.mData.sizeY[playerStatus],playerLookat);
+		img->Render(hdc, pos.x, pos.y, frameX, frameY, baseX, baseY, playerStatus, playerLookat);
 	}
 }
 

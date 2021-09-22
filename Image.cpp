@@ -155,13 +155,15 @@ void Image::Render(HDC hdc, int destX, int destY)
 
 }
 
-void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int imgWidth,int imgHeight, ChAnimData::Lookat playerLookat)
+void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int baseX,int baseY, ChAnimData::AnimStatus playerStatus, ChAnimData::Lookat playerLookat)
 {
 	// frameX : 0, frameY : 0 => 시작 (68 * 0, 0) (0,     0)	(68, 104)
 	// frameX : 1, frameY : 0 => 시작 (68 * 1, 0) (68,  104)	(136, 104)
 	// frameX : 2, frameY : 0 => 시작 (68 * 2, 0) (136, 104)	(204, 104)
 	// frameX : 3, frameY : 0 => 시작 (68 * 3, 0) (204, 104)	(272, 104)
 	//											  (68,	104)	(0,0)
+	//Player.mData.sizeX[playerStatus], Player.mData.sizeY[playerStatus];
+
 	if (isTransparent)
 	{
 		if (playerLookat == ChAnimData::Lookat::Right_Lookat)
@@ -183,8 +185,8 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int img
 
 			GdiTransparentBlt(
 				hdc,
-				destX - (imageInfo->frameWidth == 66 ? 66 : imageInfo->frameWidth - (imageInfo->frameWidth - 66) / 2),
-				destY - (imageInfo->frameHeight == 120 ? 120 : imageInfo->frameHeight - (imageInfo->frameHeight - 120) / 2),// - (imageInfo->frameHeight / 2),
+				destX - (imageInfo->frameWidth / 2),
+				destY - (imageInfo->frameHeight / 2),// - (imageInfo->frameHeight / 2),
 				imageInfo->frameWidth,
 				imageInfo->frameHeight,	// 전체 프레임 수
 
@@ -200,8 +202,8 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int img
 		{
 			GdiTransparentBlt(
 				hdc,
-				destX - (imageInfo->frameWidth == 66 ? 66 : imageInfo->frameWidth - (imageInfo->frameWidth - 66) / 2),
-				destY - (imageInfo->frameHeight == 120 ? 120 : imageInfo->frameHeight - (imageInfo->frameHeight - 120) / 2),
+				destX - (imageInfo->frameWidth / 2),	/*imageInfo->frameWidth <= baseX ? baseX : (imageInfo->frameWidth - (*/
+				destY - (imageInfo->frameHeight / 2),	/*imageInfo->frameHeight <= baseY ? baseY : imageInfo->frameHeight - (*/
 				imageInfo->frameWidth,
 				imageInfo->frameHeight,	// 전체 프레임 수
 

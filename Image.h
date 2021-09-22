@@ -1,6 +1,8 @@
 #pragma once
 #include "Config.h"
-#include "Ralf.h"
+#include "ChAnimData.h"
+
+using namespace std;
 
 class Image
 {
@@ -78,7 +80,7 @@ public:
 
 	void Render(HDC hdc);
 	void Render(HDC hdc, int destX, int destY);	// 이미지 데이터를 화면에 복사
-	void Render(HDC hdc, int destX, int destY, int frameX, int frameY,int imgWidth, int imgHeight, ChAnimData::Lookat playerLookat);	// 이미지 데이터를 화면에 복사
+	void Render(HDC hdc, int destX, int destY, int frameX, int frameY, int baseX, int baseY, ChAnimData::AnimStatus playerStatus, ChAnimData::Lookat playerLookat);	// 이미지 데이터를 화면에 복사
 
 
 	HDC GetMemDC() { if (imageInfo) return imageInfo->hMemDc; return NULL; }
