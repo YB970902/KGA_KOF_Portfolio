@@ -12,7 +12,7 @@ using namespace std;
 
 //static ChAnimData::AnimStatus Player.playerStatus; // 추후에 전역변수로 설정요망?
 
-Ralf Player;
+Leona Player;
 
 void AnimManager::Init()
 {	
@@ -40,6 +40,16 @@ void AnimManager::Init()
 	pos.x = WIN_SIZE_X / 2;
 	pos.y = WIN_SIZE_Y / 2;
 	moveSpeed = 10.0f;
+
+
+
+	mHP = 100;
+
+	shape.left = (int)pos.x - ((Player.mData.sizeX[Player.playerStatus] / Player.mData.Animframe[Player.playerStatus]) / 2);
+	shape.top = (int)pos.y - (Player.mData.sizeY[Player.playerStatus] / 2);
+	shape.right = (int)pos.x + ((Player.mData.sizeX[Player.playerStatus] / Player.mData.Animframe[Player.playerStatus]) / 2);
+	shape.bottom = (int)pos.y + (Player.mData.sizeY[Player.playerStatus] / 2);
+
 }
 
 void AnimManager::ImgUpdate(ChAnimData::AnimStatus playerStatus)
@@ -193,6 +203,16 @@ void AnimManager::Update()
 			if (elapsedCount >= 4)
 			{
 				frameX++;
+
+				if (frameX == 2)
+				{
+					OnWeakPunchHitBox((int)Player.playerLookat);
+				}
+				else if (frameX == 3)
+				{
+					OffWeakPunchHitBox();
+				}
+
 				if (frameX >= Player.mData.Animframe[Player.playerStatus])
 				{
 					frameX = 0;
@@ -210,6 +230,16 @@ void AnimManager::Update()
 			if (elapsedCount >= 4)
 			{
 				frameX++;
+				
+				if (frameX == 4)
+				{
+					OnStrongPunchHitBox((int)Player.playerLookat);
+				}
+				else if (frameX == 9)
+				{
+					OffStrongPunchHitBox();
+				}
+
 				if (frameX >= Player.mData.Animframe[Player.playerStatus])
 				{
 					frameX = 0;
@@ -227,6 +257,16 @@ void AnimManager::Update()
 			if (elapsedCount >= 4)
 			{
 				frameX++;
+
+				if (frameX == 3)
+				{
+					OnWeakKickHitBox((int)Player.playerLookat);
+				}
+				else if (frameX == 5)
+				{
+					OffWeakKickHitBox();
+				}
+
 				if (frameX >= Player.mData.Animframe[Player.playerStatus])
 				{
 					frameX = 0;
@@ -244,6 +284,17 @@ void AnimManager::Update()
 			if (elapsedCount >= 4)
 			{
 				frameX++;
+
+
+				if (frameX == 5)
+				{
+					OnStrongKickHitBox((int)Player.playerLookat);
+				}
+				else if (frameX == 8)
+				{
+					OffStrongKickHitBox();
+				}
+
 				if (frameX >= Player.mData.Animframe[Player.playerStatus])
 				{
 					frameX = 0;
@@ -360,6 +411,51 @@ void AnimManager::Update()
 	baseX = Player.mData.sizeX[Player.playerStatus] / (int)Player.mData.Animframe[ChAnimData::AnimStatus::Idle];
 	baseY = (int)Player.mData.sizeY[ChAnimData::AnimStatus::Idle];
 
+
+
+
+	shape.left = (int)pos.x - ((Player.mData.sizeX[ChAnimData::AnimStatus::Idle] / Player.mData.Animframe[ChAnimData::AnimStatus::Idle]) / 2);
+	shape.top = (int)pos.y - (Player.mData.sizeY[ChAnimData::AnimStatus::Idle] / 2);
+	shape.right = (int)pos.x + ((Player.mData.sizeX[ChAnimData::AnimStatus::Idle] / Player.mData.Animframe[ChAnimData::AnimStatus::Idle]) / 2);
+	shape.bottom = (int)pos.y + (Player.mData.sizeY[ChAnimData::AnimStatus::Idle] / 2);
+
+	if (mpTarget && IsCollided(mWeakPunchHitBox, mpTarget->shape))
+	{
+		if (!CheckHitChar())
+		{
+			mHitChar.push_back(mpTarget);
+			mpTarget->mHP -= 10;
+			cout << "HP -10 상대 현재 체력 : " << mpTarget->mHP << endl;
+		}
+	}
+	else if (mpTarget && IsCollided(mStrongPunchHitBox, mpTarget->shape))
+	{
+		if (!CheckHitChar())
+		{
+			mHitChar.push_back(mpTarget);
+			mpTarget->mHP -= 20;
+			cout << "HP -20 상대 현재 체력 : " << mpTarget->mHP << endl;
+		}
+	}
+	else if (mpTarget && IsCollided(mWeakPunchHitBox, mpTarget->shape))
+	{
+		if (!CheckHitChar())
+		{
+			mHitChar.push_back(mpTarget);
+			mpTarget->mHP -= 15;
+			cout << "HP -15 상대 현재 체력 : " << mpTarget->mHP << endl;
+		}
+	}
+	else if (mpTarget && IsCollided(mStrongPunchHitBox, mpTarget->shape))
+	{
+		if (!CheckHitChar())
+		{
+			mHitChar.push_back(mpTarget);
+			mpTarget->mHP -= 30;
+			cout << "HP -30 상대 현재 체력 : " << mpTarget->mHP << endl;
+		}
+	}
+
 }
 
 	// 실습1. 뒤로 움직이기 + 실제 위치 이동
@@ -369,6 +465,13 @@ void AnimManager::Update()
 
 void AnimManager::Render(HDC hdc)
 {
+	Rectangle(hdc, shape.left, shape.top, shape.right, shape.bottom);
+
+	Rectangle(hdc, mWeakPunchHitBox.left, mWeakPunchHitBox.top, mWeakPunchHitBox.right, mWeakPunchHitBox.bottom);
+	Rectangle(hdc, mStrongPunchHitBox.left, mStrongPunchHitBox.top, mStrongPunchHitBox.right, mStrongPunchHitBox.bottom);
+	Rectangle(hdc, mWeakKickHitBox.left, mWeakKickHitBox.top, mWeakKickHitBox.right, mWeakKickHitBox.bottom);
+	Rectangle(hdc, mStrongKickHitBox.left, mStrongKickHitBox.top, mStrongKickHitBox.right, mStrongKickHitBox.bottom);
+
 	if (img)
 	{
 		img->Render(hdc, pos.x, pos.y, frameX, frameY, baseX, baseY, Player.playerStatus, Player.playerLookat);

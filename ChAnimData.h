@@ -27,8 +27,8 @@ public:
 
 	enum class Lookat
 	{
-		Left_Lookat,
-		Right_Lookat
+		Left_Lookat = -1,
+		Right_Lookat = 1
 	};
 
 	//추후에 스트럭트로 묶자.
