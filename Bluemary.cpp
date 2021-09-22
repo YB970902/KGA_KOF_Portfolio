@@ -47,4 +47,15 @@ void Bluemary::init()
 	mData.moveAfteraction.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Weak_Punch, 0));
 	mData.moveAfteraction.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Strong_Kick, 22));
 	mData.moveAfteraction.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Strong_Punch, 24));
+
+	mData.AnimSpeed.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Idle, 8));
+	mData.AnimSpeed.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Move_Front, 6));
+	mData.AnimSpeed.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Move_Backward, 8));
+	mData.AnimSpeed.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Damaged, 0));
+	mData.AnimSpeed.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Weak_Kick, 4));
+	mData.AnimSpeed.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Weak_Punch, 4));
+	mData.AnimSpeed.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Strong_Kick, 4));
+	mData.AnimSpeed.insert(pair<ChAnimData::AnimStatus, int>(ChAnimData::AnimStatus::Strong_Punch, 4));
+
+	notReverse = 1;
 }

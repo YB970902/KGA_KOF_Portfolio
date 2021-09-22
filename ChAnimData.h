@@ -33,8 +33,10 @@ public:
 
 	//추후에 스트럭트로 묶자.
 	map<AnimStatus, int> Animframe;
+	map<AnimStatus, int> AnimSpeed;
 	map<AnimStatus, int> sizeX;
 	map<AnimStatus, int> sizeY;
 	map<AnimStatus, const char*> Path;
 	map<AnimStatus, int> moveAfteraction;
+	
 };

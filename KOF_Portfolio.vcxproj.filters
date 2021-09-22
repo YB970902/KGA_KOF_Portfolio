@@ -72,9 +72,6 @@
     <ClInclude Include="AnimationScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="ChAnimData.h">
-      <Filter>2DFramework</Filter>
-    </ClInclude>
     <ClInclude Include="Leona.h">
       <Filter>2DFramework\Animator\2dData</Filter>
     </ClInclude>
@@ -85,6 +82,9 @@
       <Filter>2DFramework\Animator\2dData</Filter>
     </ClInclude>
     <ClInclude Include="AnimManager.h">
+      <Filter>2DFramework\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="ChAnimData.h">
       <Filter>2DFramework\Animator</Filter>
     </ClInclude>
   </ItemGroup>
