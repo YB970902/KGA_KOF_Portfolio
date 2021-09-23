@@ -1,10 +1,10 @@
 ﻿#pragma once
 #include "Config.h"
 #include "GameEntity.h"
-#include "AnimManager.h"
+#include "ChAnimation.h"
 
 class Image;
-class AnimManager;
+class ChAnimation;
 class MainGame : public GameEntity
 {
 private:

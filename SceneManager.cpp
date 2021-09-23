@@ -1,11 +1,13 @@
 #include "AnimationScene.h"
 #include "HitBoxScene.h"
 #include "SceneManager.h"
+#include "CharacterSelectScene.h"
 
 void SceneManager::Init()
 {
+	mScene[eSceneTag::CharacterSelectScene] = new CharacterSelectScene;
 	mScene[eSceneTag::HitBoxSnene] = new HitBoxScene;
-	mScene[eSceneTag::ImageAnimationScene] = new AnimationScene;
+	mScene[eSceneTag::AnimationScene] = new AnimationScene;
 
 	mpCurScene = nullptr;
 }

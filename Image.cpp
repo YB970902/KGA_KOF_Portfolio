@@ -155,7 +155,7 @@ void Image::Render(HDC hdc, int destX, int destY)
 
 }
 
-void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int baseX,int baseY, ChAnimData::AnimStatus playerStatus, ChAnimData::Lookat playerLookat)
+void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int baseX,int baseY, AnimStatus playerStatus, Lookat playerLookat)
 {
 	// frameX : 0, frameY : 0 => 시작 (68 * 0, 0) (0,     0)	(68, 104)
 	// frameX : 1, frameY : 0 => 시작 (68 * 1, 0) (68,  104)	(136, 104)
@@ -166,7 +166,7 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int bas
 
 	if (isTransparent)
 	{
-		if (playerLookat == ChAnimData::Lookat::Right_Lookat)
+		if (playerLookat == Lookat::Right_Lookat)
 		{
 			StretchBlt(
 				imageInfo->hMemDc,
@@ -198,7 +198,7 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int bas
 				RGB(255, 0, 255)
 			);
 		}
-		else if (playerLookat == ChAnimData::Lookat::Left_Lookat)
+		else if (playerLookat == Lookat::Left_Lookat)
 		{
 			GdiTransparentBlt(
 				hdc,

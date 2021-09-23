@@ -9,6 +9,7 @@ class SceneManager : public Singleton<SceneManager>
 private:
 	map<eSceneTag, Scene*> mScene;
 
+
 	Scene* mpCurScene = nullptr;
 public:
 	void Init();

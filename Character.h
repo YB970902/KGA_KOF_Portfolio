@@ -44,12 +44,16 @@ public:
 	void AllOffHitBox();
 
 	inline void SetTarget(Character* ch) { this->mpTarget = ch; }
+	inline void SetHP(int hp) { this->mHP -= hp; }
 
 	inline Character* GetTarget() { return mpTarget; }
 	inline RECT GetShape() { return shape; }
+	inline int GetHP() { return mHP; }
 	inline RECT GetSmallHitBox() { return mWeakPunchHitBox; }
 	inline int GetFrame() { return mFrame; }
 	inline MoveDir GetDir() { return mDir; }
+
+
 	
 	static void LeftMove(Character* ch) { ch->Move((int)MoveDir::Left); }
 	static void RightMove(Character* ch) { ch->Move((int)MoveDir::Right); }

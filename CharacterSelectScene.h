@@ -1,12 +1,9 @@
 #pragma once
-#include "Config.h"
 #include "Scene.h"
+#include "Config.h"
 
-class ChAnimation;
-class AnimationScene : public Scene
+class CharacterSelectScene : public Scene
 {
-	ChAnimation* mPlayer1 = nullptr;
-	ChAnimation* mPlayer2 = nullptr;
 
 	virtual void Enter() override;
 	virtual void Update() override;

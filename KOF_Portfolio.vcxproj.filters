@@ -72,20 +72,23 @@
     <ClInclude Include="AnimationScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Leona.h">
+    <ClInclude Include="LeonaAnimation.h">
       <Filter>2DFramework\Animator\2dData</Filter>
     </ClInclude>
-    <ClInclude Include="Ralf.h">
+    <ClInclude Include="RalfAnimation.h">
       <Filter>2DFramework\Animator\2dData</Filter>
     </ClInclude>
-    <ClInclude Include="Bluemary.h">
+    <ClInclude Include="BluemaryAnimation.h">
       <Filter>2DFramework\Animator\2dData</Filter>
     </ClInclude>
-    <ClInclude Include="AnimManager.h">
+    <ClInclude Include="ChAnimation.h">
       <Filter>2DFramework\Animator</Filter>
     </ClInclude>
     <ClInclude Include="ChAnimData.h">
       <Filter>2DFramework\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterSelectScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,17 +128,20 @@
     <ClCompile Include="AnimationScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Leona.cpp">
+    <ClCompile Include="LeonaAnimation.cpp">
       <Filter>2DFramework\Animator\2dData</Filter>
     </ClCompile>
-    <ClCompile Include="Ralf.cpp">
+    <ClCompile Include="RalfAnimation.cpp">
       <Filter>2DFramework\Animator\2dData</Filter>
     </ClCompile>
-    <ClCompile Include="Bluemary.cpp">
+    <ClCompile Include="BluemaryAnimation.cpp">
       <Filter>2DFramework\Animator\2dData</Filter>
     </ClCompile>
-    <ClCompile Include="AnimManager.cpp">
+    <ClCompile Include="ChAnimation.cpp">
       <Filter>2DFramework\Animator\2dData</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterSelectScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

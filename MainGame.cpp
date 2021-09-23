@@ -3,7 +3,8 @@
 #include "KeyManager.h"
 #include "SceneManager.h"
 #include "Image.h"
-#include "AnimManager.h"
+#include "ChAnimation.h"
+#include "Config.h"
 
 void MainGame::Init()
 {
@@ -13,12 +14,14 @@ void MainGame::Init()
 	KeyManager::GetSingleton()->Init();
 	SceneManager::GetSingleton();
 
-	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 200, NULL);
+	MGR_SCN->ChangeScene(eSceneTag::CharacterSelectScene);
+
+	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
 
 	mousePosX = 0;
 	mousePosY = 0;
-	clickedMousePosX = 0; 
-	clickedMousePosY = 0; 
+	clickedMousePosX = 0;
+	clickedMousePosY = 0;
 
 	backBuffer = new Image;
 	backBuffer->Init(WIN_SIZE_X, WIN_SIZE_Y);
@@ -35,11 +38,11 @@ void MainGame::Update()
 
 	if (MGR_KEY->IsOnceKeyDown('O'))
 	{
-	MGR_SCN->ChangeScene(eSceneTag::HitBoxSnene);
+		MGR_SCN->ChangeScene(eSceneTag::HitBoxSnene);
 	}
 	else if (MGR_KEY->IsOnceKeyDown('P'))
 	{
-		MGR_SCN->ChangeScene(eSceneTag::ImageAnimationScene);
+		MGR_SCN->ChangeScene(eSceneTag::AnimationScene);
 	}
 }
 

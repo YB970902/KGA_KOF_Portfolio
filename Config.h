@@ -20,8 +20,38 @@ using namespace std;
 
 #define SAFE_RELEASE(p)	{ if (p) { p->Release(); delete p; p = nullptr; } }
 
-enum class MoveDir { Left = -1, Right = 1, Up, Down };
-enum class eSceneTag { HitBoxSnene, ImageAnimationScene,};
+enum class MoveDir { Left = -1, Right = 1, Up, Down, };
+enum class eSceneTag { CharacterSelectScene,HitBoxSnene, AnimationScene, };
+enum class eCharacterType {Null, Ralf, Leona, Bluemary, };
 
 extern HWND g_hWnd;
 extern HINSTANCE g_hInstance;
+
+extern int Player1; 
+extern int Player2;
+
+enum class AnimStatus
+{
+	Idle,
+	Move_Front,
+	Move_Backward,
+	Damaged,
+	Weak_Punch,
+	Weak_Kick,
+	Strong_Punch,
+	Strong_Kick,
+};
+
+enum class Acting
+{
+	Act_Attack,
+	Act_Left_Move,
+	Act_Right_Move,
+	Act_Idle,
+};
+
+enum class Lookat
+{
+	Left_Lookat = -1,
+	Right_Lookat = 1
+};
