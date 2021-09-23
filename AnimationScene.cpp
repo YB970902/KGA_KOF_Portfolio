@@ -3,6 +3,7 @@
 #include "BluemaryAnimation.h"
 #include "RalfAnimation.h"
 #include "LeonaAnimation.h"
+#include "ChAnimData.h"
 
 void AnimationScene::Enter()
 {
@@ -35,8 +36,6 @@ void AnimationScene::Enter()
 		mPlayer2 = new LeonaAnimation;
 		break;
 	}
-
-
 	
 	mPlayer1->Init(Lookat::Right_Lookat);
 	mPlayer2->Init(Lookat::Left_Lookat);

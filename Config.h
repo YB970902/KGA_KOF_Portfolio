@@ -33,7 +33,7 @@ extern int Player2;
 enum class AnimStatus
 {
 	Idle,
-	Move_Front,
+	Move_Forward,
 	Move_Backward,
 	Damaged,
 	Weak_Punch,
