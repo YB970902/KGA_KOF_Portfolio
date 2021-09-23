@@ -4,7 +4,7 @@
 #include "ChAnimData.h"
 using namespace std;
 
-void LeonaAnimation::Init()
+void LeonaAnimation::Init(Lookat dir)
 {
 
 	mData = new ChAnimData;
@@ -68,7 +68,7 @@ void LeonaAnimation::Init()
 
 	mData->mPlayerAct = Acting::Act_Idle;
 	mData->mPlayerStatus = AnimStatus::Idle;
-	mData->mPlayerLookat = Lookat::Left_Lookat;
+	mData->mPlayerLookat = dir;
 
 	//Player.selectedCharacter = ralf
 

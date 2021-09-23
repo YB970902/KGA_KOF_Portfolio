@@ -8,7 +8,7 @@ public:
 	ChAnimData* mData;
 
 
-	void Init() override;
+	void Init(Lookat dir) override;
 	void ImgUpdate(AnimStatus playerStatus) override;
 	FLOAT moveAfterAction(FLOAT pos) override;
 	void Update() override;

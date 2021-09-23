@@ -19,7 +19,7 @@ protected:
 	ChAnimation* Player = nullptr;
 
 public:
-	virtual void Init() {};
+	virtual void Init(Lookat dir) {};
 	virtual void ImgUpdate(AnimStatus playerStatus) {};
 	virtual void Update() {};
 	virtual void Render(HDC hdc) {};

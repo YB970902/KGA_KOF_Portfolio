@@ -36,8 +36,19 @@ void AnimationScene::Enter()
 		break;
 	}
 
-	mPlayer1->Init();
-	mPlayer2->Init();
+
+	
+	mPlayer1->Init(Lookat::Right_Lookat);
+	mPlayer2->Init(Lookat::Left_Lookat);
+
+	POINTFLOAT pos;
+	pos.x = 200;
+	pos.y = 450;
+	mPlayer1->SetPos(pos);
+
+	pos.x = 1000;
+	mPlayer2->SetPos(pos);
+
 }
 
 void AnimationScene::Update()

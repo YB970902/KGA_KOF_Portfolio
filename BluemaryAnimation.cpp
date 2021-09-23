@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void BluemaryAnimation::Init()
+void BluemaryAnimation::Init(Lookat dir)
 {
 	mData = new ChAnimData;
 
@@ -67,7 +67,7 @@ void BluemaryAnimation::Init()
 
 	mData->mPlayerAct = Acting::Act_Idle;
 	mData->mPlayerStatus = AnimStatus::Idle;
-	mData->mPlayerLookat = Lookat::Left_Lookat;
+	mData->mPlayerLookat = dir;
 
 	//selectedCharacter = ralf
 

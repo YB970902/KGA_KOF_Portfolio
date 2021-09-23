@@ -13,7 +13,7 @@
 //
 using namespace std;
 
-void RalfAnimation::Init()
+void RalfAnimation::Init(Lookat dir)
 {
 	mData = new ChAnimData;
 
@@ -76,7 +76,7 @@ void RalfAnimation::Init()
 
 	mData->mPlayerAct = Acting::Act_Idle;
 	mData->mPlayerStatus = AnimStatus::Idle;
-	mData->mPlayerLookat = Lookat::Left_Lookat;
+	mData->mPlayerLookat = dir;
 
 	//Player.selectedCharacter = ralf
 

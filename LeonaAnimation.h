@@ -8,7 +8,7 @@ public:
 	ChAnimData* mData;
 
 	// ChAnimation을(를) 통해 상속됨
-	void Init() override;
+	void Init(Lookat dir) override;
 	void ImgUpdate(AnimStatus playerStatus) override;
 	void Update() override;
 	void Render(HDC hdc) override;
