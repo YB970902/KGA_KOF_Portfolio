@@ -58,7 +58,11 @@ public:
 	inline eMoveDir GetDir() { return mDir; }
 
 	inline void SetTarget(Character* ch) { this->mpTarget = ch; }
-	
+
+	void Move(int dir);
+
+	static void LeftMove(Character* ch) { ch->Move((int)eMoveDir::Left); }
+	static void RightMove(Character* ch) { ch->Move((int)eMoveDir::Right); }
 	static void OnWeakPunchHitBox(Character* ch,ChAnimData* an) { ch->OnWeakPunchHitBox((int)ch->GetDir(), an); }
 	static void OnStrongPunchHitBox(Character* ch,ChAnimData* an) { ch->OnStrongPunchHitBox((int)ch->GetDir(),an); }
 	static void OnWeakKickHitBox(Character* ch, ChAnimData* an) { ch->OnWeakKickHitBox((int)ch->GetDir(),an); }

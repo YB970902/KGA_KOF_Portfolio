@@ -2,11 +2,13 @@
 #include "Config.h"
 #include "Scene.h"
 
-
+class Image;
 class Command;
 class ChAnimation;
 class AnimationScene : public Scene
 {
+	Image* mBattleGroundImg;
+
 	ChAnimation* mPlayer1 = nullptr;
 	ChAnimation* mPlayer2 = nullptr;
 

@@ -7,6 +7,7 @@ void SceneManager::Init()
 {
 	mScene[eSceneTag::CharacterSelectScene] = new CharacterSelectScene;
 	mScene[eSceneTag::AnimationScene] = new AnimationScene;
+	mScene[eSceneTag::HitBoxSnene] = new HitBoxScene;
 
 	mpCurScene = nullptr;
 }

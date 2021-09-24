@@ -149,6 +149,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="HitBoxScene.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="AnimationScene.h" />
     <ClInclude Include="KeyManager.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="HitBoxScene.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="AnimationScene.cpp" />
     <ClCompile Include="KeyManager.cpp" />
