@@ -6,6 +6,7 @@
 #include "KeyManager.h"
 #include "LeonaAnimation.h"
 #include "RalfAnimation.h"
+#include "Image.h"
 
 
 void AnimationScene::Enter()
@@ -87,11 +88,42 @@ void AnimationScene::Enter()
 	mMoveRight2 = new Command;
 	mMoveRight2->Init(mPlayer2, ChAnimation::MoveRightCommand);
 
+	mpArrBackground = new Image * [39];
+	for (int i = 0; i < 39; i++)
+	{
+		mpArrBackground[i] = new Image();
+	}
 
+	char temp[128];
+	for (int i = 0; i < 39; i++)
+	{
+		wsprintf(temp, "Image/BattleBackground/frame_%02d_delay.bmp", i);
+		mpArrBackground[i]->Init(temp, WIN_SIZE_X * 2, WIN_SIZE_Y);
+	}
 }
 
 void AnimationScene::Update()
 {
+	mCurElapseTime++;
+	if (mCurElapseTime > 3)
+	{
+		mCurElapseTime = 0;
+		mCurBackgroundFrame++;
+		if (mCurBackgroundFrame >= MaxBackGroundFrame)
+		{
+			mCurBackgroundFrame = 0;
+		}
+	}
+
+	if (MGR_KEY->IsStayKeyDown('A'))
+	{
+		mBackgroundPosX -= 5;
+	}
+	else if (MGR_KEY->IsStayKeyDown('D'))
+	{
+		mBackgroundPosX += 5;
+	}
+
 	if (mPlayer1->GetData()->mIsAttack == false)
 	{
 		if (KeyManager::GetSingleton()->IsOnceKeyDown('G'))
@@ -183,6 +215,8 @@ void AnimationScene::Update()
 
 void AnimationScene::Render(HDC hdc)
 {
+	mpArrBackground[mCurBackgroundFrame]->Render(hdc, WIN_SIZE_X / 2 + mBackgroundPosX, WIN_SIZE_Y / 2);
+
 	mPlayer1->Render(hdc);
 	
 	mPlayer2->Render(hdc);
@@ -194,4 +228,10 @@ void AnimationScene::Exit()
 	SAFE_RELEASE(mPlayer1);
 
 	SAFE_RELEASE(mPlayer2);
+
+	for (int i = 0; i < 39; i++)
+	{
+		SAFE_RELEASE(mpArrBackground[i]);
+	}
+	delete[] mpArrBackground;
 }

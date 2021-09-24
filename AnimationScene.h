@@ -7,6 +7,7 @@ class Command;
 class ChAnimation;
 class AnimationScene : public Scene
 {
+private:
 	Image* mBattleGroundImg;
 
 	ChAnimation* mPlayer1 = nullptr;
@@ -25,6 +26,16 @@ class AnimationScene : public Scene
 	Command* mStrongKick2 = nullptr;
 	Command* mMoveLeft2 = nullptr;
 	Command* mMoveRight2 = nullptr;
+
+	Image** mpArrBackground = nullptr;
+
+	int mCurBackgroundFrame = 0;
+	const int MaxBackGroundFrame = 39;
+	int mCurElapseTime = 0;
+
+	int mBackgroundPosX = 0;
+
+public:
 
 	virtual void Enter() override;
 	virtual void Update() override;
