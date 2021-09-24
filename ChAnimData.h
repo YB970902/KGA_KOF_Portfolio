@@ -17,10 +17,26 @@ public:
 	bool mNotReverse = false;
 
 	//추후에 스트럭트로 묶자.
+<<<<<<< HEAD
 	map<eAnimStatus, int> mAnimframe = {};
 	map<eAnimStatus, int> mAnimSpeed = {};
 	map<eAnimStatus, int> mSizeX = {};
 	map<eAnimStatus, int> mSizeY = {};
 	map<eAnimStatus, const char*> mPath = {};
 	map<eAnimStatus, int> mMoveAfteraction = {};
+=======
+	map<AnimStatus, int> mAnimframe;
+	map<AnimStatus, int> mAnimSpeed;
+	map<AnimStatus, int> mSizeX;
+	map<AnimStatus, int> mSizeY;
+	map<AnimStatus, const char*> mPath;
+	map<AnimStatus, int> mMoveAfteraction;
+	map<AnimStatus, int> mHitboxShapeLeft;
+	map<AnimStatus, int> mHitboxShapeRight;
+	map<AnimStatus, int> mHitboxShapeTop;
+	map<AnimStatus, int> mHitboxShapeBottom;
+	map<AnimStatus, int> mHitboxOnFrame;
+	map<AnimStatus, int> mHitboxOffFrame;
+	
+>>>>>>> bdc06b383e470c785a137bd4e512c814c26237b9
 };

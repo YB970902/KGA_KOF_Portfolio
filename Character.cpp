@@ -28,22 +28,22 @@ bool Character::CheckHitChar()
 	return false;
 }
 
-void Character::OnWeakPunchHitBox(int dir)
+void Character::OnWeakPunchHitBox(int dir, ChAnimData* an)
 {
 	mFrame = 0;
 
 	if (dir > 0)
 	{
 		mWeakPunchHitBox.left = (int)pos.x;
-		mWeakPunchHitBox.right = (int)pos.x + 70;
+		mWeakPunchHitBox.right = (int)pos.x + (int)an->mHitboxShapeRight[AnimStatus::Weak_Punch];
 	}
 	else
 	{
-		mWeakPunchHitBox.left = (int)pos.x - 70;
+		mWeakPunchHitBox.left = (int)pos.x + (int)an->mHitboxShapeLeft[AnimStatus::Weak_Punch];
 		mWeakPunchHitBox.right = (int)pos.x;
 	}
-	mWeakPunchHitBox.top = (int)pos.y - 25;
-	mWeakPunchHitBox.bottom = (int)pos.y - 15;
+	mWeakPunchHitBox.top = (int)pos.y + (int)an->mHitboxShapeTop[AnimStatus::Weak_Punch];
+	mWeakPunchHitBox.bottom = (int)pos.y + (int)an->mHitboxShapeBottom[AnimStatus::Weak_Punch];
 }
 
 void Character::OffWeakPunchHitBox()
@@ -52,24 +52,42 @@ void Character::OffWeakPunchHitBox()
 	mHitChar.clear();
 }
 
-void Character::OnStrongPunchHitBox(int dir)
+void Character::OnStrongPunchHitBox(int dir, ChAnimData* an)
 {
 	mFrame = 0;
 
 	if (dir > 0)
 	{
 		mStrongPunchHitBox.left = (int)pos.x;
-		mStrongPunchHitBox.right = (int)pos.x + 80;
+		mStrongPunchHitBox.right = (int)pos.x + (int)an->mHitboxShapeRight[AnimStatus::Strong_Punch];
 	}
 	else
 	{
-		mStrongPunchHitBox.left = (int)pos.x - 80;
+		mStrongPunchHitBox.left = (int)pos.x + (int)an->mHitboxShapeLeft[AnimStatus::Strong_Punch];
 		mStrongPunchHitBox.right = (int)pos.x;
 	}
-
-	mStrongPunchHitBox.top = (int)pos.y - 30;
-	mStrongPunchHitBox.bottom = (int)pos.y - 10;
+	mStrongPunchHitBox.top = (int)pos.y + (int)an->mHitboxShapeTop[AnimStatus::Strong_Punch];
+	mStrongPunchHitBox.bottom = (int)pos.y + (int)an->mHitboxShapeBottom[AnimStatus::Strong_Punch];
 }
+
+//void Character::OnStrongPunchHitBox(int dir, ChAnimData* an, AnimStatus animstatus)
+//{
+//	mFrame = 0;
+//
+//	if (dir > 0)
+//	{
+//		mCreateHitBox.left = (int)pos.x;
+//		mCreateHitBox.right = (int)pos.x + (int)an->mHitboxShapeRight[animstatus];
+//	}
+//	else
+//	{
+//		mCreateHitBox.left = (int)pos.x + an->mHitboxShapeLeft[animstatus];
+//		mCreateHitright = (int)pos.x;
+//	}
+//
+//	mCreateHit.top = (int)pos.y + an->mHitboxShapeTop[animstatus];
+//	mCreateHit.bottom = (int)pos.y + an->mHitboxShapeBottom[animstatus];
+//}
 
 void Character::OffStrongPunchHitBox()
 {
@@ -77,22 +95,22 @@ void Character::OffStrongPunchHitBox()
 	mHitChar.clear();
 }
 
-void Character::OnWeakKickHitBox(int dir)
+void Character::OnWeakKickHitBox(int dir, ChAnimData* an)
 {
 	mFrame = 0;
 
 	if (dir > 0)
 	{
 		mWeakKickHitBox.left = (int)pos.x;
-		mWeakKickHitBox.right = (int)pos.x + 78;
+		mWeakKickHitBox.right = (int)pos.x + (int)an->mHitboxShapeRight[AnimStatus::Weak_Kick];
 	}
 	else
 	{
-		mWeakKickHitBox.left = (int)pos.x - 78;
+		mWeakKickHitBox.left = (int)pos.x + (int)an->mHitboxShapeLeft[AnimStatus::Weak_Kick];
 		mWeakKickHitBox.right = (int)pos.x;
 	}
-	mWeakKickHitBox.top = (int)pos.y - 40;
-	mWeakKickHitBox.bottom = (int)pos.y + 10;
+	mWeakKickHitBox.top = (int)pos.y + (int)an->mHitboxShapeTop[AnimStatus::Weak_Kick];
+	mWeakKickHitBox.bottom = (int)pos.y + (int)an->mHitboxShapeBottom[AnimStatus::Weak_Kick];
 }
 
 void Character::OffWeakKickHitBox()
@@ -101,22 +119,22 @@ void Character::OffWeakKickHitBox()
 	mHitChar.clear();
 }
 
-void Character::OnStrongKickHitBox(int dir)
+void Character::OnStrongKickHitBox(int dir, ChAnimData* an)
 {
 	mFrame = 0;
 
 	if (dir > 0)
 	{
 		mStrongKickHitBox.left = (int)pos.x;
-		mStrongKickHitBox.right = (int)pos.x + 135;
+		mStrongKickHitBox.right = (int)pos.x + (int)an->mHitboxShapeRight[AnimStatus::Strong_Kick];
 	}
 	else
 	{
-		mStrongKickHitBox.left = (int)pos.x - 135;
+		mStrongKickHitBox.left = (int)pos.x + (int)an->mHitboxShapeLeft[AnimStatus::Strong_Kick];
 		mStrongKickHitBox.right = (int)pos.x;
 	}
-	mStrongKickHitBox.top = (int)pos.y - 45;
-	mStrongKickHitBox.bottom = (int)pos.y;
+	mStrongKickHitBox.top = (int)pos.y + (int)an->mHitboxShapeTop[AnimStatus::Strong_Kick];
+	mStrongKickHitBox.bottom = (int)pos.y + (int)an->mHitboxShapeBottom[AnimStatus::Strong_Kick];
 }
 
 void Character::OffStrongKickHitBox()
