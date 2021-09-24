@@ -24,5 +24,11 @@ public:
 	map<AnimStatus, int> mSizeY;
 	map<AnimStatus, const char*> mPath;
 	map<AnimStatus, int> mMoveAfteraction;
+	map<AnimStatus, int> mHitboxShapeLeft;
+	map<AnimStatus, int> mHitboxShapeRight;
+	map<AnimStatus, int> mHitboxShapeTop;
+	map<AnimStatus, int> mHitboxShapeBottom;
+	map<AnimStatus, int> mHitboxOnFrame;
+	map<AnimStatus, int> mHitboxOffFrame;
 	
 };

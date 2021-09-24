@@ -137,11 +137,11 @@
     <ClCompile Include="BluemaryAnimation.cpp">
       <Filter>2DFramework\Animator\2dData</Filter>
     </ClCompile>
-    <ClCompile Include="ChAnimation.cpp">
-      <Filter>2DFramework\Animator\2dData</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterSelectScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ChAnimation.cpp">
+      <Filter>2DFramework\Animator</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -63,6 +63,34 @@ void BluemaryAnimation::Init(Lookat dir)
 	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 4));
 	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 4));
 
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, -50));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 50));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, -35));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, -25));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 2));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 3));
+
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, -60));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 60));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, -30));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, -10));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 4));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 6));
+
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, -105));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 105));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, -30));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, -10));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 9));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 14));
+
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, -85));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 85));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, -25));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 0));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 4));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 6));
+
 	mpData->mNotReverse = 1;
 
 	mpData->mPlayerAct = Acting::Act_Idle;

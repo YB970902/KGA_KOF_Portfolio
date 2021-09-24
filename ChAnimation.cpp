@@ -66,16 +66,16 @@ void ChAnimation::Update()
 			{
 				frameX++;
 
-				if (frameX == 2)
+				if (frameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
 				{
-					OnWeakPunchHitBox((int)mpData->mPlayerLookat);
+					OnWeakPunchHitBox((int)mpData->mPlayerLookat,mpData);
 				}
-				else if (frameX == 3)
+				else if (frameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
 				{
 					OffWeakPunchHitBox();
 				}
 
-				if (frameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				if (frameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus])
 				{
 					frameX = 0;
 					mpData->mIsAttack = false;
@@ -93,16 +93,16 @@ void ChAnimation::Update()
 			{
 				frameX++;
 
-				if (frameX == 4)
+				if (frameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
 				{
-					OnStrongPunchHitBox((int)mpData->mPlayerLookat);
+					OnStrongPunchHitBox((int)mpData->mPlayerLookat, mpData);
 				}
-				else if (frameX == 9)
+				else if (frameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
 				{
 					OffStrongPunchHitBox();
 				}
 
-				if (frameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				if (frameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus])
 				{
 					frameX = 0;
 					mpData->mIsAttack = false;
@@ -120,11 +120,11 @@ void ChAnimation::Update()
 			{
 				frameX++;
 
-				if (frameX == 3)
+				if (frameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
 				{
-					OnWeakKickHitBox((int)mpData->mPlayerLookat);
+					OnWeakKickHitBox((int)mpData->mPlayerLookat, mpData);
 				}
-				else if (frameX == 5)
+				else if (frameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
 				{
 					OffWeakKickHitBox();
 				}
@@ -148,11 +148,11 @@ void ChAnimation::Update()
 				frameX++;
 
 
-				if (frameX == 5)
+				if (frameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
 				{
-					OnStrongKickHitBox((int)mpData->mPlayerLookat);
+					OnStrongKickHitBox((int)mpData->mPlayerLookat, mpData);
 				}
-				else if (frameX == 8)
+				else if (frameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
 				{
 					OffStrongKickHitBox();
 				}

@@ -3,6 +3,9 @@
 #include "Command.h"
 #include "KeyManager.h"
 
+ChAnimData mPlayer1;
+ChAnimData mPlayer2;
+
 void HitBoxScene::Enter()
 {
 	mpRect1 = new Character;
@@ -22,36 +25,36 @@ void HitBoxScene::Enter()
 
 	mpLeftMoveCom = new Command;
 	mpLeftMoveCom->Init(mpRect1, Character::LeftMove);
-
-
 	mpRightMoveCom = new Command;
 	mpRightMoveCom->Init(mpRect1, Character::RightMove);
-	mpWeakPunchAttack = new Command;
-	mpWeakPunchAttack->Init(mpRect1, Character::OnWeakPunchHitBox);
-	mpStrongPunchAttack = new Command;
-	mpStrongPunchAttack->Init(mpRect1, Character::OnStrongPunchHitBox);
-	mpWeakKickAttack = new Command;
-	mpWeakKickAttack->Init(mpRect1, Character::OnWeakKickHitBox);
-	mpStrongKickAttack = new Command;
-	mpStrongKickAttack->Init(mpRect1, Character::OnStrongKickHitBox);
+
+	mpWeakPunchAttack = new AnimCommand;
+	mpWeakPunchAttack->Init(mpRect1, &mPlayer1, Character::OnWeakPunchHitBox);
+	mpStrongPunchAttack = new AnimCommand;
+	mpStrongPunchAttack->Init(mpRect1, &mPlayer1, Character::OnStrongPunchHitBox);
+	mpWeakKickAttack = new AnimCommand;
+	mpWeakKickAttack->Init(mpRect1, &mPlayer1, Character::OnWeakKickHitBox);
+	mpStrongKickAttack = new AnimCommand;
+	mpStrongKickAttack->Init(mpRect1, &mPlayer1, Character::OnStrongKickHitBox);
 
 
 	mpLeftMoveCom1 = new Command;
 	mpLeftMoveCom1->Init(mpRect2, Character::LeftMove); 
 	mpRightMoveCom1 = new Command;
 	mpRightMoveCom1->Init(mpRect2, Character::RightMove);
-	mpWeakPunchAttack1 = new Command;
-	mpWeakPunchAttack1->Init(mpRect2, Character::OnWeakPunchHitBox);
-	mpStrongPunchAttack1 = new Command;
-	mpStrongPunchAttack1->Init(mpRect2, Character::OnStrongPunchHitBox);
-	mpWeakKickAttack1 = new Command;
-	mpWeakKickAttack1->Init(mpRect2, Character::OnWeakKickHitBox);
-	mpStrongKickAttack1 = new Command;
-	mpStrongKickAttack1->Init(mpRect2, Character::OnStrongKickHitBox);
+	mpWeakPunchAttack1 = new AnimCommand;
+	mpWeakPunchAttack1->Init(mpRect2,&mPlayer2,Character::OnWeakPunchHitBox);
+	mpStrongPunchAttack1 = new AnimCommand;
+	mpStrongPunchAttack1->Init(mpRect2, &mPlayer2, Character::OnStrongPunchHitBox);
+	mpWeakKickAttack1 = new AnimCommand;
+	mpWeakKickAttack1->Init(mpRect2, &mPlayer2, Character::OnWeakKickHitBox);
+	mpStrongKickAttack1 = new AnimCommand;
+	mpStrongKickAttack1->Init(mpRect2, &mPlayer2, Character::OnStrongKickHitBox);
 }
 
 void HitBoxScene::Update()
 {
+
 	if (mpLeftMoveCom->GetCharacter()->GetFrame() > 5)
 	{
 		if (MGR_KEY->IsOnceKeyDown('G'))
@@ -116,18 +119,18 @@ void HitBoxScene::Update()
 		if (mpLeftMoveCom->GetCharacter() == mpRect1)
 		{
 			mpLeftMoveCom->Init(mpRect2, Character::LeftMove);
-			mpRightMoveCom->Init(mpRect2, Character::RightMove);
+			mpRightMoveCom->Init(mpRect2, Character::RightMove);/*
 			mpWeakPunchAttack->Init(mpRect2, Character::OnWeakPunchHitBox);
-			mpStrongPunchAttack->Init(mpRect2, Character::OnStrongPunchHitBox);
+			mpStrongPunchAttack->Init(mpRect2, Character::OnStrongPunchHitBox);*/
 			mpRect1->SetTarget(nullptr);
 			mpRect2->SetTarget(mpRect1);
 		}
 		else
 		{
 			mpLeftMoveCom->Init(mpRect1, Character::LeftMove);
-			mpRightMoveCom->Init(mpRect1, Character::RightMove);
+			mpRightMoveCom->Init(mpRect1, Character::RightMove);/*
 			mpWeakPunchAttack->Init(mpRect1, Character::OnWeakPunchHitBox);
-			mpStrongPunchAttack->Init(mpRect1, Character::OnStrongPunchHitBox);
+			mpStrongPunchAttack->Init(mpRect1, Character::OnStrongPunchHitBox);*/
 			mpRect2->SetTarget(nullptr);
 			mpRect1->SetTarget(mpRect2);
 		}

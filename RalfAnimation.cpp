@@ -1,7 +1,6 @@
 #include "RalfAnimation.h"
 #include "Image.h"
 #include "KeyManager.h"
-
 #include "ChAnimData.h"
 // 지금은 랄프데이터만 받았지만
 // 나중엔 다른 데이터도 불러올 예정
@@ -71,8 +70,35 @@ void RalfAnimation::Init(Lookat dir)
 	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 4));
 	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 4));
 
-	mpData->mNotReverse = 0;
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, -60));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 60));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, -35));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, -15));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 1));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 3));
 
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, -65));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 65));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, -30));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, -10));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 3));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 5));
+
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, -105));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 105));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, -30));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, -10));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 3));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 5));
+
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, -98));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 98));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, -25));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 0));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 4));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 8));
+
+	mpData->mNotReverse = 0;
 
 	mpData->mPlayerAct = Acting::Act_Idle;
 	mpData->mPlayerStatus = AnimStatus::Idle;

@@ -2,6 +2,7 @@
 #include "Image.h"
 #include "KeyManager.h"
 #include "ChAnimData.h"
+
 using namespace std;
 
 void LeonaAnimation::Init(Lookat dir)
@@ -63,6 +64,34 @@ void LeonaAnimation::Init(Lookat dir)
 	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 4));
 	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 4));
 	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 4));
+
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, -70));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 70));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, -25));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, -15));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 2));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 3));
+
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, -78));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 78));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, -40));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, -20));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 3));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 5));
+
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, -80));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 80));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, -30));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, -10));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 4));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 6));
+
+	mpData->mHitboxShapeLeft.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, -135));
+	mpData->mHitboxShapeRight.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 135));
+	mpData->mHitboxShapeTop.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, -40));
+	mpData->mHitboxShapeBottom.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, -15));
+	mpData->mHitboxOnFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 6));
+	mpData->mHitboxOffFrame.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 8));
 
 	mpData->mNotReverse = 1;
 
