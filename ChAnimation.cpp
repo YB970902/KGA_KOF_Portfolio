@@ -63,28 +63,17 @@ void ChAnimation::Update()
 			{
 				mFrameX++;
 
-<<<<<<< HEAD
-				if (mFrameX == 2)
-=======
-				if (frameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
->>>>>>> bdc06b383e470c785a137bd4e512c814c26237b9
+				
+				if (mFrameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
 				{
 					OnWeakPunchHitBox((int)mpData->mPlayerLookat,mpData);
 				}
-<<<<<<< HEAD
-				else if (mFrameX == 3)
-=======
-				else if (frameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
->>>>>>> bdc06b383e470c785a137bd4e512c814c26237b9
+				else if (mFrameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
 				{
 					OffWeakPunchHitBox();
 				}
 
-<<<<<<< HEAD
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
-=======
-				if (frameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus])
->>>>>>> bdc06b383e470c785a137bd4e512c814c26237b9
+				if (mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus])
 				{
 					mFrameX = 0;
 					mpData->mIsAttack = false;
@@ -102,28 +91,16 @@ void ChAnimation::Update()
 			{
 				mFrameX++;
 
-<<<<<<< HEAD
-				if (mFrameX == 4)
-=======
-				if (frameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
->>>>>>> bdc06b383e470c785a137bd4e512c814c26237b9
+				if (mFrameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
 				{
 					OnStrongPunchHitBox((int)mpData->mPlayerLookat, mpData);
 				}
-<<<<<<< HEAD
-				else if (mFrameX == 9)
-=======
-				else if (frameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
->>>>>>> bdc06b383e470c785a137bd4e512c814c26237b9
+				else if (mFrameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
 				{
 					OffStrongPunchHitBox();
 				}
 
-<<<<<<< HEAD
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
-=======
-				if (frameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus])
->>>>>>> bdc06b383e470c785a137bd4e512c814c26237b9
+				if (mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus])
 				{
 					mFrameX = 0;
 					mpData->mIsAttack = false;
@@ -141,19 +118,11 @@ void ChAnimation::Update()
 			{
 				mFrameX++;
 
-<<<<<<< HEAD
-				if (mFrameX == 3)
-=======
-				if (frameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
->>>>>>> bdc06b383e470c785a137bd4e512c814c26237b9
+				if (mFrameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
 				{
 					OnWeakKickHitBox((int)mpData->mPlayerLookat, mpData);
 				}
-<<<<<<< HEAD
-				else if (mFrameX == 5)
-=======
-				else if (frameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
->>>>>>> bdc06b383e470c785a137bd4e512c814c26237b9
+				else if (mFrameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
 				{
 					OffWeakKickHitBox();
 				}
@@ -176,20 +145,11 @@ void ChAnimation::Update()
 			{
 				mFrameX++;
 
-<<<<<<< HEAD
-				if (mFrameX == 5)
-=======
-
-				if (frameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
->>>>>>> bdc06b383e470c785a137bd4e512c814c26237b9
+				if (mFrameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
 				{
 					OnStrongKickHitBox((int)mpData->mPlayerLookat, mpData);
 				}
-<<<<<<< HEAD
-				else if (mFrameX == 8)
-=======
-				else if (frameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
->>>>>>> bdc06b383e470c785a137bd4e512c814c26237b9
+				else if (mFrameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
 				{
 					OffStrongKickHitBox();
 				}
