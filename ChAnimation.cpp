@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void ChAnimation::ImgUpdate(AnimStatus playerStatus)
+void ChAnimation::ImgUpdate(eAnimStatus playerStatus)
 {
 	img->Release();
 	img->Init(mpData->mPath[mpData->mPlayerStatus], (int)mpData->mSizeX[mpData->mPlayerStatus], (int)mpData->mSizeY[mpData->mPlayerStatus],
@@ -15,269 +15,6 @@ void ChAnimation::ImgUpdate(AnimStatus playerStatus)
 
 void ChAnimation::Update()
 {
-	if (mpData->mIsAttack == false)
-	{
-		if (KeyManager::GetSingleton()->IsOnceKeyDown('Z'))
-		{
-			Attack(AnimStatus::Weak_Punch);
-		}
-		else if (KeyManager::GetSingleton()->IsOnceKeyDown('X'))
-		{
-			Attack(AnimStatus::Strong_Punch);
-		}
-		else if (KeyManager::GetSingleton()->IsOnceKeyDown('C'))
-		{
-			Attack(AnimStatus::Weak_Kick);
-		}
-		else if (KeyManager::GetSingleton()->IsOnceKeyDown('V'))
-		{
-			Attack(AnimStatus::Strong_Kick);
-		}
-	}
-
-	if (mpData->mPlayerAct != Acting::Act_Attack)
-	{
-		if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT))
-		{
-			MoveLeft();
-		}
-		else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_RIGHT))
-		{
-			MoveRight();
-		}
-		else
-		{
-			if (mpData->mPlayerAct != Acting::Act_Idle)
-			{
-				frameX = 0;
-			}
-			mpData->mPlayerAct = Acting::Act_Idle;
-			mpData->mPlayerStatus = AnimStatus::Idle;
-		}
-	}
-
-	if (mpData->mPlayerAct == Acting::Act_Attack)
-	{
-		if (mpData->mPlayerStatus == AnimStatus::Weak_Punch)
-		{
-			ImgUpdate(mpData->mPlayerStatus);
-			elapsedCount++;
-			if (elapsedCount >= 4)
-			{
-				frameX++;
-
-				if (frameX == 2)
-				{
-					OnWeakPunchHitBox((int)mpData->mPlayerLookat);
-				}
-				else if (frameX == 3)
-				{
-					OffWeakPunchHitBox();
-				}
-
-				if (frameX >= mpData->mAnimframe[mpData->mPlayerStatus])
-				{
-					frameX = 0;
-					mpData->mIsAttack = false;
-					mpData->mPlayerAct = Acting::Act_Idle;
-					pos.x = moveAfterAction(pos.x);
-				}
-				elapsedCount = 0;
-			}
-		}
-		else if (mpData->mPlayerStatus == AnimStatus::Strong_Punch)
-		{
-			ImgUpdate(mpData->mPlayerStatus);
-			elapsedCount++;
-			if (elapsedCount >= 4)
-			{
-				frameX++;
-
-				if (frameX == 4)
-				{
-					OnStrongPunchHitBox((int)mpData->mPlayerLookat);
-				}
-				else if (frameX == 9)
-				{
-					OffStrongPunchHitBox();
-				}
-
-				if (frameX >= mpData->mAnimframe[mpData->mPlayerStatus])
-				{
-					frameX = 0;
-					mpData->mIsAttack = false;
-					mpData->mPlayerAct = Acting::Act_Idle;
-					pos.x = moveAfterAction(pos.x);
-				}
-				elapsedCount = 0;
-			}
-		}
-		else if (mpData->mPlayerStatus == AnimStatus::Weak_Kick)
-		{
-			ImgUpdate(mpData->mPlayerStatus);
-			elapsedCount++;
-			if (elapsedCount >= 4)
-			{
-				frameX++;
-
-				if (frameX == 3)
-				{
-					OnWeakKickHitBox((int)mpData->mPlayerLookat);
-				}
-				else if (frameX == 5)
-				{
-					OffWeakKickHitBox();
-				}
-
-				if (frameX >= mpData->mAnimframe[mpData->mPlayerStatus])
-				{
-					frameX = 0;
-					mpData->mIsAttack = false;
-					mpData->mPlayerAct = Acting::Act_Idle;
-					pos.x = moveAfterAction(pos.x);
-				}
-				elapsedCount = 0;
-			}
-		}
-		else if (mpData->mPlayerStatus == AnimStatus::Strong_Kick)
-		{
-			ImgUpdate(mpData->mPlayerStatus);
-			elapsedCount++;
-			if (elapsedCount >= 4)
-			{
-				frameX++;
-
-
-				if (frameX == 5)
-				{
-					OnStrongKickHitBox((int)mpData->mPlayerLookat);
-				}
-				else if (frameX == 8)
-				{
-					OffStrongKickHitBox();
-				}
-
-				if (frameX >= mpData->mAnimframe[mpData->mPlayerStatus])
-				{
-					frameX = 0;
-					mpData->mIsAttack = false;
-					mpData->mPlayerAct = Acting::Act_Idle;
-					pos.x = moveAfterAction(pos.x);
-				}
-				elapsedCount = 0;
-			}
-		}
-	}
-
-	else if (mpData->mPlayerAct != Acting::Act_Attack) // 공격상태에서는 Idle과 Move가 작동하면 안되므로 공격상태인지 아닌지 판별
-	{
-		if (mpData->mPlayerStatus == AnimStatus::Move_Forward || mpData->mPlayerStatus == AnimStatus::Move_Backward) //Move일때
-		{
-			// 왼쪽으로 움직이기
-			if (mpData->mPlayerAct == Acting::Act_Left_Move)
-			{
-				ImgUpdate(mpData->mPlayerStatus);
-				elapsedCount++;
-				if (elapsedCount >= 8)
-				{
-					if (mpData->mPlayerLookat == Lookat::Right_Lookat)
-					{
-						if (mpData->mNotReverse == 1)
-						{
-							frameX++;
-							if (frameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
-							{
-								frameX = 0;
-							}
-						}
-						else
-						{
-							frameX--;
-							if (frameX < 0)
-							{
-								frameX = mpData->mAnimframe[mpData->mPlayerStatus] - 1;
-							}
-						}
-					}
-					else if (mpData->mPlayerLookat == Lookat::Left_Lookat)
-					{
-						frameX++;
-						if (frameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
-						{
-							frameX = 0;
-						}
-					}
-					pos.x -= moveSpeed;
-					elapsedCount = 0;
-				}
-
-			}
-			// 오른쪽으로 움직이기
-			else if (mpData->mPlayerAct == Acting::Act_Right_Move)
-			{
-				ImgUpdate(mpData->mPlayerStatus);
-
-				elapsedCount++;
-				if (elapsedCount >= 8)//(int)AnimSpeed[mpData->mPlayerStatus])
-				{
-					if (mpData->mPlayerLookat == Lookat::Right_Lookat)
-					{
-						frameX++;
-						if (frameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
-						{
-							frameX = 0;
-						}
-					}
-					else if (mpData->mPlayerLookat == Lookat::Left_Lookat)
-					{
-						if (mpData->mNotReverse == 1)
-						{
-							frameX++;
-							if (frameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
-							{
-								frameX = 0;
-							}
-						}
-						else
-						{
-							frameX--;
-							if (frameX < 0)
-							{
-								frameX = mpData->mAnimframe[mpData->mPlayerStatus] - 1;
-							}
-						}
-					}
-					pos.x += moveSpeed;
-					elapsedCount = 0;
-				}
-			}
-		}
-
-		else if (mpData->mPlayerAct == Acting::Act_Idle) // Idle 일때
-		{
-			ImgUpdate(mpData->mPlayerStatus);
-
-			elapsedCount++;
-			if (elapsedCount >= 8)
-			{
-				frameX++;
-				if (frameX >= mpData->mAnimframe[mpData->mPlayerStatus])
-				{
-					frameX = 0;
-				}
-				elapsedCount = 0;
-			}
-		}
-	}
-
-	baseX = mpData->mSizeX[mpData->mPlayerStatus] / (int)mpData->mAnimframe[AnimStatus::Idle];
-	baseY = (int)mpData->mSizeY[AnimStatus::Idle];
-
-	shape.left = (int)pos.x - ((mpData->mSizeX[AnimStatus::Idle] / mpData->mAnimframe[AnimStatus::Idle]) / 2);
-	shape.top = (int)pos.y - (mpData->mSizeY[AnimStatus::Idle] / 2);
-	shape.right = (int)pos.x + ((mpData->mSizeX[AnimStatus::Idle] / mpData->mAnimframe[AnimStatus::Idle]) / 2);
-	shape.bottom = (int)pos.y + (mpData->mSizeY[AnimStatus::Idle] / 2);
-
 	if (mpTarget && IsCollided(mWeakPunchHitBox, mpTarget->GetShape()))
 	{
 		if (!CheckHitChar())
@@ -285,6 +22,7 @@ void ChAnimation::Update()
 			mHitChar.push_back(mpTarget);
 			mpTarget->SetHP(10);
 			cout << "HP -10 상대 현재 체력 : " << mpTarget->GetHP() << endl;
+
 		}
 	}
 	else if (mpTarget && IsCollided(mStrongPunchHitBox, mpTarget->GetShape()))
@@ -314,6 +52,276 @@ void ChAnimation::Update()
 			cout << "HP -30 상대 현재 체력 : " << mpTarget->GetHP() << endl;
 		}
 	}
+
+	if (mpData->mPlayerAct == eActing::Act_Attack)
+	{
+		if (mpData->mPlayerStatus == eAnimStatus::Weak_Punch)
+		{
+			ImgUpdate(mpData->mPlayerStatus);
+			mElapsedCount++;
+			if (mElapsedCount >= 4)
+			{
+				mFrameX++;
+
+				if (mFrameX == 2)
+				{
+					OnWeakPunchHitBox((int)mpData->mPlayerLookat);
+				}
+				else if (mFrameX == 3)
+				{
+					OffWeakPunchHitBox();
+				}
+
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				{
+					mFrameX = 0;
+					mpData->mIsAttack = false;
+					mpData->mPlayerAct = eActing::Act_Idle;
+					pos.x = moveAfterAction(pos.x);
+				}
+				mElapsedCount = 0;
+			}
+		}
+		else if (mpData->mPlayerStatus == eAnimStatus::Strong_Punch)
+		{
+			ImgUpdate(mpData->mPlayerStatus);
+			mElapsedCount++;
+			if (mElapsedCount >= 4)
+			{
+				mFrameX++;
+
+				if (mFrameX == 4)
+				{
+					OnStrongPunchHitBox((int)mpData->mPlayerLookat);
+				}
+				else if (mFrameX == 9)
+				{
+					OffStrongPunchHitBox();
+				}
+
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				{
+					mFrameX = 0;
+					mpData->mIsAttack = false;
+					mpData->mPlayerAct = eActing::Act_Idle;
+					pos.x = moveAfterAction(pos.x);
+				}
+				mElapsedCount = 0;
+			}
+		}
+		else if (mpData->mPlayerStatus == eAnimStatus::Weak_Kick)
+		{
+			ImgUpdate(mpData->mPlayerStatus);
+			mElapsedCount++;
+			if (mElapsedCount >= 4)
+			{
+				mFrameX++;
+
+				if (mFrameX == 3)
+				{
+					OnWeakKickHitBox((int)mpData->mPlayerLookat);
+				}
+				else if (mFrameX == 5)
+				{
+					OffWeakKickHitBox();
+				}
+
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				{
+					mFrameX = 0;
+					mpData->mIsAttack = false;
+					mpData->mPlayerAct = eActing::Act_Idle;
+					pos.x = moveAfterAction(pos.x);
+				}
+				mElapsedCount = 0;
+			}
+		}
+		else if (mpData->mPlayerStatus == eAnimStatus::Strong_Kick)
+		{
+			ImgUpdate(mpData->mPlayerStatus);
+			mElapsedCount++;
+			if (mElapsedCount >= 4)
+			{
+				mFrameX++;
+
+				if (mFrameX == 5)
+				{
+					OnStrongKickHitBox((int)mpData->mPlayerLookat);
+				}
+				else if (mFrameX == 8)
+				{
+					OffStrongKickHitBox();
+				}
+
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				{
+					mFrameX = 0;
+					mpData->mIsAttack = false;
+					mpData->mPlayerAct = eActing::Act_Idle;
+					pos.x = moveAfterAction(pos.x);
+				}
+				mElapsedCount = 0;
+			}
+		}
+	}
+
+	else if (mpData->mPlayerAct != eActing::Act_Attack) // 공격상태에서는 Idle과 Move가 작동하면 안되므로 공격상태인지 아닌지 판별
+	{
+		if (mpData->mPlayerStatus == eAnimStatus::Move_Forward || mpData->mPlayerStatus == eAnimStatus::Move_Backward) //Move일때
+		{
+			// 왼쪽으로 움직이기
+			if (mpData->mPlayerAct == eActing::Act_Left_Move)
+			{
+				ImgUpdate(mpData->mPlayerStatus);
+				mElapsedCount++;
+				if (mElapsedCount >= 8)
+				{
+					if (mpData->mPlayerLookat == eLookat::Right_Lookat)
+					{
+						if (mpData->mNotReverse == 1)
+						{
+							mFrameX++;
+							if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
+							{
+								mFrameX = 0;
+							}
+						}
+						else
+						{
+							mFrameX--;
+							if (mFrameX < 0)
+							{
+								mFrameX = mpData->mAnimframe[mpData->mPlayerStatus] - 1;
+							}
+						}
+					}
+					else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
+					{
+						mFrameX++;
+						if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
+						{
+							mFrameX = 0;
+						}
+					}
+
+					pos.x -= moveSpeed;
+
+					mElapsedCount = 0;
+				}
+
+			}
+			// 오른쪽으로 움직이기
+			else if (mpData->mPlayerAct == eActing::Act_Right_Move)
+			{
+				ImgUpdate(mpData->mPlayerStatus);
+
+				mElapsedCount++;
+				if (mElapsedCount >= 8)//(int)AnimSpeed[mpData->mPlayerStatus])
+				{
+					if (mpData->mPlayerLookat == eLookat::Right_Lookat)
+					{
+						mFrameX++;
+						if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
+						{
+							mFrameX = 0;
+						}
+					}
+					else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
+					{
+						if (mpData->mNotReverse == 1)
+						{
+							mFrameX++;
+							if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
+							{
+								mFrameX = 0;
+							}
+						}
+						else
+						{
+							mFrameX--;
+							if (mFrameX < 0)
+							{
+								mFrameX = mpData->mAnimframe[mpData->mPlayerStatus] - 1;
+							}
+						}
+					}
+					pos.x += moveSpeed;
+					mElapsedCount = 0;
+				}
+			}
+		}
+
+		else if (mpData->mPlayerAct == eActing::Act_Idle) // Idle 일때
+		{
+			ImgUpdate(mpData->mPlayerStatus);
+
+			mElapsedCount++;
+			if (mElapsedCount >= 8)
+			{
+				mFrameX++;
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				{
+					mFrameX = 0;
+				}
+				mElapsedCount = 0;
+			}
+		}
+	}
+
+	baseX = mpData->mSizeX[mpData->mPlayerStatus] / (int)mpData->mAnimframe[eAnimStatus::Idle];
+	baseY = (int)mpData->mSizeY[eAnimStatus::Idle];
+
+	shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
+	shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] / 2);
+	shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
+	shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] / 2);
+
+	// 왼쪽으로 이동했을 때 충돌이 있다면
+	if (mpData->mPlayerAct == eActing::Act_Left_Move)
+	{
+		if (shape.left < 0)
+		{
+			pos.x -= shape.left;
+
+			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
+			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] / 2);
+			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
+			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] / 2);
+		}
+		else if (IsCollided(shape, mpTarget->GetShape()))
+		{
+			pos.x += mpTarget->GetShape().right - shape.left;
+
+			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
+			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] / 2);
+			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
+			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] / 2);
+		}
+	}
+
+	// 오른쪽으로 이동했을 때 충돌이 있다면
+	if (mpData->mPlayerAct == eActing::Act_Right_Move)
+	{
+		if (shape.right > WIN_SIZE_X)
+		{
+			pos.x += WIN_SIZE_X - shape.right;
+
+			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
+			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] / 2);
+			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
+			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] / 2);
+		}
+		else if (IsCollided(shape, mpTarget->GetShape()))
+		{
+			pos.x += mpTarget->GetShape().left - shape.right;
+
+			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
+			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] / 2);
+			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
+			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] / 2);
+		}
+	}
+	
 }
 
 void ChAnimation::Render(HDC hdc)
@@ -327,7 +335,7 @@ void ChAnimation::Render(HDC hdc)
 
 	if (img)
 	{
-		img->Render(hdc, (int)pos.x, (int)pos.y, frameX, frameY, baseX, baseY, mpData->mPlayerStatus, mpData->mPlayerLookat);
+		img->Render(hdc, (int)pos.x, (int)pos.y, mFrameX, mFrameY, baseX, baseY, mpData->mPlayerStatus, mpData->mPlayerLookat);
 	}
 }
 
@@ -338,61 +346,62 @@ void ChAnimation::Release()
 
 FLOAT ChAnimation::moveAfterAction(FLOAT pos)
 {
-	if (mpData->mPlayerLookat == Lookat::Right_Lookat)
+	if (mpData->mPlayerLookat == eLookat::Right_Lookat)
 	{
 		pos = pos + (FLOAT)(mpData->mMoveAfteraction[mpData->mPlayerStatus]);
 	}
-	else if (mpData->mPlayerLookat == Lookat::Left_Lookat)
+	else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
 	{
-		pos = pos - (FLOAT)(mpData->mMoveAfteraction[mpData->mPlayerStatus]);;
+		pos = pos - (FLOAT)(mpData->mMoveAfteraction[mpData->mPlayerStatus]);
 	}
 	return pos;
 }
 
-void ChAnimation::Attack(AnimStatus type)
+void ChAnimation::Attack(eAnimStatus type)
 {
 	if (mpData->mPlayerStatus != type)
 	{
-		frameX = 0;
+		mFrameX = 0;
 	}
 	mpData->mIsAttack = true;
-	mpData->mPlayerAct = Acting::Act_Attack;
+	mpData->mPlayerAct = eActing::Act_Attack;
 	mpData->mPlayerStatus = type;
 }
 
 void ChAnimation::MoveLeft()
 {
-	if (mpData->mPlayerAct != Acting::Act_Left_Move)
+	if (mpData->mPlayerAct != eActing::Act_Left_Move)
 	{
-		frameX = 0;
+		mFrameX = 0;
 	}
 
-	if (mpData->mPlayerLookat == Lookat::Left_Lookat)
+	if (mpData->mPlayerLookat == eLookat::Left_Lookat)
 	{
-		mpData->mPlayerStatus = AnimStatus::Move_Forward;
+		mpData->mPlayerStatus = eAnimStatus::Move_Forward;
 	}
-	else if (mpData->mPlayerLookat == Lookat::Right_Lookat)
+	else if (mpData->mPlayerLookat == eLookat::Right_Lookat)
 	{
-		mpData->mPlayerStatus = AnimStatus::Move_Backward;
+		mpData->mPlayerStatus = eAnimStatus::Move_Backward;
 	}
 
-	mpData->mPlayerAct = Acting::Act_Left_Move;
+	mpData->mPlayerAct = eActing::Act_Left_Move;
 }
 
 void ChAnimation::MoveRight()
 {
-	if (mpData->mPlayerAct != Acting::Act_Right_Move)
+	if (mpData->mPlayerAct != eActing::Act_Right_Move)
 	{
-		frameX = 0;
+		mFrameX = 0;
 	}
-	mpData->mPlayerAct = Acting::Act_Right_Move;
+	mpData->mPlayerAct = eActing::Act_Right_Move;
 
-	if (mpData->mPlayerLookat == Lookat::Left_Lookat)
+	if (mpData->mPlayerLookat == eLookat::Left_Lookat)
 	{
-		mpData->mPlayerStatus = AnimStatus::Move_Backward;
+		mpData->mPlayerStatus = eAnimStatus::Move_Backward;
 	}
-	else if (mpData->mPlayerLookat == Lookat::Right_Lookat)
+	else if (mpData->mPlayerLookat == eLookat::Right_Lookat)
 	{
-		mpData->mPlayerStatus = AnimStatus::Move_Forward;
+		mpData->mPlayerStatus = eAnimStatus::Move_Forward;
 	}
+
 }

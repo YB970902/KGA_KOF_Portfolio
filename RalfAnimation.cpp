@@ -1,8 +1,8 @@
 #include "RalfAnimation.h"
 #include "Image.h"
 #include "KeyManager.h"
-
 #include "ChAnimData.h"
+
 // 지금은 랄프데이터만 받았지만
 // 나중엔 다른 데이터도 불러올 예정
 // 지금은 Idle, Move로 되어있지만
@@ -13,69 +13,69 @@
 //
 using namespace std;
 
-void RalfAnimation::Init(Lookat dir)
+void RalfAnimation::Init(eLookat dir)
 {
 	mpData = new ChAnimData;
 
-	mpData->mPath.insert(pair<AnimStatus, const char*>(AnimStatus::Idle, "Image/Ralf_Database_IMG/Ralf_Idle.bmp"));
-	mpData->mPath.insert(pair<AnimStatus, const char*>(AnimStatus::Move_Forward, "Image/Ralf_Database_IMG/Ralf_Walk_Cycle.bmp"));
-	mpData->mPath.insert(pair<AnimStatus, const char*>(AnimStatus::Move_Backward, "Image/Ralf_Database_IMG/Ralf_Walk_Cycle.bmp"));
-	mpData->mPath.insert(pair<AnimStatus, const char*>(AnimStatus::Damaged, "Image/Ralf_Database_IMG/Ralf_Damaged.bmp"));
-	mpData->mPath.insert(pair<AnimStatus, const char*>(AnimStatus::Weak_Punch, "Image/Ralf_Database_IMG/Ralf_Weak_Punch.bmp"));
-	mpData->mPath.insert(pair<AnimStatus, const char*>(AnimStatus::Weak_Kick, "Image/Ralf_Database_IMG/Ralf_Weak_kick.bmp"));
-	mpData->mPath.insert(pair<AnimStatus, const char*>(AnimStatus::Strong_Punch, "Image/Ralf_Database_IMG/Ralf_Strong_Punch.bmp"));
-	mpData->mPath.insert(pair<AnimStatus, const char*>(AnimStatus::Strong_Kick, "Image/Ralf_Database_IMG/Ralf_Strong_kick.bmp"));
+	mpData->mPath.insert(pair<eAnimStatus, const char*>(eAnimStatus::Idle, "Image/Ralf_Database_IMG/Ralf_Idle.bmp"));
+	mpData->mPath.insert(pair<eAnimStatus, const char*>(eAnimStatus::Move_Forward, "Image/Ralf_Database_IMG/Ralf_Walk_Cycle.bmp"));
+	mpData->mPath.insert(pair<eAnimStatus, const char*>(eAnimStatus::Move_Backward, "Image/Ralf_Database_IMG/Ralf_Walk_Cycle.bmp"));
+	mpData->mPath.insert(pair<eAnimStatus, const char*>(eAnimStatus::Damaged, "Image/Ralf_Database_IMG/Ralf_Damaged.bmp"));
+	mpData->mPath.insert(pair<eAnimStatus, const char*>(eAnimStatus::Weak_Punch, "Image/Ralf_Database_IMG/Ralf_Weak_Punch.bmp"));
+	mpData->mPath.insert(pair<eAnimStatus, const char*>(eAnimStatus::Weak_Kick, "Image/Ralf_Database_IMG/Ralf_Weak_kick.bmp"));
+	mpData->mPath.insert(pair<eAnimStatus, const char*>(eAnimStatus::Strong_Punch, "Image/Ralf_Database_IMG/Ralf_Strong_Punch.bmp"));
+	mpData->mPath.insert(pair<eAnimStatus, const char*>(eAnimStatus::Strong_Kick, "Image/Ralf_Database_IMG/Ralf_Strong_kick.bmp"));
 
-	mpData->mAnimframe.insert(pair<AnimStatus, int>(AnimStatus::Idle, 35));
-	mpData->mAnimframe.insert(pair<AnimStatus, int>(AnimStatus::Move_Forward, 8));
-	mpData->mAnimframe.insert(pair<AnimStatus, int>(AnimStatus::Move_Backward, 8));
-	mpData->mAnimframe.insert(pair<AnimStatus, int>(AnimStatus::Damaged, 4));
-	mpData->mAnimframe.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 4));
-	mpData->mAnimframe.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 6));
-	mpData->mAnimframe.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 8));
-	mpData->mAnimframe.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 12));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Idle, 35));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Forward, 8));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Backward, 8));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Damaged, 4));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Punch, 4));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Kick, 6));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Punch, 8));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 12));
 
-	mpData->mSizeX.insert(pair<AnimStatus, int>(AnimStatus::Idle, 2345));
-	mpData->mSizeX.insert(pair<AnimStatus, int>(AnimStatus::Move_Forward, 528));
-	mpData->mSizeX.insert(pair<AnimStatus, int>(AnimStatus::Move_Backward, 528));
-	mpData->mSizeX.insert(pair<AnimStatus, int>(AnimStatus::Damaged, 568));
-	mpData->mSizeX.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 488));
-	mpData->mSizeX.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 768));
-	mpData->mSizeX.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 1680));
-	mpData->mSizeX.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 2352));
+	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Idle, 2345));
+	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Forward, 528));
+	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Backward, 528));
+	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Damaged, 568));
+	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Punch, 488));
+	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Kick, 768));
+	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Punch, 1680));
+	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 2352));
 
-	mpData->mSizeY.insert(pair<AnimStatus, int>(AnimStatus::Idle, 120));
-	mpData->mSizeY.insert(pair<AnimStatus, int>(AnimStatus::Move_Forward, 120));
-	mpData->mSizeY.insert(pair<AnimStatus, int>(AnimStatus::Move_Backward, 120));
-	mpData->mSizeY.insert(pair<AnimStatus, int>(AnimStatus::Damaged, 120));
-	mpData->mSizeY.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 120));
-	mpData->mSizeY.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 120));
-	mpData->mSizeY.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 120));
-	mpData->mSizeY.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 140));
+	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Idle, 120));
+	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Forward, 120));
+	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Backward, 120));
+	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Damaged, 120));
+	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Kick, 120));
+	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Punch, 120));
+	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 120));
+	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Punch, 140));
 
-	mpData->mMoveAfteraction.insert(pair<AnimStatus, int>(AnimStatus::Idle, 0));
-	mpData->mMoveAfteraction.insert(pair<AnimStatus, int>(AnimStatus::Move_Forward, 0));
-	mpData->mMoveAfteraction.insert(pair<AnimStatus, int>(AnimStatus::Move_Backward, 0));
-	mpData->mMoveAfteraction.insert(pair<AnimStatus, int>(AnimStatus::Damaged, 0));
-	mpData->mMoveAfteraction.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 0));
-	mpData->mMoveAfteraction.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 0));
-	mpData->mMoveAfteraction.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 0));
-	mpData->mMoveAfteraction.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 0));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Idle, 0));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Forward, 0));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Backward, 0));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Damaged, 0));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Kick, 0));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Punch, 0));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 0));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Punch, 0));
 
-	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Idle, 8));
-	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Move_Forward, 7));
-	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Move_Backward, 7));
-	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Damaged, 0));
-	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Weak_Kick, 4));
-	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Weak_Punch, 4));
-	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Strong_Kick, 4));
-	mpData->mAnimSpeed.insert(pair<AnimStatus, int>(AnimStatus::Strong_Punch, 4));
+	mpData->mAnimSpeed.insert(pair<eAnimStatus, int>(eAnimStatus::Idle, 8));
+	mpData->mAnimSpeed.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Forward, 7));
+	mpData->mAnimSpeed.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Backward, 7));
+	mpData->mAnimSpeed.insert(pair<eAnimStatus, int>(eAnimStatus::Damaged, 0));
+	mpData->mAnimSpeed.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Kick, 4));
+	mpData->mAnimSpeed.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Punch, 4));
+	mpData->mAnimSpeed.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 4));
+	mpData->mAnimSpeed.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Punch, 4));
 
 	mpData->mNotReverse = 0;
 
 
-	mpData->mPlayerAct = Acting::Act_Idle;
-	mpData->mPlayerStatus = AnimStatus::Idle;
+	mpData->mPlayerAct = eActing::Act_Idle;
+	mpData->mPlayerStatus = eAnimStatus::Idle;
 	mpData->mPlayerLookat = dir;
 
 	//Player.selectedCharacter = ralf
@@ -91,8 +91,8 @@ void RalfAnimation::Init(Lookat dir)
 	//img->Init(Player.mpData->mPath[playerStatus], (int)Player.mpData->sizeX[playerStatus], (int)Player.mpData->sizeY[playerStatus],
 	//	(int)Player.mpData->Animframe[playerStatus], 1, true, RGB(255, 0, 255));
 
-	frameX = frameY = 0;
-	elapsedCount = 0;
+	mFrameX = mFrameY = 0;
+	mElapsedCount = 0;
 	pos.x = WIN_SIZE_X / 2;
 	pos.y = WIN_SIZE_Y / 2;
 	moveSpeed = 10.0f;
@@ -105,4 +105,3 @@ void RalfAnimation::Init(Lookat dir)
 	shape.bottom = (int)pos.y + (mpData->mSizeX[mpData->mPlayerStatus] / 2);
 
 }
-

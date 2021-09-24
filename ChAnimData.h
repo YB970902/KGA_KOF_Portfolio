@@ -5,10 +5,9 @@
 class ChAnimData
 {
 public:
-
-	Lookat mPlayerLookat = {};
-	AnimStatus mPlayerStatus = {};
-	Acting mPlayerAct = {};
+	eLookat mPlayerLookat = {};
+	eAnimStatus mPlayerStatus = {};
+	eActing mPlayerAct = {};
 
 	//static bool isAction = false;		// 추후에 아래 세개의 변수를 isAction으로 통합시킬수 있는지 판단필요 (조건문에 &&을 넣어야 하는건가;)
 	bool mIsAttack = false;				// 공격은 액션인데 공격중 다른공격을 할수는 없다.
@@ -18,11 +17,10 @@ public:
 	bool mNotReverse = false;
 
 	//추후에 스트럭트로 묶자.
-	map<AnimStatus, int> mAnimframe;
-	map<AnimStatus, int> mAnimSpeed;
-	map<AnimStatus, int> mSizeX;
-	map<AnimStatus, int> mSizeY;
-	map<AnimStatus, const char*> mPath;
-	map<AnimStatus, int> mMoveAfteraction;
-	
+	map<eAnimStatus, int> mAnimframe = {};
+	map<eAnimStatus, int> mAnimSpeed = {};
+	map<eAnimStatus, int> mSizeX = {};
+	map<eAnimStatus, int> mSizeY = {};
+	map<eAnimStatus, const char*> mPath = {};
+	map<eAnimStatus, int> mMoveAfteraction = {};
 };

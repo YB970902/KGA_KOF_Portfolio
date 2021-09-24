@@ -57,7 +57,7 @@ int APIENTRY WinMain(_In_ HINSTANCE _hInstance, _In_opt_  HINSTANCE _hPrevInstan
 
 	g_mainGame.Release();
 
-	return message.wParam;
+	return (int)message.wParam;
 }
 
 void SetWindowSize(int startX, int startY, int sizeX, int sizeY)

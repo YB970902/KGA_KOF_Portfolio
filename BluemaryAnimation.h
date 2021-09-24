@@ -4,5 +4,5 @@
 class BluemaryAnimation : public ChAnimation
 {
 public:
-	void Init(Lookat dir) override;
+	void Init(eLookat dir) override;
 };

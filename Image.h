@@ -71,7 +71,7 @@ private:
 public:
 	HRESULT Init(int width, int height);	// 빈 비트맵 이미지 생성(Empty)
 	HRESULT Init(const char* fileName, int width, int height,
-		bool isTrans = false, COLORREF transColor = NULL); // File 프레임이 없는 이미지
+bool isTrans = false, COLORREF transColor = NULL); // File 프레임이 없는 이미지
 	HRESULT Init(const char* fileName, int width, int height,
 		int maxFrameX, int maxFrameY,
 		bool isTrans = false, COLORREF transColor = NULL); // File 프레임이 있는 이미지
@@ -80,7 +80,7 @@ public:
 
 	void Render(HDC hdc);
 	void Render(HDC hdc, int destX, int destY);	// 이미지 데이터를 화면에 복사
-	void Render(HDC hdc, int destX, int destY, int frameX, int frameY, int baseX, int baseY, AnimStatus playerStatus, Lookat playerLookat);	// 이미지 데이터를 화면에 복사
+	void Render(HDC hdc, int destX, int destY, int frameX, int frameY, int baseX, int baseY, eAnimStatus playerStatus, eLookat playerLookat);	// 이미지 데이터를 화면에 복사
 
 
 	HDC GetMemDC() { if (imageInfo) return imageInfo->hMemDc; return NULL; }

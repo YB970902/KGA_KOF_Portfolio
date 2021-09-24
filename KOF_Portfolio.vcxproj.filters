@@ -63,9 +63,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="HitBoxScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>2DFramework\Manager</Filter>
     </ClInclude>
@@ -84,11 +81,11 @@
     <ClInclude Include="ChAnimation.h">
       <Filter>2DFramework\Animator</Filter>
     </ClInclude>
-    <ClInclude Include="ChAnimData.h">
-      <Filter>2DFramework\Animator</Filter>
-    </ClInclude>
     <ClInclude Include="CharacterSelectScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ChAnimData.h">
+      <Filter>2DFramework\Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -122,9 +119,6 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="HitBoxScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="AnimationScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -137,11 +131,11 @@
     <ClCompile Include="BluemaryAnimation.cpp">
       <Filter>2DFramework\Animator\2dData</Filter>
     </ClCompile>
-    <ClCompile Include="ChAnimation.cpp">
-      <Filter>2DFramework\Animator\2dData</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterSelectScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ChAnimation.cpp">
+      <Filter>2DFramework\Animator</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

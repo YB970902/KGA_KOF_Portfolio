@@ -11,7 +11,16 @@ protected:
 	int bodySize = 0;
 
 public:
-	inline void SetPos(POINTFLOAT pos) { this->pos = pos; }
+
+	inline void SetPos(POINTFLOAT pos)
+	{
+		this->pos = pos;
+		shape.left = (int)pos.x;
+		shape.top = (int)pos.y;
+		shape.right = (int)pos.x;
+		shape.bottom = (int)pos.y;
+	}
+
 	inline POINTFLOAT GetPos() { return this->pos; }
 	inline void SetMoveSpeed(float speed) { this->moveSpeed = speed; }
 	inline int GetBodySize() { return this->bodySize; }

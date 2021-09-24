@@ -7,8 +7,6 @@
 class Character : public GameObject
 {
 protected:
-	Character* mpTarget = nullptr;
-
 	RECT mWeakPunchHitBox = RECT();
 	RECT mStrongPunchHitBox = RECT();
 	RECT mWeakKickHitBox = RECT();
@@ -16,9 +14,11 @@ protected:
 
 	int mFrame = 0;
 	int mHP = 0;
-	MoveDir mDir = MoveDir::Right;
+	eMoveDir mDir = eMoveDir::Right;
 
 	vector<Character*> mHitChar = {};
+
+	Character* mpTarget = nullptr;
 
 public:
 	Character() {};
@@ -29,7 +29,6 @@ public:
 	void Render(HDC hdc);
 	void Release();
 
-	void Move(int dir);
 	bool CheckHitChar();
 
 	void OnWeakPunchHitBox(int dir);
@@ -43,20 +42,15 @@ public:
 
 	void AllOffHitBox();
 
-	inline void SetTarget(Character* ch) { this->mpTarget = ch; }
 	inline void SetHP(int hp) { this->mHP -= hp; }
 
-	inline Character* GetTarget() { return mpTarget; }
 	inline RECT GetShape() { return shape; }
 	inline int GetHP() { return mHP; }
 	inline RECT GetSmallHitBox() { return mWeakPunchHitBox; }
 	inline int GetFrame() { return mFrame; }
-	inline MoveDir GetDir() { return mDir; }
+	inline eMoveDir GetDir() { return mDir; }
 
-
-	
-	static void LeftMove(Character* ch) { ch->Move((int)MoveDir::Left); }
-	static void RightMove(Character* ch) { ch->Move((int)MoveDir::Right); }
+	inline void SetTarget(Character* ch) { this->mpTarget = ch; }
 	static void OnWeakPunchHitBox(Character* ch) { ch->OnWeakPunchHitBox((int)ch->GetDir()); }
 	static void OnStrongPunchHitBox(Character* ch) { ch->OnStrongPunchHitBox((int)ch->GetDir()); }
 	static void OnWeakKickHitBox(Character* ch) { ch->OnWeakKickHitBox((int)ch->GetDir()); }
