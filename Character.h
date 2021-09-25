@@ -22,10 +22,14 @@ protected:
 
 	int mFrame = 0;
 	int mHP = 0;
+
+	bool mIsHit = false;
+	float mAcceleration = 0.0f;
+	float mResistance = 0.0f;
+
 	eMoveDir mDir = eMoveDir::Right;
 
 	vector<Character*> mHitChar = {};
-
 public:
 	Character() {};
 	~Character() {};
@@ -37,10 +41,10 @@ public:
 
 	bool CheckHitChar();
 
-	void OnWeakPunchHitBox(int dir,ChAnimData* charamData);
+	void OnWeakPunchHitBox(int dir, ChAnimData* charamData);
 	void OffWeakPunchHitBox();
 	void OnStrongPunchHitBox(int dir, ChAnimData* charamData);
-	void OffStrongPunchHitBox();	
+	void OffStrongPunchHitBox();
 	void OnWeakKickHitBox(int dir, ChAnimData* charamData);
 	void OffWeakKickHitBox();
 	void OnStrongKickHitBox(int dir, ChAnimData* charamData);
@@ -50,6 +54,9 @@ public:
 
 	inline void SetHP(int hp) { this->mHP -= hp; }
 	inline void SetPosX(int pixel) { this->pos.x -= pixel; }
+	inline void SetIsHit(bool hit) { this->mIsHit = hit; }
+	inline void SetAcceleration(float val) { this->mAcceleration = val; }
+	inline void SetResistance(float val) { this->mResistance = val; }
 
 	inline Character* GetTarget() { return mpTarget; }
 	inline ChAnimData* GetmpmData() { return mpmData; }
@@ -68,8 +75,8 @@ public:
 
 	static void LeftMove(Character* ch) { ch->Move((int)eMoveDir::Left); }
 	static void RightMove(Character* ch) { ch->Move((int)eMoveDir::Right); }
-	static void OnWeakPunchHitBox(Character* ch,ChAnimData* an) { ch->OnWeakPunchHitBox((int)ch->GetDir(), an); }
-	static void OnStrongPunchHitBox(Character* ch,ChAnimData* an) { ch->OnStrongPunchHitBox((int)ch->GetDir(),an); }
-	static void OnWeakKickHitBox(Character* ch, ChAnimData* an) { ch->OnWeakKickHitBox((int)ch->GetDir(),an); }
-	static void OnStrongKickHitBox(Character* ch, ChAnimData* an) { ch->OnStrongKickHitBox((int)ch->GetDir(),an); }
+	static void OnWeakPunchHitBox(Character* ch, ChAnimData* an) { ch->OnWeakPunchHitBox((int)ch->GetDir(), an); }
+	static void OnStrongPunchHitBox(Character* ch, ChAnimData* an) { ch->OnStrongPunchHitBox((int)ch->GetDir(), an); }
+	static void OnWeakKickHitBox(Character* ch, ChAnimData* an) { ch->OnWeakKickHitBox((int)ch->GetDir(), an); }
+	static void OnStrongKickHitBox(Character* ch, ChAnimData* an) { ch->OnStrongKickHitBox((int)ch->GetDir(), an); }
 };

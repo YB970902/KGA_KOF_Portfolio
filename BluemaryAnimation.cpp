@@ -114,7 +114,7 @@ void BluemaryAnimation::Init(eLookat dir)
 	mElapsedCount = 0;
 	pos.x = WIN_SIZE_X / 2;
 	pos.y = WIN_SIZE_Y / 2;
-	moveSpeed = 10.0f;
+	moveSpeed = 50.0f;
 
 	mHP = 100;
 

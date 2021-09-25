@@ -31,7 +31,7 @@ public:
 	void MoveLeft();
 	void MoveRight();
 
-	void HitTarget(int damage);
+	void HitTarget(int damage, float KnockBackPixel);
 	
 	inline void SetFrameX(int frame) { this->mFrameX = frame; }
 

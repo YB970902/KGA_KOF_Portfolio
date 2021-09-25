@@ -9,7 +9,6 @@
 #include "Image.h"
 #include "HealthBar.h"
 
-
 void AnimationScene::Enter()
 {
 	switch (Player1)
@@ -145,13 +144,13 @@ void AnimationScene::Update()
 
 	if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && MGR_KEY->IsStayKeyDown(VK_LEFT))
 	{
-		mBackgroundPosX += 2;
+		mBackgroundPosX += 6;
 		mPlayer1->SetNotMove(true);
 		mPlayer2->SetNotMove(true);
 	}
 	else if (mBackgroundPosX > -600 && MGR_KEY->IsStayKeyDown('D') && MGR_KEY->IsStayKeyDown(VK_RIGHT))
 	{
-		mBackgroundPosX -= 2;
+		mBackgroundPosX -= 6;
 		mPlayer1->SetNotMove(true);
 		mPlayer2->SetNotMove(true);
 	}
@@ -159,16 +158,16 @@ void AnimationScene::Update()
 	{
 		if (!(mPlayer2->GetShape().right >= (mCameraSize.right)))
 		{
-			mPlayer2->SetPosX(-2);
-			mBackgroundPosX += 2;
+			mPlayer2->SetPosX(-6);
+			mBackgroundPosX += 6;
 		}
 	}
 	else if (mBackgroundPosX > -600 && MGR_KEY->IsStayKeyDown(VK_RIGHT) && mPlayer2->GetShape().right == mCameraSize.right)
 	{
 		if (!(mPlayer1->GetShape().left <= (mCameraSize.left)))
 		{
-			mPlayer1->SetPosX(2);
-			mBackgroundPosX -= 2;
+			mPlayer1->SetPosX(6);
+			mBackgroundPosX -= 6;
 		}
 	}
 
