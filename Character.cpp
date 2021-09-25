@@ -282,3 +282,11 @@ void Character::Move(int dir)
 		mDir = eMoveDir::Left;
 	}
 }
+
+void Character::SetShape()
+{
+	shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) * 4 / 2);
+	shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] * 4 / 2);
+	shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) * 4 / 2);
+	shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] * 4 / 2);
+}

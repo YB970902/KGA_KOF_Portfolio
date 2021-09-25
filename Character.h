@@ -13,6 +13,8 @@ protected:
 	Character* mpTarget = nullptr;
 	ChAnimData* mpmData = nullptr;
 
+	ChAnimData* mpData = nullptr;
+
 	RECT mWeakPunchHitBox = RECT();
 	RECT mStrongPunchHitBox = RECT();
 	RECT mWeakKickHitBox = RECT();
@@ -51,6 +53,7 @@ public:
 
 	inline Character* GetTarget() { return mpTarget; }
 	inline ChAnimData* GetmpmData() { return mpmData; }
+	inline ChAnimData* GetData() { return mpData; }
 
 	inline RECT GetShape() { return shape; }
 	inline int GetHP() { return mHP; }
@@ -61,6 +64,7 @@ public:
 	inline void SetTarget(Character* ch) { this->mpTarget = ch; }
 
 	void Move(int dir);
+	void SetShape();
 
 	static void LeftMove(Character* ch) { ch->Move((int)eMoveDir::Left); }
 	static void RightMove(Character* ch) { ch->Move((int)eMoveDir::Right); }

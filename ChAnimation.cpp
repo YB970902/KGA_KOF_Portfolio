@@ -19,37 +19,28 @@ void ChAnimation::Update()
 	{
 		if (!CheckHitChar())
 		{
-			mHitChar.push_back(mpTarget);
-			mpTarget->SetHP(10);
-			cout << "HP -10 상대 현재 체력 : " << mpTarget->GetHP() << endl;
-
+			HitTarget(10);
 		}
 	}
 	else if (mpTarget && IsCollided(mStrongPunchHitBox, mpTarget->GetShape()))
 	{
 		if (!CheckHitChar())
 		{
-			mHitChar.push_back(mpTarget);
-			mpTarget->SetHP(20);
-			cout << "HP -20 상대 현재 체력 : " << mpTarget->GetHP() << endl;
+			HitTarget(20);
 		}
 	}
 	else if (mpTarget && IsCollided(mWeakPunchHitBox, mpTarget->GetShape()))
 	{
 		if (!CheckHitChar())
 		{
-			mHitChar.push_back(mpTarget);
-			mpTarget->SetHP(15);
-			cout << "HP -15 상대 현재 체력 : " << mpTarget->GetHP() << endl;
+			HitTarget(15);
 		}
 	}
 	else if (mpTarget && IsCollided(mStrongPunchHitBox, mpTarget->GetShape()))
 	{
 		if (!CheckHitChar())
 		{
-			mHitChar.push_back(mpTarget);
-			mpTarget->SetHP(30);
-			cout << "HP -30 상대 현재 체력 : " << mpTarget->GetHP() << endl;
+			HitTarget(30);
 		}
 	}
 
@@ -63,10 +54,9 @@ void ChAnimation::Update()
 			{
 				mFrameX++;
 
-				
 				if (mFrameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
 				{
-					OnWeakPunchHitBox((int)mpData->mPlayerLookat,mpData);
+					OnWeakPunchHitBox((int)mpData->mPlayerLookat, mpData);
 				}
 				else if (mFrameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
 				{
@@ -282,10 +272,7 @@ void ChAnimation::Update()
 	baseX = mpData->mSizeX[mpData->mPlayerStatus] / (int)mpData->mAnimframe[eAnimStatus::Idle];
 	baseY = (int)mpData->mSizeY[eAnimStatus::Idle];
 
-	shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
-	shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
-	shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
-	shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
+	SetShape();
 
 	// 왼쪽으로 이동했을 때 충돌이 있다면
 	if (mpData->mPlayerAct == eActing::Act_Left_Move)
@@ -294,19 +281,13 @@ void ChAnimation::Update()
 		{
 			pos.x -= shape.left;
 
-			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
-			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
-			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
-			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
+			SetShape();
 		}
 		else if (IsCollided(shape, mpTarget->GetShape()))
 		{
 			pos.x += mpTarget->GetShape().right - shape.left;
 
-			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
-			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] *4/ 2);
-			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
-			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
+			SetShape();
 		}
 	}
 
@@ -317,22 +298,45 @@ void ChAnimation::Update()
 		{
 			pos.x += WIN_SIZE_X - shape.right;
 
-			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
-			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
-			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
-			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
+			SetShape();
 		}
 		else if (IsCollided(shape, mpTarget->GetShape()))
 		{
 			pos.x += mpTarget->GetShape().left - shape.right;
 
-			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
-			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
-			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
-			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
+			SetShape();
 		}
 	}
-	
+
+	// 넉백하고도 캐릭터가 충돌하고있다면
+	if (IsCollided(shape, mpTarget->GetShape()))
+	{
+		if (mpTarget->GetData()->mPlayerLookat == eLookat::Left_Lookat)
+		{
+			mpTarget->SetPosX(-(shape.right - mpTarget->GetShape().left));
+			mpTarget->SetShape();
+			if (mpTarget->GetShape().right > WIN_SIZE_X)
+			{
+				mpTarget->SetPosX(mpTarget->GetShape().right - WIN_SIZE_X);
+				mpTarget->SetShape();
+				pos.x -= shape.right - mpTarget->GetShape().left;
+				SetShape();
+			}
+		}
+		else
+		{
+			mpTarget->SetPosX((mpTarget->GetShape().right - shape.left));
+			mpTarget->SetShape();
+			if (mpTarget->GetShape().left < 0)
+			{
+				mpTarget->SetPosX((mpTarget->GetShape().left));
+				mpTarget->SetShape();
+				pos.x += mpTarget->GetShape().right - shape.left;
+				SetShape();
+			}
+		}
+	}
+
 }
 
 void ChAnimation::Render(HDC hdc)
@@ -415,4 +419,20 @@ void ChAnimation::MoveRight()
 		mpData->mPlayerStatus = eAnimStatus::Move_Forward;
 	}
 
+}
+
+void ChAnimation::HitTarget(int damage)
+{
+	mHitChar.push_back(mpTarget);
+	mpTarget->SetHP(damage);
+	if (mpTarget->GetData()->mPlayerLookat == eLookat::Left_Lookat)
+	{
+		mpTarget->SetPosX(-KnockBackPixel);
+	}
+	else
+	{
+		mpTarget->SetPosX(KnockBackPixel);
+	}
+
+	cout << "HP - " << damage << " 상대 현재 체력 : " << mpTarget->GetHP() << endl;
 }

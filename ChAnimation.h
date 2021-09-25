@@ -15,7 +15,7 @@ protected:
 
 	bool mNotMove = false;
 
-	ChAnimData* mpData = nullptr;
+	const int KnockBackPixel = 30;
 
 public:
 	virtual void Init(eLookat dir) {};
@@ -31,9 +31,10 @@ public:
 	void MoveLeft();
 	void MoveRight();
 
+	void HitTarget(int damage);
+	
 	inline void SetFrameX(int frame) { this->mFrameX = frame; }
 
-	inline ChAnimData* GetData() { return this->mpData; }
 	inline int GetFrameX() { return this->mFrameX; }
 
 	inline void SetNotMove(bool b) { this->mNotMove = b; }
