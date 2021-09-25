@@ -205,8 +205,12 @@ void ChAnimation::Update()
 						}
 					}
 
-					pos.x -= moveSpeed;
+					if (!mNotMove)
+					{
+						pos.x -= moveSpeed;
+					}
 
+					mNotMove = false;
 					mElapsedCount = 0;
 				}
 
@@ -246,7 +250,13 @@ void ChAnimation::Update()
 							}
 						}
 					}
-					pos.x += moveSpeed;
+
+					if (!mNotMove)
+					{
+						pos.x += moveSpeed;
+					}
+
+					mNotMove = false;
 					mElapsedCount = 0;
 				}
 			}

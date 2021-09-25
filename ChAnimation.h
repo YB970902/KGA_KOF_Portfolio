@@ -13,6 +13,8 @@ protected:
 	int mFrameX = 0, mFrameY = 0;
 	int mElapsedCount = 0;
 
+	bool mNotMove = false;
+
 	ChAnimData* mpData = nullptr;
 
 public:
@@ -34,6 +36,7 @@ public:
 	inline ChAnimData* GetData() { return this->mpData; }
 	inline int GetFrameX() { return this->mFrameX; }
 
+	inline void SetNotMove(bool b) { this->mNotMove = b; }
 
 	static void WeakPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Weak_Punch); }
 	static void StrongPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Strong_Punch); }

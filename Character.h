@@ -47,6 +47,7 @@ public:
 	void AllOffHitBox();
 
 	inline void SetHP(int hp) { this->mHP -= hp; }
+	inline void SetPosX(int pixel) { this->pos.x -= pixel; }
 
 	inline Character* GetTarget() { return mpTarget; }
 	inline ChAnimData* GetmpmData() { return mpmData; }

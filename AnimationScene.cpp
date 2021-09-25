@@ -38,6 +38,16 @@ void AnimationScene::Enter()
 		break;
 	}
 
+	mCameraSize.left = 0;
+	mCameraSize.top = 0;
+	mCameraSize.right = WIN_SIZE_X;
+	mCameraSize.bottom = WIN_SIZE_Y;
+
+	mBackgroundSize.left = -WIN_SIZE_X;
+	mBackgroundSize.top = 0;
+	mBackgroundSize.right = WIN_SIZE_X;
+	mBackgroundSize.bottom = WIN_SIZE_Y;
+
 	mPlayer1->Init(eLookat::Right_Lookat);
 	mPlayer2->Init(eLookat::Left_Lookat);
 
@@ -133,13 +143,33 @@ void AnimationScene::Update()
 		}
 	}
 
-	if (MGR_KEY->IsStayKeyDown('A'))
+	if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && MGR_KEY->IsStayKeyDown(VK_LEFT))
 	{
-		mBackgroundPosX -= 5;
+		mBackgroundPosX += 2;
+		mPlayer1->SetNotMove(true);
+		mPlayer2->SetNotMove(true);
 	}
-	else if (MGR_KEY->IsStayKeyDown('D'))
+	else if (mBackgroundPosX > -600 && MGR_KEY->IsStayKeyDown('D') && MGR_KEY->IsStayKeyDown(VK_RIGHT))
 	{
-		mBackgroundPosX += 5;
+		mBackgroundPosX -= 2;
+		mPlayer1->SetNotMove(true);
+		mPlayer2->SetNotMove(true);
+	}
+	else if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && mPlayer1->GetShape().left == mCameraSize.left)
+	{
+		if (!(mPlayer2->GetShape().right >= (mCameraSize.right)))
+		{
+			mPlayer2->SetPosX(-2);
+			mBackgroundPosX += 2;
+		}
+	}
+	else if (mBackgroundPosX > -600 && MGR_KEY->IsStayKeyDown(VK_RIGHT) && mPlayer2->GetShape().right == mCameraSize.right)
+	{
+		if (!(mPlayer1->GetShape().left <= (mCameraSize.left)))
+		{
+			mPlayer1->SetPosX(2);
+			mBackgroundPosX -= 2;
+		}
 	}
 
 	if (mPlayer1->GetData()->mIsAttack == false)

@@ -11,6 +11,9 @@ class AnimationScene : public Scene
 private:
 	Image* mBattleGroundImg;
 
+	RECT mCameraSize = RECT();
+	RECT mBackgroundSize = RECT();
+
 	ChAnimation* mPlayer1 = nullptr;
 	ChAnimation* mPlayer2 = nullptr;
 
