@@ -185,10 +185,10 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int bas
 
 			GdiTransparentBlt(
 				hdc,
-				destX - (imageInfo->frameWidth / 2),
-				destY - (imageInfo->frameHeight / 2),// - (imageInfo->frameHeight / 2),
-				imageInfo->frameWidth,
-				imageInfo->frameHeight,	// 전체 프레임 수
+				destX - (imageInfo->frameWidth*4 / 2),
+				destY - (imageInfo->frameHeight*4 / 2),// - (imageInfo->frameHeight / 2),
+				imageInfo->frameWidth*4,
+				imageInfo->frameHeight*4,	// 전체 프레임 수
 
 				imageInfo->hMemDc,
 				0,
@@ -202,10 +202,10 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int bas
 		{
 			GdiTransparentBlt(
 				hdc,
-				destX - (imageInfo->frameWidth / 2),	/*imageInfo->frameWidth <= baseX ? baseX : (imageInfo->frameWidth - (*/
-				destY - (imageInfo->frameHeight / 2),	/*imageInfo->frameHeight <= baseY ? baseY : imageInfo->frameHeight - (*/
-				imageInfo->frameWidth,
-				imageInfo->frameHeight,	// 전체 프레임 수
+				destX - (imageInfo->frameWidth*4 / 2),	/*imageInfo->frameWidth <= baseX ? baseX : (imageInfo->frameWidth - (*/
+				destY - (imageInfo->frameHeight*4 / 2), /*imageInfo->frameHeight <= baseY ? baseY : imageInfo->frameHeight - (*/
+				imageInfo->frameWidth*4,
+				imageInfo->frameHeight*4,	// 전체 프레임 수
 
 				imageInfo->hMemDc,
 				imageInfo->frameWidth * frameX,
