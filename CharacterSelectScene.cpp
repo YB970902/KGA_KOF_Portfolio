@@ -95,6 +95,41 @@ void CharacterSelectScene::Update()
 	{
 		MGR_SCN->ChangeScene(eSceneTag::AnimationScene);
 	}
+
+	if (MGR_KEY->IsOnceKeyDown(VK_LEFT))
+	{
+		mCurIndex++;
+		if (mCurIndex > 3) { mCurIndex = 1; }
+	}
+	else if (MGR_KEY->IsOnceKeyDown(VK_RIGHT))
+	{
+		mCurIndex--;
+		if (mCurIndex < 1) { mCurIndex = 3; }
+	}
+
+	if (!mbIsPlayer1Selected)
+	{
+		Player1 = mCurIndex;
+	}
+	else if (!mbIsPlayer2Selected)
+	{
+		Player2 = mCurIndex;
+	}
+
+	if (MGR_KEY->IsOnceKeyDown(VK_SPACE))
+	{
+		if (!mbIsPlayer1Selected)
+		{
+			mbIsPlayer1Selected = true;
+			mCurIndex = 1;
+		}
+		else if (!mbIsPlayer2Selected) 
+		{
+			mbIsPlayer2Selected = true;
+			mCurIndex = 1;
+		}
+		else { MGR_SCN->ChangeScene(eSceneTag::AnimationScene); }
+	}
 }
 
 void CharacterSelectScene::Render(HDC hdc)
@@ -136,8 +171,40 @@ void CharacterSelectScene::Render(HDC hdc)
 
 	mpRightSection->Render(hdc, WIN_SIZE_X - 325, 475);
 
-	mp1PEdge->Render(hdc, 630, 710);
-	mp2PEdge->Render(hdc, 630, 710);
+	if (!mbIsPlayer1Selected)
+	{
+		switch (mCurIndex)
+		{
+		case (int)eCharacterType::Bluemary:
+			mp1PEdge->Render(hdc, 1025, 598);
+			break;
+		case (int)eCharacterType::Ralf:
+			mp1PEdge->Render(hdc, 727, 710);
+			break;
+		case (int)eCharacterType::Leona:
+			mp1PEdge->Render(hdc, 630, 710);
+			break;
+		default:
+			break;
+		}
+	}
+	else if (!mbIsPlayer2Selected)
+	{
+		switch (mCurIndex)
+		{
+		case (int)eCharacterType::Bluemary:
+			mp2PEdge->Render(hdc, 1025, 598);
+			break;
+		case (int)eCharacterType::Ralf:
+			mp2PEdge->Render(hdc, 727, 710);
+			break;
+		case (int)eCharacterType::Leona:
+			mp2PEdge->Render(hdc, 630, 710);
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void CharacterSelectScene::Exit()

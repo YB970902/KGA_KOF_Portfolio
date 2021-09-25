@@ -20,6 +20,11 @@ private:
 	Image* mp1PEdge = nullptr;
 	Image* mp2PEdge = nullptr;
 
+	bool mbIsPlayer1Selected = false;
+	bool mbIsPlayer2Selected = false;
+
+	int mCurIndex = 1;
+
 public:
 	CharacterSelectScene();
 	~CharacterSelectScene();
