@@ -272,10 +272,10 @@ void ChAnimation::Update()
 	baseX = mpData->mSizeX[mpData->mPlayerStatus] / (int)mpData->mAnimframe[eAnimStatus::Idle];
 	baseY = (int)mpData->mSizeY[eAnimStatus::Idle];
 
-	shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
-	shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] / 2);
-	shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
-	shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] / 2);
+	shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
+	shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
+	shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
+	shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
 
 	// 왼쪽으로 이동했을 때 충돌이 있다면
 	if (mpData->mPlayerAct == eActing::Act_Left_Move)
@@ -284,19 +284,19 @@ void ChAnimation::Update()
 		{
 			pos.x -= shape.left;
 
-			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
-			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] / 2);
-			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
-			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] / 2);
+			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
+			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
+			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
+			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
 		}
 		else if (IsCollided(shape, mpTarget->GetShape()))
 		{
 			pos.x += mpTarget->GetShape().right - shape.left;
 
-			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
-			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] / 2);
-			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
-			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] / 2);
+			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
+			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] *4/ 2);
+			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
+			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
 		}
 	}
 
@@ -307,19 +307,19 @@ void ChAnimation::Update()
 		{
 			pos.x += WIN_SIZE_X - shape.right;
 
-			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
-			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] / 2);
-			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
-			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] / 2);
+			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
+			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
+			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
+			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
 		}
 		else if (IsCollided(shape, mpTarget->GetShape()))
 		{
 			pos.x += mpTarget->GetShape().left - shape.right;
 
-			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
-			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] / 2);
-			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) / 2);
-			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] / 2);
+			shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
+			shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
+			shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle])*4 / 2);
+			shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle]*4 / 2);
 		}
 	}
 	

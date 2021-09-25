@@ -43,7 +43,7 @@ void AnimationScene::Enter()
 
 	POINTFLOAT pos;
 	pos.x = 200;
-	pos.y = 450;
+	pos.y = 600;
 	mPlayer1->SetPos(pos);
 	pos.x = 1000;
 	mPlayer2->SetPos(pos);
