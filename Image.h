@@ -19,6 +19,7 @@ public:
 	// 접근지정자가 public이냐 private이냐
 	typedef struct tagImageInfo
 	{
+		const char* path;
 		HDC hMemDc;		// 이미지 데이터를 관리하는 핸들(메모리 관리자)
 		HBITMAP hBitmap;// 이미지 데이터
 		HBITMAP hOldBit;// 기존 이미지 데이터
@@ -36,6 +37,7 @@ public:
 
 		tagImageInfo()
 		{
+			path = nullptr;
 			hMemDc = NULL;
 			hBitmap = NULL;
 			hOldBit = NULL;
@@ -64,9 +66,9 @@ public:
 	//LPIMAGE_INFO imageInfo3;
 
 private:
-	LPIMAGE_INFO imageInfo;
-	bool isTransparent;
-	COLORREF transColor;
+	LPIMAGE_INFO imageInfo = nullptr;
+	bool isTransparent = false;
+	COLORREF transColor = RGB(0, 0, 0);
 
 public:
 	HRESULT Init(int width, int height);	// 빈 비트맵 이미지 생성(Empty)
@@ -84,4 +86,6 @@ bool isTrans = false, COLORREF transColor = NULL); // File 프레임이 없는 이미지
 
 
 	HDC GetMemDC() { if (imageInfo) return imageInfo->hMemDc; return NULL; }
+
+	void ResizeWidth(int width);
 };

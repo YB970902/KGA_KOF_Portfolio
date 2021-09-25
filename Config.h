@@ -55,3 +55,9 @@ enum class eLookat
 	Left_Lookat = -1,
 	Right_Lookat = 1
 };
+
+enum class eHealthBarDir
+{
+	Left,
+	Right,
+};

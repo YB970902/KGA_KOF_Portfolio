@@ -7,6 +7,7 @@
 #include "LeonaAnimation.h"
 #include "RalfAnimation.h"
 #include "Image.h"
+#include "HealthBar.h"
 
 
 void AnimationScene::Enter()
@@ -100,6 +101,23 @@ void AnimationScene::Enter()
 		wsprintf(temp, "Image/BattleBackground/frame_%02d_delay.bmp", i);
 		mpArrBackground[i]->Init(temp, WIN_SIZE_X * 2, WIN_SIZE_Y);
 	}
+
+	mPlayer1Bar = new HealthBar();
+	mPlayer1Bar->Init();
+	mPlayer1Bar->SetHealthBarDir(eHealthBarDir::Left);
+	mPlayer2Bar = new HealthBar();
+	mPlayer2Bar->Init();
+	mPlayer2Bar->SetHealthBarDir(eHealthBarDir::Right);
+
+	POINTFLOAT player1BarPos;
+	player1BarPos.x = 300;
+	player1BarPos.y = 100;
+	mPlayer1Bar->SetPosition(player1BarPos);
+
+	POINTFLOAT player2BarPos;
+	player2BarPos.x = 900;
+	player2BarPos.y = 100;
+	mPlayer2Bar->SetPosition(player2BarPos);
 }
 
 void AnimationScene::Update()
@@ -207,10 +225,14 @@ void AnimationScene::Update()
 		}
 	}
 
+	if (MGR_KEY->IsOnceKeyDown('1')) { mPlayer2Bar->SetValue(1.0f); }
+	if (MGR_KEY->IsOnceKeyDown('2')) { mPlayer2Bar->SetValue(0.5f); }
+	if (MGR_KEY->IsOnceKeyDown('3')) { mPlayer2Bar->SetValue(0.25f); }
+	if (MGR_KEY->IsOnceKeyDown('4')) { mPlayer2Bar->SetValue(0.0f); }
+
 	mPlayer1->Update();
 
 	mPlayer2->Update();
-	
 }
 
 void AnimationScene::Render(HDC hdc)
@@ -221,6 +243,8 @@ void AnimationScene::Render(HDC hdc)
 	
 	mPlayer2->Render(hdc);
 
+	mPlayer1Bar->Render(hdc);
+	mPlayer2Bar->Render(hdc);
 }
 
 void AnimationScene::Exit()

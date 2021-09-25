@@ -28,6 +28,9 @@
     <Filter Include="2DFramework\Animator\2dData">
       <UniqueIdentifier>{dceae723-4c51-4ed1-8806-8c97ff0f0428}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2DFramework\UI">
+      <UniqueIdentifier>{2922b8c9-32e8-4bb3-bc23-8844396aaee3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFunction.h">
@@ -90,6 +93,9 @@
     <ClInclude Include="HitBoxScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="HealthBar.h">
+      <Filter>2DFramework\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -142,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="HitBoxScene.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBar.cpp">
+      <Filter>2DFramework\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

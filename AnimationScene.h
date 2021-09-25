@@ -5,6 +5,7 @@
 class Image;
 class Command;
 class ChAnimation;
+class HealthBar;
 class AnimationScene : public Scene
 {
 private:
@@ -26,6 +27,9 @@ private:
 	Command* mStrongKick2 = nullptr;
 	Command* mMoveLeft2 = nullptr;
 	Command* mMoveRight2 = nullptr;
+
+	HealthBar* mPlayer1Bar = nullptr;
+	HealthBar* mPlayer2Bar = nullptr;
 
 	Image** mpArrBackground = nullptr;
 

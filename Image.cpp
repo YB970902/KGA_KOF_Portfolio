@@ -5,7 +5,9 @@ HRESULT Image::Init(int width, int height)
 	HDC hdc = GetDC(g_hWnd);		// 권한이 굉장히 많은 총지배인
 
 	// 빈 비트맵 생성
-	imageInfo = new IMAGE_INFO;
+	if (imageInfo) { Release(); }
+	if (!imageInfo) { imageInfo = new IMAGE_INFO; }
+	imageInfo->path = nullptr;
 	imageInfo->width = width;
 	imageInfo->height = height;
 	imageInfo->loadType = ImageLoadType::Empty;
@@ -36,7 +38,9 @@ HRESULT Image::Init(const char* fileName, int width, int height,
 {
 	HDC hdc = GetDC(g_hWnd);
 
-	imageInfo = new IMAGE_INFO;
+	if (imageInfo) { Release(); }
+	if (!imageInfo) { imageInfo = new IMAGE_INFO; }
+	imageInfo->path = fileName;
 	imageInfo->width = width;
 	imageInfo->height = height;
 	imageInfo->loadType = ImageLoadType::File;
@@ -66,7 +70,8 @@ HRESULT Image::Init(const char* fileName, int width, int height, int maxFrameX, 
 {
 	HDC hdc = GetDC(g_hWnd);
 
-	imageInfo = new IMAGE_INFO;
+	if (imageInfo) { Release(); }
+	if (!imageInfo) { imageInfo = new IMAGE_INFO; }
 	imageInfo->width = width;
 	imageInfo->height = height;
 	imageInfo->loadType = ImageLoadType::File;
@@ -273,5 +278,17 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int bas
 			0,					// 원본 비트맵 복사 시작 위치 x
 			0,					// 원본 비트맵 복사 시작 위치 y
 			SRCCOPY);			// 복사 옵션
+	}
+}
+
+void Image::ResizeWidth(int width)
+{
+	if (imageInfo->maxFrameX > 0 || imageInfo->maxFrameY > 0)
+	{
+		Init(imageInfo->path, width, imageInfo->height, imageInfo->maxFrameX, imageInfo->maxFrameY, isTransparent, transColor);
+	}
+	else
+	{
+		Init(imageInfo->path, width, imageInfo->height, isTransparent, transColor);
 	}
 }
