@@ -9,7 +9,7 @@ protected:
 	Image* mpHealthBarFront = nullptr;
 	Image* mpHealthBarBack = nullptr;
 
-	POINTFLOAT mPos;
+	POINTFLOAT mPos = POINTFLOAT();
 	int mBarFrontX = 0;
 
 	int mWidth = 0;
