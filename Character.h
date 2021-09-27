@@ -21,6 +21,7 @@ protected:
 	RECT mStrongKickHitBox = RECT();
 
 	int mFrame = 0;
+	int mMaxHP = 0;
 	int mHP = 0;
 
 	bool mIsHit = false;
@@ -55,18 +56,21 @@ public:
 	inline void SetHP(int hp) { this->mHP -= hp; }
 	inline void SetPosX(int pixel) { this->pos.x -= pixel; }
 	inline void SetIsHit(bool hit) { this->mIsHit = hit; }
+
+
 	inline void SetAcceleration(float val) { this->mAcceleration = val; }
 	inline void SetResistance(float val) { this->mResistance = val; }
 
 	inline Character* GetTarget() { return mpTarget; }
 	inline ChAnimData* GetmpmData() { return mpmData; }
 	inline ChAnimData* GetData() { return mpData; }
-
+	inline float GetHPWeight() { return (float)mHP / (float)mMaxHP; }
 	inline RECT GetShape() { return shape; }
 	inline int GetHP() { return mHP; }
 	inline RECT GetSmallHitBox() { return mWeakPunchHitBox; }
 	inline int GetFrame() { return mFrame; }
 	inline eMoveDir GetDir() { return mDir; }
+	inline bool GetIsHit() { return mIsHit; }
 
 	inline void SetTarget(Character* ch) { this->mpTarget = ch; }
 

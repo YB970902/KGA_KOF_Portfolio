@@ -20,6 +20,35 @@ void ChAnimation::Update()
 		if (!CheckHitChar())
 		{
 			HitTarget(10, 10.0f);
+
+			if (mpData->mPlayerLookat == eLookat::Right_Lookat)
+			{
+				if (mpTarget->GetShape().right >= WIN_SIZE_X)
+				{
+					if ((pos.x + mpData->mHitboxShapeRight[mpData->mPlayerStatus]) > mpTarget->GetShape().left)
+					{
+						mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeRight[mpData->mPlayerStatus]) - (mpTarget->GetShape().left - shape.right)) / 2));
+						mResistance = mAcceleration / 15;
+					}
+
+					mbNotMove = true;
+
+				}
+			}
+			else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
+			{
+				if (mpTarget->GetShape().left <= 0)
+				{
+					if ((pos.x + mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) < mpTarget->GetShape().right)
+					{
+						mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) - (shape.left - mpTarget->GetShape().right)) / 2));
+						mResistance = mAcceleration / 15;
+					}
+
+					mbNotMove = true;
+
+				}
+			}
 		}
 	}
 	else if (mpTarget && IsCollided(mStrongPunchHitBox, mpTarget->GetShape()))
@@ -27,6 +56,35 @@ void ChAnimation::Update()
 		if (!CheckHitChar())
 		{
 			HitTarget(20, 20.0f);
+
+			if (mpData->mPlayerLookat == eLookat::Right_Lookat)
+			{
+				if (mpTarget->GetShape().right >= WIN_SIZE_X)
+				{
+					if ((pos.x + mpData->mHitboxShapeRight[mpData->mPlayerStatus]) > mpTarget->GetShape().left)
+					{
+						mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeRight[mpData->mPlayerStatus]) - (mpTarget->GetShape().left - shape.right)) / 2));
+						mResistance = mAcceleration / 15;
+					}
+
+					mbNotMove = true;
+
+				}
+			}
+			else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
+			{
+				if (mpTarget->GetShape().left <= 0)
+				{
+					if ((pos.x + mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) < mpTarget->GetShape().right)
+					{
+						mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) - (shape.left - mpTarget->GetShape().right)) / 2));
+						mResistance = mAcceleration / 15;
+					}
+
+					mbNotMove = true;
+
+				}
+			}
 		}
 	}
 	else if (mpTarget && IsCollided(mWeakKickHitBox, mpTarget->GetShape()))
@@ -34,6 +92,36 @@ void ChAnimation::Update()
 		if (!CheckHitChar())
 		{
 			HitTarget(15, 20.0f);
+
+			if (mpData->mPlayerLookat == eLookat::Right_Lookat)
+			{
+				if (mpTarget->GetShape().right >= WIN_SIZE_X)
+				{
+					if ((pos.x + mpData->mHitboxShapeRight[mpData->mPlayerStatus]) > mpTarget->GetShape().left)
+					{
+						mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeRight[mpData->mPlayerStatus]) - (mpTarget->GetShape().left - shape.right)) / 2));
+						mResistance = mAcceleration / 15;
+
+					}
+
+					mbNotMove = true;
+
+				}
+			}
+			else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
+			{
+				if (mpTarget->GetShape().left <= 0)
+				{
+					if ((pos.x + mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) < mpTarget->GetShape().right)
+					{
+						mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) - (shape.left - mpTarget->GetShape().right)) / 2));
+						mResistance = mAcceleration / 15;
+					}
+
+					mbNotMove = true;
+
+				}
+			}
 		}
 	}
 	else if (mpTarget && IsCollided(mStrongKickHitBox, mpTarget->GetShape()))
@@ -41,6 +129,35 @@ void ChAnimation::Update()
 		if (!CheckHitChar())
 		{
 			HitTarget(30, 40.0f);
+
+			if (mpData->mPlayerLookat == eLookat::Right_Lookat)
+			{
+				if (mpTarget->GetShape().right >= WIN_SIZE_X)
+				{
+					if ((pos.x + mpData->mHitboxShapeRight[mpData->mPlayerStatus]) > mpTarget->GetShape().left)
+					{
+						mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeRight[mpData->mPlayerStatus]) - (mpTarget->GetShape().left - shape.right)) / 2));
+						mResistance = mAcceleration / 15;
+					}
+
+					mbNotMove = true;
+
+				}
+			}
+			else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
+			{
+				if (mpTarget->GetShape().left <= 0)
+				{
+					if ((pos.x + mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) < mpTarget->GetShape().right)
+					{
+						mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) - (shape.left - mpTarget->GetShape().right)) / 2));
+						mResistance = mAcceleration / 15;
+					}
+
+					mbNotMove = true;
+
+				}
+			}
 		}
 	}
 
@@ -272,7 +389,7 @@ void ChAnimation::Update()
 	baseX = mpData->mSizeX[mpData->mPlayerStatus] / (int)mpData->mAnimframe[eAnimStatus::Idle];
 	baseY = (int)mpData->mSizeY[eAnimStatus::Idle];
 
-	if (mIsHit)
+	if (mIsHit || mAcceleration > 0)
 	{
 		if (mpData->mPlayerLookat == eLookat::Left_Lookat)
 		{

@@ -111,6 +111,18 @@ void AnimationScene::Enter()
 		mpArrBackground[i]->Init(temp, WIN_SIZE_X * 2, WIN_SIZE_Y);
 	}
 
+	mpArrEffect = new Image * [8];
+	for (int i = 0; i < 8; i++)
+	{
+		mpArrEffect[i] = new Image();
+	}
+
+	for (int i = 0; i < 8; i++)
+	{
+		wsprintf(temp, "Image/Effect/frame_%d.bmp", i);
+		mpArrEffect[i]->Init(temp, 220, 213, true, RGB(255, 0, 255));
+	}
+
 	mPlayer1Bar = new HealthBar();
 	mPlayer1Bar->Init();
 	mPlayer1Bar->SetHealthBarDir(eHealthBarDir::Left);
@@ -127,6 +139,14 @@ void AnimationScene::Enter()
 	player2BarPos.x = 900;
 	player2BarPos.y = 100;
 	mPlayer2Bar->SetPosition(player2BarPos);
+
+	mpEndImage = new Image;
+	mpEndImage->Init("Image/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
+
+	bf.AlphaFormat = 0;
+	bf.BlendFlags = 0;
+	bf.BlendOp = AC_SRC_OVER;
+	bf.SourceConstantAlpha = 0;
 }
 
 void AnimationScene::Update()
@@ -139,6 +159,35 @@ void AnimationScene::Update()
 		if (mCurBackgroundFrame >= MaxBackGroundFrame)
 		{
 			mCurBackgroundFrame = 0;
+		}
+	}
+
+	if (mPlayer1->GetIsHit())
+	{
+		mPrintEffect1 = true;
+		Player1HitPos.x = mPlayer1->GetPos().x + ((rand() % 61) - 30);
+		Player1HitPos.y = mPlayer1->GetPos().y + ((rand() % 61) - 110);
+	}
+	if (mPlayer2->GetIsHit())
+	{
+		mPrintEffect2 = true;
+		Player2HitPos.x = mPlayer2->GetPos().x + ((rand() % 61) - 30);
+		Player2HitPos.y = mPlayer2->GetPos().y + ((rand() % 61) - 110);
+	}
+
+	if (mPrintEffect1 || mPrintEffect2)
+	{
+		mCurEffectElapseTime++;
+		if (mCurEffectElapseTime > 4)
+		{
+			mCurEffectElapseTime = 0;
+			mCurEffectFrame++;
+			if (mCurEffectFrame >= MaxEffectFrame - 1)
+			{
+				mCurEffectFrame = 0;
+				mPrintEffect1 = false;
+				mPrintEffect2 = false;
+			}
 		}
 	}
 
@@ -254,14 +303,25 @@ void AnimationScene::Update()
 		}
 	}
 
-	if (MGR_KEY->IsOnceKeyDown('1')) { mPlayer2Bar->SetValue(1.0f); }
-	if (MGR_KEY->IsOnceKeyDown('2')) { mPlayer2Bar->SetValue(0.5f); }
-	if (MGR_KEY->IsOnceKeyDown('3')) { mPlayer2Bar->SetValue(0.25f); }
-	if (MGR_KEY->IsOnceKeyDown('4')) { mPlayer2Bar->SetValue(0.0f); }
-
 	mPlayer1->Update();
 
 	mPlayer2->Update();
+
+ 	mPlayer1Bar->SetValue(mPlayer1->GetHPWeight());
+	mPlayer2Bar->SetValue(mPlayer2->GetHPWeight());
+
+	if (mPlayer1->GetHP() <= 0 || mPlayer2->GetHP() <= 0)
+	{
+		SetTimer(g_hWnd, 0, 100, NULL);
+		if (bf.SourceConstantAlpha >= 250)
+		{
+			bf.SourceConstantAlpha = 255;
+		}
+		else
+		{
+			bf.SourceConstantAlpha += 10;
+		}
+	}
 }
 
 void AnimationScene::Render(HDC hdc)
@@ -274,6 +334,11 @@ void AnimationScene::Render(HDC hdc)
 
 	mPlayer1Bar->Render(hdc);
 	mPlayer2Bar->Render(hdc);
+
+	if (mPrintEffect1) { mpArrEffect[mCurEffectFrame]->Render(hdc, (int)Player1HitPos.x, (int)Player1HitPos.y); }
+	if (mPrintEffect2) { mpArrEffect[mCurEffectFrame]->Render(hdc, (int)Player2HitPos.x, (int)Player2HitPos.y); }
+
+	mpEndImage->Render(hdc, bf);
 }
 
 void AnimationScene::Exit()
@@ -287,4 +352,12 @@ void AnimationScene::Exit()
 		SAFE_RELEASE(mpArrBackground[i]);
 	}
 	delete[] mpArrBackground;
+
+	for (int i = 0; i < 8; i++)
+	{
+		SAFE_RELEASE(mpArrEffect[i]);
+	}
+	delete[] mpArrEffect;
+
+	SAFE_RELEASE(mpEndImage);
 }

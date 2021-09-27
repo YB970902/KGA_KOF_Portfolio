@@ -1,4 +1,5 @@
 #pragma once
+#pragma comment(lib, "msimg32.lib")
 #include "Config.h"
 #include "Scene.h"
 
@@ -9,7 +10,8 @@ class HealthBar;
 class AnimationScene : public Scene
 {
 private:
-	Image* mBattleGroundImg;
+	Image* mpEndImage = nullptr;
+	BLENDFUNCTION bf;
 
 	RECT mCameraSize = RECT();
 	RECT mBackgroundSize = RECT();
@@ -36,11 +38,21 @@ private:
 
 	Image** mpArrBackground = nullptr;
 
+	Image** mpArrEffect = nullptr;
+
 	int mCurBackgroundFrame = 0;
 	const int MaxBackGroundFrame = 39;
 	int mCurElapseTime = 0;
 
 	int mBackgroundPosX = 0;
+
+	POINTFLOAT Player1HitPos;
+	POINTFLOAT Player2HitPos;
+	bool mPrintEffect1 = false;
+	bool mPrintEffect2 = false;
+	int mCurEffectFrame = 0;
+	int mCurEffectElapseTime = 0;
+	const int MaxEffectFrame = 8;
 
 public:
 

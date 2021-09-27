@@ -14,6 +14,7 @@ protected:
 	int mElapsedCount = 0;
 
 	bool mNotMove = false;
+	bool mbNotMove = false;
 
 	const int KnockBackPixel = 30;
 
@@ -38,6 +39,8 @@ public:
 	inline int GetFrameX() { return this->mFrameX; }
 
 	inline void SetNotMove(bool b) { this->mNotMove = b; }
+
+	inline float CalculationAcceleration(float knockbackpixel) { return knockbackpixel * 0.3f; }
 
 	static void WeakPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Weak_Punch); }
 	static void StrongPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Strong_Punch); }

@@ -6,7 +6,7 @@ void Character::Init()
 	pos.y = WIN_SIZE_Y / 2;
 
 	bodySize = 25;
-	mHP = 100;
+	mMaxHP = mHP = 100;
 
 	shape.left = (int)pos.x - bodySize;
 	shape.top = (int)pos.y - bodySize;
