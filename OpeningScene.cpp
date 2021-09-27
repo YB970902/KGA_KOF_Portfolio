@@ -1,5 +1,7 @@
-#include "OpeningScene.h"
 #include "Image.h"
+#include "KeyManager.h"
+#include "OpeningScene.h"
+#include "SceneManager.h"
 
 OpeningScene::OpeningScene()
 {
@@ -47,6 +49,11 @@ void OpeningScene::Update()
 			mCurIntroAnimFrame++;
 			if (mCurIntroAnimFrame >= 129) { mbIsOpening = false; }
 		}
+	}
+
+	if (MGR_KEY->IsOnceKeyDown(VK_SPACE))
+	{
+		MGR_SCN->ChangeScene(eSceneTag::CharacterSelectScene);
 	}
 }
 
