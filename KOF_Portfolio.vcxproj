@@ -156,6 +156,7 @@
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LeonaAnimation.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="OpeningScene.h" />
     <ClInclude Include="RalfAnimation.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
@@ -177,6 +178,7 @@
     <ClCompile Include="LeonaAnimation.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="OpeningScene.cpp" />
     <ClCompile Include="RalfAnimation.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
