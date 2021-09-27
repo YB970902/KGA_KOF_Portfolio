@@ -1,5 +1,4 @@
 #pragma once
-#pragma comment(lib, "msimg32.lib")
 #include "Config.h"
 #include "Scene.h"
 
@@ -10,8 +9,7 @@ class HealthBar;
 class AnimationScene : public Scene
 {
 private:
-	Image* mpEndImage = nullptr;
-	BLENDFUNCTION bf;
+	Image* mBattleGroundImg;
 
 	RECT mCameraSize = RECT();
 	RECT mBackgroundSize = RECT();
@@ -26,6 +24,11 @@ private:
 	Command* mMoveLeft1 = nullptr;
 	Command* mMoveRight1 = nullptr;
 
+	Command* mNearWeakPunch1 = nullptr;
+	Command* mNearStrongPunch1 = nullptr;
+	Command* mNearWeakKick1 = nullptr;
+	Command* mNearStrongKick1 = nullptr;
+
 	Command* mWeakPunch2 = nullptr;
 	Command* mStrongPunch2 = nullptr;
 	Command* mWeakKick2 = nullptr;
@@ -33,12 +36,15 @@ private:
 	Command* mMoveLeft2 = nullptr;
 	Command* mMoveRight2 = nullptr;
 
+	Command* mNearWeakPunch2 = nullptr;
+	Command* mNearStrongPunch2 = nullptr;
+	Command* mNearWeakKick2 = nullptr;
+	Command* mNearStrongKick2 = nullptr;
+
 	HealthBar* mPlayer1Bar = nullptr;
 	HealthBar* mPlayer2Bar = nullptr;
 
 	Image** mpArrBackground = nullptr;
-
-	Image** mpArrEffect = nullptr;
 
 	int mCurBackgroundFrame = 0;
 	const int MaxBackGroundFrame = 39;
@@ -46,13 +52,7 @@ private:
 
 	int mBackgroundPosX = 0;
 
-	POINTFLOAT Player1HitPos;
-	POINTFLOAT Player2HitPos;
-	bool mPrintEffect1 = false;
-	bool mPrintEffect2 = false;
-	int mCurEffectFrame = 0;
-	int mCurEffectElapseTime = 0;
-	const int MaxEffectFrame = 8;
+	int mDistance=0;
 
 public:
 

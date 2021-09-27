@@ -21,7 +21,7 @@ using namespace std;
 #define SAFE_RELEASE(p)	{ if (p) { p->Release(); delete p; p = nullptr; } }
 
 enum class eMoveDir { Left = -1, Right = 1, Up, Down, };
-enum class eSceneTag { OpeningScene,CharacterSelectScene, HitBoxSnene, AnimationScene, };
+enum class eSceneTag { CharacterSelectScene, HitBoxSnene, AnimationScene, };
 enum class eCharacterType { Null, Bluemary, Ralf, Leona, };
 
 extern HWND g_hWnd;
@@ -36,10 +36,15 @@ enum class eAnimStatus
 	Move_Forward,
 	Move_Backward,
 	Damaged,
+	Dead,
 	Weak_Punch,
 	Weak_Kick,
 	Strong_Punch,
 	Strong_Kick,
+	Near_Weak_Kick,
+	Near_Weak_Punch,
+	Near_Strong_Kick,
+	Near_Strong_Punch
 };
 
 enum class eActing
@@ -48,6 +53,8 @@ enum class eActing
 	Act_Left_Move,
 	Act_Right_Move,
 	Act_Idle,
+	Damaged,
+	Dead
 };
 
 enum class eLookat

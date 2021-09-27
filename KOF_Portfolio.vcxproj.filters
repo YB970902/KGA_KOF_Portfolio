@@ -96,8 +96,8 @@
     <ClInclude Include="HealthBar.h">
       <Filter>2DFramework\UI</Filter>
     </ClInclude>
-    <ClInclude Include="OpeningScene.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="ImageManager.h">
+      <Filter>2DFramework\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -155,8 +155,8 @@
     <ClCompile Include="HealthBar.cpp">
       <Filter>2DFramework\UI</Filter>
     </ClCompile>
-    <ClCompile Include="OpeningScene.cpp">
-      <Filter>Scene</Filter>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>2DFramework\Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

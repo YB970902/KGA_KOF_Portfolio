@@ -14,7 +14,6 @@ protected:
 	int mElapsedCount = 0;
 
 	bool mNotMove = false;
-	bool mbNotMove = false;
 
 	const int KnockBackPixel = 30;
 
@@ -28,6 +27,7 @@ public:
 
 	virtual FLOAT moveAfterAction(FLOAT pos);
 
+	void Damaged(eAnimStatus type);
 	void Attack(eAnimStatus type);
 	void MoveLeft();
 	void MoveRight();
@@ -40,12 +40,20 @@ public:
 
 	inline void SetNotMove(bool b) { this->mNotMove = b; }
 
-	inline float CalculationAcceleration(float knockbackpixel) { return knockbackpixel * 0.3f; }
+	inline eLookat GetLookAt() {
+		return mpData->mPlayerLookat;
+	}
 
 	static void WeakPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Weak_Punch); }
 	static void StrongPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Strong_Punch); }
 	static void WeakKickCommand(ChAnimation* character) { character->Attack(eAnimStatus::Weak_Kick); }
 	static void StrongKickCommand(ChAnimation* character) { character->Attack(eAnimStatus::Strong_Kick); }
+
+	static void NearWeakPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Near_Weak_Punch); }
+	static void NearStrongPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Near_Strong_Punch); }
+	static void NearWeakKickCommand(ChAnimation* character) { character->Attack(eAnimStatus::Near_Weak_Kick); }
+	static void NearStrongKickCommand(ChAnimation* character) { character->Attack(eAnimStatus::Near_Strong_Kick); }
+
 	static void MoveLeftCommand(ChAnimation* character) { character->MoveLeft(); }
 	static void MoveRightCommand(ChAnimation* character) { character->MoveRight(); }
 };

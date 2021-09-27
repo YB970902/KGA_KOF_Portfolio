@@ -20,8 +20,12 @@ protected:
 	RECT mWeakKickHitBox = RECT();
 	RECT mStrongKickHitBox = RECT();
 
+	RECT mNearWeakPunchHitBox = RECT();
+	RECT mNearStrongPunchHitBox = RECT();
+	RECT mNearWeakKickHitBox = RECT();
+	RECT mNearStrongKickHitBox = RECT();
+
 	int mFrame = 0;
-	int mMaxHP = 0;
 	int mHP = 0;
 
 	bool mIsHit = false;
@@ -51,26 +55,32 @@ public:
 	void OnStrongKickHitBox(int dir, ChAnimData* charamData);
 	void OffStrongKickHitBox();
 
+	void OnNearWeakPunchHitBox(int dir, ChAnimData* charamData);
+	void OffNearWeakPunchHitBox();
+	void OnNearWeakKickHitBox(int dir, ChAnimData* charamData);
+	void OffNearWeakKickHitBox();
+	void OnNearStrongPunchHitBox(int dir, ChAnimData* charamData);
+	void OffNearStrongPunchHitBox();
+	void OnNearStrongKickHitBox(int dir, ChAnimData* charamData);
+	void OffNearStrongKickHitBox();
+
 	void AllOffHitBox();
 
 	inline void SetHP(int hp) { this->mHP -= hp; }
 	inline void SetPosX(int pixel) { this->pos.x -= pixel; }
 	inline void SetIsHit(bool hit) { this->mIsHit = hit; }
-
-
 	inline void SetAcceleration(float val) { this->mAcceleration = val; }
 	inline void SetResistance(float val) { this->mResistance = val; }
 
 	inline Character* GetTarget() { return mpTarget; }
 	inline ChAnimData* GetmpmData() { return mpmData; }
 	inline ChAnimData* GetData() { return mpData; }
-	inline float GetHPWeight() { return (float)mHP / (float)mMaxHP; }
+
 	inline RECT GetShape() { return shape; }
 	inline int GetHP() { return mHP; }
 	inline RECT GetSmallHitBox() { return mWeakPunchHitBox; }
 	inline int GetFrame() { return mFrame; }
 	inline eMoveDir GetDir() { return mDir; }
-	inline bool GetIsHit() { return mIsHit; }
 
 	inline void SetTarget(Character* ch) { this->mpTarget = ch; }
 
@@ -83,4 +93,9 @@ public:
 	static void OnStrongPunchHitBox(Character* ch, ChAnimData* an) { ch->OnStrongPunchHitBox((int)ch->GetDir(), an); }
 	static void OnWeakKickHitBox(Character* ch, ChAnimData* an) { ch->OnWeakKickHitBox((int)ch->GetDir(), an); }
 	static void OnStrongKickHitBox(Character* ch, ChAnimData* an) { ch->OnStrongKickHitBox((int)ch->GetDir(), an); }
+
+	static void OnNearWeakPunchHitBox(Character* ch, ChAnimData* an) { ch->OnNearWeakPunchHitBox((int)ch->GetDir(), an); }
+	static void OnNearWeakKickHitBox(Character* ch, ChAnimData* an) { ch->OnNearWeakKickHitBox((int)ch->GetDir(), an); }
+	static void OnNearStrongPunchHitBox(Character* ch, ChAnimData* an) { ch->OnNearStrongPunchHitBox((int)ch->GetDir(), an); }
+	static void OnNearStrongKickHitBox(Character* ch, ChAnimData* an) { ch->OnNearStrongKickHitBox((int)ch->GetDir(), an); }
 };

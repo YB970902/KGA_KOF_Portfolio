@@ -6,7 +6,7 @@ void Character::Init()
 	pos.y = WIN_SIZE_Y / 2;
 
 	bodySize = 25;
-	mMaxHP = mHP = 100;
+	mHP = 100;
 
 	shape.left = (int)pos.x - bodySize;
 	shape.top = (int)pos.y - bodySize;
@@ -229,6 +229,102 @@ void Character::OffStrongKickHitBox()
 	mHitChar.clear();
 }
 
+void Character::OnNearWeakPunchHitBox(int dir, ChAnimData* an)
+{
+	mFrame = 0;
+
+	if (dir > 0)
+	{
+		mNearWeakPunchHitBox.left = (int)pos.x;
+		mNearWeakPunchHitBox.right = (int)pos.x + (int)an->mHitboxShapeRight[eAnimStatus::Near_Weak_Punch];
+	}
+	else
+	{
+		mNearWeakPunchHitBox.left = (int)pos.x + (int)an->mHitboxShapeLeft[eAnimStatus::Near_Weak_Punch];
+		mNearWeakPunchHitBox.right = (int)pos.x;
+	}
+	mNearWeakPunchHitBox.top = (int)pos.y + (int)an->mHitboxShapeTop[eAnimStatus::Near_Weak_Punch];
+	mNearWeakPunchHitBox.bottom = (int)pos.y + (int)an->mHitboxShapeBottom[eAnimStatus::Near_Weak_Punch];
+}
+
+void Character::OffNearWeakPunchHitBox()
+{
+	mNearWeakPunchHitBox = RECT();
+	mHitChar.clear();
+}
+
+void Character::OnNearWeakKickHitBox(int dir, ChAnimData* an)
+{
+	mFrame = 0;
+
+	if (dir > 0)
+	{
+		mNearWeakKickHitBox.left = (int)pos.x;
+		mNearWeakKickHitBox.right = (int)pos.x + (int)an->mHitboxShapeRight[eAnimStatus::Near_Weak_Kick];
+	}
+	else
+	{
+		mNearWeakKickHitBox.left = (int)pos.x + (int)an->mHitboxShapeLeft[eAnimStatus::Near_Weak_Kick];
+		mNearWeakKickHitBox.right = (int)pos.x;
+	}
+	mNearWeakKickHitBox.top = (int)pos.y + (int)an->mHitboxShapeTop[eAnimStatus::Near_Weak_Kick];
+	mNearWeakKickHitBox.bottom = (int)pos.y + (int)an->mHitboxShapeBottom[eAnimStatus::Near_Weak_Kick];
+}
+
+void Character::OffNearWeakKickHitBox()
+{
+	mNearWeakKickHitBox = RECT();
+	mHitChar.clear();
+}
+
+void Character::OnNearStrongPunchHitBox(int dir, ChAnimData* an)
+{
+	mFrame = 0;
+
+	if (dir > 0)
+	{
+		mNearStrongPunchHitBox.left = (int)pos.x;
+		mNearStrongPunchHitBox.right = (int)pos.x + (int)an->mHitboxShapeRight[eAnimStatus::Near_Strong_Punch];
+	}
+	else
+	{
+		mNearStrongPunchHitBox.left = (int)pos.x + (int)an->mHitboxShapeLeft[eAnimStatus::Near_Strong_Punch];
+		mNearStrongPunchHitBox.right = (int)pos.x;
+	}
+	mNearStrongPunchHitBox.top = (int)pos.y + (int)an->mHitboxShapeTop[eAnimStatus::Near_Strong_Punch];
+	mNearStrongPunchHitBox.bottom = (int)pos.y + (int)an->mHitboxShapeBottom[eAnimStatus::Near_Strong_Punch];
+}
+
+void Character::OffNearStrongPunchHitBox()
+{
+	mNearStrongPunchHitBox = RECT();
+	mHitChar.clear();
+}
+
+void Character::OnNearStrongKickHitBox(int dir, ChAnimData* an)
+{
+	mFrame = 0;
+
+	if (dir > 0)
+	{
+		mNearStrongKickHitBox.left = (int)pos.x;
+		mNearStrongKickHitBox.right = (int)pos.x + (int)an->mHitboxShapeRight[eAnimStatus::Near_Strong_Kick];
+	}
+	else
+	{
+		mNearStrongKickHitBox.left = (int)pos.x + (int)an->mHitboxShapeLeft[eAnimStatus::Near_Strong_Kick];
+		mNearStrongKickHitBox.right = (int)pos.x;
+	}
+	mNearStrongKickHitBox.top = (int)pos.y + (int)an->mHitboxShapeTop[eAnimStatus::Near_Strong_Kick];
+	mNearStrongKickHitBox.bottom = (int)pos.y + (int)an->mHitboxShapeBottom[eAnimStatus::Near_Strong_Kick];
+}
+
+void Character::OffNearStrongKickHitBox()
+{
+	mNearStrongKickHitBox = RECT();
+	mHitChar.clear();
+}
+
 void Character::AllOffHitBox()
 {
 	mWeakPunchHitBox = RECT();
@@ -285,8 +381,22 @@ void Character::Move(int dir)
 
 void Character::SetShape()
 {
-	shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) * 4 / 2);
+	if (mpData->mPlayerLookat == eLookat::Right_Lookat)
+	{
+		shape.left = (int)pos.x - ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) * 4 / 2) / 2;
+		shape.right = (int)pos.x + (((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) * 4 / 2) / 3);
+	}
+	else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
+	{
+		shape.left = (int)pos.x - (((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) * 4 / 2) / 3);
+		shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) * 4 / 2) / 2;
+	}
+
 	shape.top = (int)pos.y - (mpData->mSizeY[eAnimStatus::Idle] * 4 / 2);
-	shape.right = (int)pos.x + ((mpData->mSizeX[eAnimStatus::Idle] / mpData->mAnimframe[eAnimStatus::Idle]) * 4 / 2);
+
+	if (true)
+	{
+
+	}
 	shape.bottom = (int)pos.y + (mpData->mSizeY[eAnimStatus::Idle] * 4 / 2);
 }

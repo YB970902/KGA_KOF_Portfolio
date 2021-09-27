@@ -6,7 +6,7 @@ HRESULT Image::Init(int width, int height)
 
 	// 빈 비트맵 생성
 	if (imageInfo) { Release(); }
-	if (!imageInfo) { imageInfo = new IMAGE_INFO; }
+	imageInfo = new IMAGE_INFO;
 	imageInfo->path = nullptr;
 	imageInfo->width = width;
 	imageInfo->height = height;
@@ -39,7 +39,7 @@ HRESULT Image::Init(const char* fileName, int width, int height,
 	HDC hdc = GetDC(g_hWnd);
 
 	if (imageInfo) { Release(); }
-	if (!imageInfo) { imageInfo = new IMAGE_INFO; }
+	imageInfo = new IMAGE_INFO;
 	imageInfo->path = fileName;
 	imageInfo->width = width;
 	imageInfo->height = height;
@@ -71,7 +71,7 @@ HRESULT Image::Init(const char* fileName, int width, int height, int maxFrameX, 
 	HDC hdc = GetDC(g_hWnd);
 
 	if (imageInfo) { Release(); }
-	if (!imageInfo) { imageInfo = new IMAGE_INFO; }
+	imageInfo = new IMAGE_INFO;
 	imageInfo->width = width;
 	imageInfo->height = height;
 	imageInfo->loadType = ImageLoadType::File;
@@ -96,6 +96,7 @@ HRESULT Image::Init(const char* fileName, int width, int height, int maxFrameX, 
 
 	if (imageInfo->hBitmap == NULL)
 	{
+		cout << "비트맵 로드가 안됨" << endl;
 		Release();
 		return E_FAIL;
 	}
@@ -279,22 +280,6 @@ void Image::Render(HDC hdc, int destX, int destY, int frameX, int frameY,int bas
 			0,					// 원본 비트맵 복사 시작 위치 y
 			SRCCOPY);			// 복사 옵션
 	}
-}
-
-void Image::Render(HDC hdc, BLENDFUNCTION ftn)
-{
-	BitBlt(imageInfo->hMemDc,// 복사 목적지 DC
-		0,					// 복사될 비트맵의 시작 위치 x
-		0,					// 복사될 비트맵의 시작 위치 y
-		imageInfo->width,	// 원본 복사할 가로 크기
-		imageInfo->height,	// 원본 복사할 세로 크기
-		imageInfo->hMemDc,	// 원본 DC
-		0,					// 원본 비트맵 복사 시작 위치 x
-		0,					// 원본 비트맵 복사 시작 위치 y
-		SRCCOPY);			// 복사 옵션
-
-	AlphaBlend(hdc, 0, 0, imageInfo->width, imageInfo->height, imageInfo->hMemDc, 0, 0, imageInfo->width, imageInfo->height, ftn);
-
 }
 
 void Image::ResizeWidth(int width)
