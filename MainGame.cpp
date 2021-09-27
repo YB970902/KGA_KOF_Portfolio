@@ -1,18 +1,12 @@
 ﻿#include "MainGame.h"
-#include "Singleton.h"
-#include "KeyManager.h"
-#include "SceneManager.h"
-#include "Image.h"
 #include "ChAnimation.h"
-#include "Config.h"
+#include "Image.h"
+#include "SceneManager.h"
 
 void MainGame::Init()
 {
 	MGR_KEY->Init();
 	MGR_SCN->Init();
-
-	KeyManager::GetSingleton()->Init();
-	SceneManager::GetSingleton();
 
 	MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
 
@@ -55,7 +49,6 @@ void MainGame::Render(HDC hdc)
 	MGR_SCN->Render(hBackBufferDC);
 
 	backBuffer->Render(hdc);
-
 }
 
 void MainGame::Release()

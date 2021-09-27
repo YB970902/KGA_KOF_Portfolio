@@ -26,13 +26,14 @@ protected:
 	RECT mNearStrongKickHitBox = RECT();
 
 	int mFrame = 0;
+	int mFrameX = 0, mFrameY = 0;
 	int mMaxHP = 0;
 	int mHP = 0;
 
-	bool mIsHit = false;
 	float mAcceleration = 0.0f;
 	float mResistance = 0.0f;
-	bool mbPrintHitBox = false;
+	bool mbIsHit = false;
+	bool mbPrintHitBox = true;
 
 	eMoveDir mDir = eMoveDir::Right;
 
@@ -70,11 +71,13 @@ public:
 
 	inline void SetHP(int hp) { this->mHP -= hp; }
 	inline void SetPosX(int pixel) { this->pos.x -= pixel; }
-	inline void SetIsHit(bool hit) { this->mIsHit = hit; }
 	inline void SetAcceleration(float val) { this->mAcceleration = val; }
 	inline void SetResistance(float val) { this->mResistance = val; }
 	inline void SetPrintHitBox(bool b) { this->mbPrintHitBox = b; }
+	inline void SetFrameX(int frame) { this->mFrameX = frame; }
+	inline void SetIsHit(bool b) { this->mbIsHit = b; }
 
+	inline int GetFrameX() { return this->mFrameX; }
 	inline Character* GetTarget() { return mpTarget; }
 	inline ChAnimData* GetmpmData() { return mpmData; }
 	inline ChAnimData* GetData() { return mpData; }
@@ -86,7 +89,7 @@ public:
 	inline int GetFrame() { return mFrame; }
 	inline eMoveDir GetDir() { return mDir; }
 	inline float GetHPWeight() { return (float)mHP / (float)mMaxHP; }
-
+	inline bool GetIsHit() { return mbIsHit; }
 	inline void SetTarget(Character* ch) { this->mpTarget = ch; }
 
 	void Move(int dir);

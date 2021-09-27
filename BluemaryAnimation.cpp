@@ -33,8 +33,8 @@ void BluemaryAnimation::Init(eLookat dir)
 	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Punch, 22));
 	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 12));
 	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 5));
-	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 7));
-	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 15));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 15));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 7));
 	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 13));
 
 	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Idle, 720));
@@ -47,8 +47,8 @@ void BluemaryAnimation::Init(eLookat dir)
 	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Punch, 4840));
 	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 2160));
 	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 300));
-	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 490));
-	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 1800));
+	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 1800));
+	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 490));
 	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 1300));
 
 	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Idle, 100));
@@ -61,9 +61,9 @@ void BluemaryAnimation::Init(eLookat dir)
 	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Punch, 120));
 	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 130));
 	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 104));
-	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 130));
-	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 150));
-	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 140));
+	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 140));
+	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 130));
+	mpData->mSizeY.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 150));
 
 	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Idle, 0));
 	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Forward, 0));
@@ -111,32 +111,32 @@ void BluemaryAnimation::Init(eLookat dir)
 	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 4));
 	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 6));
 
-	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, -392));
-	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 392));
-	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, -100));
-	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 0));
-	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 4));
-	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 8));
+	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, -121));
+	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 121));
+	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, -149));
+	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, -103));
+	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 1));
+	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 4));
 
-	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, -392));
-	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 392));
-	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, -100));
-	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 0));
+	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, -237));
+	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 237));
+	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, -249));
+	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 80));
 	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 4));
-	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 8));
+	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 7));
 
-	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, -392));
-	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 392));
-	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, -100));
-	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 0));
-	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 4));
-	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 8));
+	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, -132));
+	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 132));
+	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, -50));
+	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 160));
+	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 2));
+	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 5));
 
-	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, -392));
-	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 392));
-	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, -100));
-	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 0));
-	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 4));
+	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, -193));
+	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 193));
+	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, -157));
+	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, -30));
+	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 7));
 	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 8));
 
 	//mpData->mMoveAfteractionForwardVal.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Punch, 0));

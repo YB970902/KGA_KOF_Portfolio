@@ -3,11 +3,10 @@
 #include "ChAnimation.h"
 #include "ChAnimData.h"
 #include "Command.h"
-#include "KeyManager.h"
+#include "HealthBar.h"
+#include "Image.h"
 #include "LeonaAnimation.h"
 #include "RalfAnimation.h"
-#include "Image.h"
-#include "HealthBar.h"
 #include "SceneManager.h"
 
 void AnimationScene::Enter()
@@ -15,26 +14,26 @@ void AnimationScene::Enter()
 	switch (Player1)
 	{
 	case 1:
-		mPlayer1 = new BluemaryAnimation;
+		mpPlayer1 = new BluemaryAnimation;
 		break;
 	case 2:
-		mPlayer1 = new RalfAnimation;
+		mpPlayer1 = new RalfAnimation;
 		break;
 	case 3:
-		mPlayer1 = new LeonaAnimation;
+		mpPlayer1 = new LeonaAnimation;
 		break;
 	}
 
 	switch (Player2)
 	{
 	case 1:
-		mPlayer2 = new BluemaryAnimation;
+		mpPlayer2 = new BluemaryAnimation;
 		break;
 	case 2:
-		mPlayer2 = new RalfAnimation;
+		mpPlayer2 = new RalfAnimation;
 		break;
 	case 3:
-		mPlayer2 = new LeonaAnimation;
+		mpPlayer2 = new LeonaAnimation;
 		break;
 	}
 
@@ -48,80 +47,80 @@ void AnimationScene::Enter()
 	mBackgroundSize.right = WIN_SIZE_X;
 	mBackgroundSize.bottom = WIN_SIZE_Y;
 
-	mPlayer1->Init(eLookat::Right_Lookat);
-	mPlayer2->Init(eLookat::Left_Lookat);
+	mpPlayer1->Init(eLookat::Right_Lookat);
+	mpPlayer2->Init(eLookat::Left_Lookat);
 
 	POINTFLOAT pos;
 	pos.x = 200;
 	pos.y = 600;
-	mPlayer1->SetPos(pos);
+	mpPlayer1->SetPos(pos);
 	pos.x = 1000;
-	mPlayer2->SetPos(pos);
+	mpPlayer2->SetPos(pos);
 
-	mPlayer1->SetTarget(mPlayer2);
-	mPlayer2->SetTarget(mPlayer1);
+	mpPlayer1->SetTarget(mpPlayer2);
+	mpPlayer2->SetTarget(mpPlayer1);
 
-	mWeakPunch1 = new Command;
-	mWeakPunch1->Init(mPlayer1, ChAnimation::WeakPunchCommand);
+	mpWeakPunch1 = new Command;
+	mpWeakPunch1->Init(mpPlayer1, ChAnimation::WeakPunchCommand);
 
-	mStrongPunch1 = new Command;
-	mStrongPunch1->Init(mPlayer1, ChAnimation::StrongPunchCommand);
+	mpStrongPunch1 = new Command;
+	mpStrongPunch1->Init(mpPlayer1, ChAnimation::StrongPunchCommand);
 
-	mWeakKick1 = new Command;
-	mWeakKick1->Init(mPlayer1, ChAnimation::WeakKickCommand);
+	mpWeakKick1 = new Command;
+	mpWeakKick1->Init(mpPlayer1, ChAnimation::WeakKickCommand);
 
-	mStrongKick1 = new Command;
-	mStrongKick1->Init(mPlayer1, ChAnimation::StrongKickCommand);
+	mpStrongKick1 = new Command;
+	mpStrongKick1->Init(mpPlayer1, ChAnimation::StrongKickCommand);
 
-	mNearWeakPunch1 = new Command;
-	mNearWeakPunch1->Init(mPlayer1, ChAnimation::NearWeakPunchCommand);
+	mpNearWeakPunch1 = new Command;
+	mpNearWeakPunch1->Init(mpPlayer1, ChAnimation::NearWeakPunchCommand);
 
-	mNearStrongPunch1 = new Command;
-	mNearStrongPunch1->Init(mPlayer1, ChAnimation::NearStrongPunchCommand);
+	mpNearStrongPunch1 = new Command;
+	mpNearStrongPunch1->Init(mpPlayer1, ChAnimation::NearStrongPunchCommand);
 
-	mNearWeakKick1 = new Command;
-	mNearWeakKick1->Init(mPlayer1, ChAnimation::NearWeakKickCommand);
+	mpNearWeakKick1 = new Command;
+	mpNearWeakKick1->Init(mpPlayer1, ChAnimation::NearWeakKickCommand);
 
-	mNearStrongKick1 = new Command;
-	mNearStrongKick1->Init(mPlayer1, ChAnimation::NearStrongKickCommand);
+	mpNearStrongKick1 = new Command;
+	mpNearStrongKick1->Init(mpPlayer1, ChAnimation::NearStrongKickCommand);
 
-	mMoveLeft1 = new Command;
-	mMoveLeft1->Init(mPlayer1, ChAnimation::MoveLeftCommand);
+	mpMoveLeft1 = new Command;
+	mpMoveLeft1->Init(mpPlayer1, ChAnimation::MoveLeftCommand);
 
-	mMoveRight1 = new Command;
-	mMoveRight1->Init(mPlayer1, ChAnimation::MoveRightCommand);
+	mpMoveRight1 = new Command;
+	mpMoveRight1->Init(mpPlayer1, ChAnimation::MoveRightCommand);
 
 
 
-	mWeakPunch2 = new Command;
-	mWeakPunch2->Init(mPlayer2, ChAnimation::WeakPunchCommand);
+	mpWeakPunch2 = new Command;
+	mpWeakPunch2->Init(mpPlayer2, ChAnimation::WeakPunchCommand);
 
-	mStrongPunch2 = new Command;
-	mStrongPunch2->Init(mPlayer2, ChAnimation::StrongPunchCommand);
+	mpStrongPunch2 = new Command;
+	mpStrongPunch2->Init(mpPlayer2, ChAnimation::StrongPunchCommand);
 
-	mWeakKick2 = new Command;
-	mWeakKick2->Init(mPlayer2, ChAnimation::WeakKickCommand);
+	mpWeakKick2 = new Command;
+	mpWeakKick2->Init(mpPlayer2, ChAnimation::WeakKickCommand);
 
-	mStrongKick2 = new Command;
-	mStrongKick2->Init(mPlayer2, ChAnimation::StrongKickCommand);
+	mpStrongKick2 = new Command;
+	mpStrongKick2->Init(mpPlayer2, ChAnimation::StrongKickCommand);
 
-	mNearWeakPunch2 = new Command;
-	mNearWeakPunch2->Init(mPlayer2, ChAnimation::NearWeakPunchCommand);
+	mpNearWeakPunch2 = new Command;
+	mpNearWeakPunch2->Init(mpPlayer2, ChAnimation::NearWeakPunchCommand);
 
-	mNearStrongPunch2 = new Command;
-	mNearStrongPunch2->Init(mPlayer2, ChAnimation::NearStrongPunchCommand);
+	mpNearStrongPunch2 = new Command;
+	mpNearStrongPunch2->Init(mpPlayer2, ChAnimation::NearStrongPunchCommand);
 
-	mNearWeakKick2 = new Command;
-	mNearWeakKick2->Init(mPlayer2, ChAnimation::NearWeakKickCommand);
+	mpNearWeakKick2 = new Command;
+	mpNearWeakKick2->Init(mpPlayer2, ChAnimation::NearWeakKickCommand);
 
-	mNearStrongKick2 = new Command;
-	mNearStrongKick2->Init(mPlayer2, ChAnimation::NearStrongKickCommand);
+	mpNearStrongKick2 = new Command;
+	mpNearStrongKick2->Init(mpPlayer2, ChAnimation::NearStrongKickCommand);
 
-	mMoveLeft2 = new Command;
-	mMoveLeft2->Init(mPlayer2, ChAnimation::MoveLeftCommand);
+	mpMoveLeft2 = new Command;
+	mpMoveLeft2->Init(mpPlayer2, ChAnimation::MoveLeftCommand);
 
-	mMoveRight2 = new Command;
-	mMoveRight2->Init(mPlayer2, ChAnimation::MoveRightCommand);
+	mpMoveRight2 = new Command;
+	mpMoveRight2->Init(mpPlayer2, ChAnimation::MoveRightCommand);
 
 	mpArrBackground = new Image * [39];
 	for (int i = 0; i < 39; i++)
@@ -148,22 +147,22 @@ void AnimationScene::Enter()
 		mpArrEffect[i]->Init(temp, 220, 213, true, RGB(255, 0, 255));
 	}
 
-	mPlayer1Bar = new HealthBar();
-	mPlayer1Bar->Init();
-	mPlayer1Bar->SetHealthBarDir(eHealthBarDir::Left);
-	mPlayer2Bar = new HealthBar();
-	mPlayer2Bar->Init();
-	mPlayer2Bar->SetHealthBarDir(eHealthBarDir::Right);
+	mpPlayer1Bar = new HealthBar();
+	mpPlayer1Bar->Init();
+	mpPlayer1Bar->SetHealthBarDir(eHealthBarDir::Left);
+	mpPlayer2Bar = new HealthBar();
+	mpPlayer2Bar->Init();
+	mpPlayer2Bar->SetHealthBarDir(eHealthBarDir::Right);
 
 	POINTFLOAT player1BarPos;
 	player1BarPos.x = 300;
 	player1BarPos.y = 100;
-	mPlayer1Bar->SetPosition(player1BarPos);
+	mpPlayer1Bar->SetPosition(player1BarPos);
 
 	POINTFLOAT player2BarPos;
 	player2BarPos.x = 900;
 	player2BarPos.y = 100;
-	mPlayer2Bar->SetPosition(player2BarPos);
+	mpPlayer2Bar->SetPosition(player2BarPos);
 
 	mpEndImage = new Image;
 	mpEndImage->Init("Image/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
@@ -187,181 +186,218 @@ void AnimationScene::Update()
 		}
 	}
 
+	if (mpPlayer1->GetIsHit())
+	{
+		mbPrintEffect1 = true;
+		Player1HitPos.x = mpPlayer1->GetPos().x + ((rand() % 61) - 30);
+		Player1HitPos.y = mpPlayer1->GetPos().y + ((rand() % 61) - 110);
+	}
+	if (mpPlayer2->GetIsHit())
+	{
+		mbPrintEffect2 = true;
+		Player2HitPos.x = mpPlayer2->GetPos().x + ((rand() % 61) - 30);
+		Player2HitPos.y = mpPlayer2->GetPos().y + ((rand() % 61) - 110);
+	}
+
+	if (mbPrintEffect1 || mbPrintEffect2)
+	{
+		mCurEffectElapseTime++;
+		if (mCurEffectElapseTime > 4)
+		{
+			mCurEffectElapseTime = 0;
+			mCurEffectFrame++;
+			if (mCurEffectFrame >= MaxEffectFrame - 1)
+			{
+				mCurEffectFrame = 0;
+				mbPrintEffect1 = false;
+				mbPrintEffect2 = false;
+			}
+		}
+	}
+
 	if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && MGR_KEY->IsStayKeyDown(VK_LEFT))
 	{
 		mBackgroundPosX += 6;
-		mPlayer1->SetNotMove(true);
-		mPlayer2->SetNotMove(true);
+		mpPlayer1->SetNotMove(true);
+		mpPlayer2->SetNotMove(true);
 	}
 	else if (mBackgroundPosX > -600 && MGR_KEY->IsStayKeyDown('D') && MGR_KEY->IsStayKeyDown(VK_RIGHT))
 	{
 		mBackgroundPosX -= 6;
-		mPlayer1->SetNotMove(true);
-		mPlayer2->SetNotMove(true);
+		mpPlayer1->SetNotMove(true);
+		mpPlayer2->SetNotMove(true);
 	}
-	else if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && mPlayer1->GetShape().left == mCameraSize.left)
+	else if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && mpPlayer1->GetShape().left == mCameraSize.left)
 	{
-		if (!(mPlayer2->GetShape().right >= (mCameraSize.right)))
+		if (!(mpPlayer2->GetShape().right >= (mCameraSize.right)))
 		{
-			mPlayer2->SetPosX(-6);
+			mpPlayer2->SetPosX(-6);
 			mBackgroundPosX += 6;
 		}
 	}
-	else if (mBackgroundPosX > -600 && MGR_KEY->IsStayKeyDown(VK_RIGHT) && mPlayer2->GetShape().right == mCameraSize.right)
+	else if (mBackgroundPosX > -600 && MGR_KEY->IsStayKeyDown(VK_RIGHT) && mpPlayer2->GetShape().right == mCameraSize.right)
 	{
-		if (!(mPlayer1->GetShape().left <= (mCameraSize.left)))
+		if (!(mpPlayer1->GetShape().left <= (mCameraSize.left)))
 		{
-			mPlayer1->SetPosX(6);
+			mpPlayer1->SetPosX(6);
 			mBackgroundPosX -= 6;
 		}
 	}
 
-	if (mPlayer1->GetData()->mIsAttack == false)
+	if (mpPlayer1->GetData()->mPlayerAct != eActing::Damaged && mpPlayer1->GetData()->mPlayerAct != eActing::Dead)
 	{
-		if (mPlayer1->GetData()->mPlayerLookat == eLookat::Left_Lookat)
+
+		if (mpPlayer1->GetData()->mIsAttack == false)
 		{
-			mDistance = abs(mPlayer2->GetShape().right) - abs(mPlayer1->GetShape().left);
-		}
-		else if (mPlayer1->GetData()->mPlayerLookat == eLookat::Right_Lookat)
-		{
-			mDistance = abs(mPlayer1->GetShape().left) - abs(mPlayer2->GetShape().right);
+			if (mpPlayer1->GetData()->mPlayerLookat == eLookat::Left_Lookat)
+			{
+				mDistance = abs(mpPlayer1->GetShape().left) - abs(mpPlayer1->GetShape().right);
+			}
+			else if (mpPlayer1->GetData()->mPlayerLookat == eLookat::Right_Lookat)
+			{
+				mDistance = abs(mpPlayer2->GetShape().left) - abs(mpPlayer1->GetShape().right);
+			}
+
+			if (MGR_KEY->IsOnceKeyDown('G'))
+			{
+				if (NearMaxPixel > mDistance)
+				{
+					mpNearWeakPunch1->Execute();
+				}
+				else
+				{
+					mpWeakPunch1->Execute();
+				}
+			}
+			else if (MGR_KEY->IsOnceKeyDown('Y'))
+			{
+				if (NearMaxPixel > mDistance)
+				{
+					mpNearStrongPunch1->Execute();
+				}
+				else
+				{
+					mpStrongPunch1->Execute();
+				}
+			}
+			else if (MGR_KEY->IsOnceKeyDown('H'))
+			{
+				if (NearMaxPixel > mDistance)
+				{
+					mpNearWeakKick1->Execute();
+				}
+				else
+				{
+					mpWeakKick1->Execute();
+				}
+			}
+			else if (MGR_KEY->IsOnceKeyDown('U'))
+			{
+				if (NearMaxPixel > mDistance)
+				{
+					mpNearStrongKick1->Execute();
+				}
+				else
+				{
+					mpStrongKick1->Execute();
+				}
+			}
 		}
 
-		if (KeyManager::GetSingleton()->IsOnceKeyDown('G'))
+		if (mpPlayer1->GetData()->mPlayerAct != eActing::Act_Attack)
 		{
-			if (abs(mPlayer1->GetData()->mHitboxShapeRight[eAnimStatus::Near_Weak_Punch]) > mDistance)
+			if (MGR_KEY->IsStayKeyDown('A'))
 			{
-				mNearWeakPunch1->Execute();
+				mpMoveLeft1->Execute();
+			}
+			else if (MGR_KEY->IsStayKeyDown('D'))
+			{
+				mpMoveRight1->Execute();
 			}
 			else
 			{
-				mWeakPunch1->Execute();
-			}
-		}
-		else if (KeyManager::GetSingleton()->IsOnceKeyDown('Y'))
-		{
-			if (abs(mPlayer1->GetData()->mHitboxShapeRight[eAnimStatus::Near_Strong_Punch]) > mDistance)
-			{
-				mNearStrongPunch1->Execute();
-			}
-			else
-			{
-				mStrongPunch1->Execute();
-			}
-		}
-		else if (KeyManager::GetSingleton()->IsOnceKeyDown('H'))
-		{
-			if (abs(mPlayer1->GetData()->mHitboxShapeRight[eAnimStatus::Near_Weak_Kick]) > mDistance)
-			{
-				mNearWeakKick1->Execute();
-			}
-			else
-			{
-				mWeakKick1->Execute();
-			}
-		}
-		else if (KeyManager::GetSingleton()->IsOnceKeyDown('U'))
-		{
-			if (abs(mPlayer1->GetData()->mHitboxShapeRight[eAnimStatus::Near_Strong_Kick]) > mDistance)
-			{
-				mNearStrongKick1->Execute();
-			}
-			else
-			{
-				mStrongKick1->Execute();
+				if (mpPlayer1->GetData()->mPlayerAct != eActing::Act_Idle)
+				{
+					mpPlayer1->SetFrameX(0);
+				}
+				mpPlayer1->GetData()->mPlayerAct = eActing::Act_Idle;
+				mpPlayer1->GetData()->mPlayerStatus = eAnimStatus::Idle;
 			}
 		}
 	}
 
-	if (mPlayer1->GetData()->mPlayerAct != eActing::Act_Attack)
+	if (mpPlayer2->GetData()->mPlayerAct != eActing::Damaged && mpPlayer2->GetData()->mPlayerAct != eActing::Dead)
 	{
-		if (KeyManager::GetSingleton()->IsStayKeyDown('A'))
+		if (mpPlayer2->GetData()->mIsAttack == false)
 		{
-			mMoveLeft1->Execute();
-		}
-		else if (KeyManager::GetSingleton()->IsStayKeyDown('D'))
-		{
-			mMoveRight1->Execute();
-		}
-		else
-		{
-			if (mPlayer1->GetData()->mPlayerAct != eActing::Act_Idle)
+			if (mpPlayer2->GetData()->mPlayerLookat == eLookat::Left_Lookat)
 			{
-				mPlayer1->SetFrameX(0);
+				mDistance = abs(mpPlayer2->GetShape().left) - abs(mpPlayer1->GetShape().right);
 			}
-			mPlayer1->GetData()->mPlayerAct = eActing::Act_Idle;
-			mPlayer1->GetData()->mPlayerStatus = eAnimStatus::Idle;
-		}
-	}
-
-
-	if (mPlayer2->GetData()->mIsAttack == false)
-	{
-		if (mPlayer2->GetData()->mPlayerLookat == eLookat::Left_Lookat)
-		{
-			mDistance = abs(mPlayer1->GetShape().right) - abs(mPlayer2->GetShape().left);
-		}
-		else if (mPlayer2->GetData()->mPlayerLookat == eLookat::Right_Lookat)
-		{
-			mDistance = abs(mPlayer2->GetShape().left) - abs(mPlayer1->GetShape().right);
-		}
-
-		if (KeyManager::GetSingleton()->IsOnceKeyDown('N'))
-		{
-			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Weak_Punch]) > mDistance) { mNearWeakPunch2->Execute(); }
-			else { mWeakPunch2->Execute(); }
-		}
-		else if (KeyManager::GetSingleton()->IsOnceKeyDown('J'))
-		{
-			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Strong_Punch]) > mDistance) { mNearStrongPunch2->Execute(); }
-			else { mStrongPunch2->Execute(); }
-		}
-		else if (KeyManager::GetSingleton()->IsOnceKeyDown('M'))
-		{
-			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Weak_Kick]) > mDistance) { mNearWeakKick2->Execute(); }
-			else { mWeakKick2->Execute(); }
-		}
-		else if (KeyManager::GetSingleton()->IsOnceKeyDown('K'))
-		{
-			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Strong_Kick]) > mDistance) { mNearStrongKick2->Execute(); }
-			else { mStrongKick2->Execute(); }
-		}
-	}
-
-	if (mPlayer2->GetData()->mPlayerAct != eActing::Act_Attack)
-	{
-		if (KeyManager::GetSingleton()->IsStayKeyDown(VK_LEFT))
-		{
-			mMoveLeft2->Execute();
-		}
-		else if (KeyManager::GetSingleton()->IsStayKeyDown(VK_RIGHT))
-		{
-			mMoveRight2->Execute();
-		}
-		else
-		{
-			if (mPlayer2->GetData()->mPlayerAct != eActing::Act_Idle)
+			else if (mpPlayer2->GetData()->mPlayerLookat == eLookat::Right_Lookat)
 			{
-				mPlayer2->SetFrameX(0);
+				mDistance = abs(mpPlayer2->GetShape().right) - abs(mpPlayer1->GetShape().left);
 			}
-			mPlayer2->GetData()->mPlayerAct = eActing::Act_Idle;
-			mPlayer2->GetData()->mPlayerStatus = eAnimStatus::Idle;
+
+			if (MGR_KEY->IsOnceKeyDown('N'))
+			{
+				if (NearMaxPixel > mDistance) { mpNearWeakPunch2->Execute(); }
+				else { mpWeakPunch2->Execute(); }
+			}
+			else if (MGR_KEY->IsOnceKeyDown('J'))
+			{
+				if (NearMaxPixel > mDistance) { mpNearStrongPunch2->Execute(); }
+				else { mpStrongPunch2->Execute(); }
+			}
+			else if (MGR_KEY->IsOnceKeyDown('M'))
+			{
+				if (NearMaxPixel > mDistance) { mpNearWeakKick2->Execute(); }
+				else { mpWeakKick2->Execute(); }
+			}
+			else if (MGR_KEY->IsOnceKeyDown('K'))
+			{
+				if (NearMaxPixel > mDistance) { mpNearStrongKick2->Execute(); }
+				else { mpStrongKick2->Execute(); }
+			}
+		}
+
+		if (mpPlayer2->GetData()->mPlayerAct != eActing::Act_Attack)
+		{
+			if (MGR_KEY->IsStayKeyDown(VK_LEFT))
+			{
+				mpMoveLeft2->Execute();
+			}
+			else if (MGR_KEY->IsStayKeyDown(VK_RIGHT))
+			{
+				mpMoveRight2->Execute();
+			}
+			else
+			{
+				if (mpPlayer2->GetData()->mPlayerAct != eActing::Act_Idle)
+				{
+					mpPlayer2->SetFrameX(0);
+				}
+				mpPlayer2->GetData()->mPlayerAct = eActing::Act_Idle;
+				mpPlayer2->GetData()->mPlayerStatus = eAnimStatus::Idle;
+			}
 		}
 	}
 
-	mPlayer1Bar->SetValue(mPlayer1->GetHPWeight());
-	mPlayer2Bar->SetValue(mPlayer2->GetHPWeight());
+	mpPlayer1Bar->SetValue(mpPlayer1->GetHPWeight());
+	mpPlayer2Bar->SetValue(mpPlayer2->GetHPWeight());
 
-	mPlayer1->Update();
+	mpPlayer1->Update();
 
-	mPlayer2->Update();
+	mpPlayer2->Update();
 
-	if (mPlayer1->GetHP() <= 0 || mPlayer2->GetHP() <= 0)
+	if (mpPlayer1->GetHP() <= 0 || mpPlayer2->GetHP() <= 0)
 	{
-		SetTimer(g_hWnd, 0, 100, NULL);
+		SetTimer(g_hWnd, 0, 200, NULL);
 		if (bf.SourceConstantAlpha >= 250)
 		{
 			bf.SourceConstantAlpha = 255;
+
+			Sleep(2000);
 			MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
 			SetTimer(g_hWnd, 0, 10, NULL);
 		}
@@ -373,15 +409,15 @@ void AnimationScene::Update()
 
 	if (MGR_KEY->IsOnceKeyDown('1'))
 	{
-		if (mPlayer1->GetPrintHitBox() == false)
+		if (mpPlayer1->GetPrintHitBox() == false)
 		{
-			mPlayer1->SetPrintHitBox(true);
-			mPlayer2->SetPrintHitBox(true);
+			mpPlayer1->SetPrintHitBox(true);
+			mpPlayer2->SetPrintHitBox(true);
 		}
 		else
 		{
-			mPlayer1->SetPrintHitBox(false);
-			mPlayer2->SetPrintHitBox(false);
+			mpPlayer1->SetPrintHitBox(false);
+			mpPlayer2->SetPrintHitBox(false);
 		}
 	}
 }
@@ -390,24 +426,24 @@ void AnimationScene::Render(HDC hdc)
 {
 	mpArrBackground[mCurBackgroundFrame]->Render(hdc, WIN_SIZE_X / 2 + mBackgroundPosX, WIN_SIZE_Y / 2);
 
-	mPlayer1->Render(hdc);
+	mpPlayer1->Render(hdc);
 
-	mPlayer2->Render(hdc);
+	mpPlayer2->Render(hdc);
 
-	mPlayer1Bar->Render(hdc);
-	mPlayer2Bar->Render(hdc);
+	mpPlayer1Bar->Render(hdc);
+	mpPlayer2Bar->Render(hdc);
 
-	if (mPrintEffect1) { mpArrEffect[mCurEffectFrame]->Render(hdc, (int)Player1HitPos.x, (int)Player1HitPos.y); }
-	if (mPrintEffect2) { mpArrEffect[mCurEffectFrame]->Render(hdc, (int)Player2HitPos.x, (int)Player2HitPos.y); }
+	if (mbPrintEffect1) { mpArrEffect[mCurEffectFrame]->Render(hdc, (int)Player1HitPos.x, (int)Player1HitPos.y); }
+	if (mbPrintEffect2) { mpArrEffect[mCurEffectFrame]->Render(hdc, (int)Player2HitPos.x, (int)Player2HitPos.y); }
 
 	mpEndImage->Render(hdc, bf);
 }
 
 void AnimationScene::Exit()
 {
-	SAFE_RELEASE(mPlayer1);
+	SAFE_RELEASE(mpPlayer1);
 
-	SAFE_RELEASE(mPlayer2);
+	SAFE_RELEASE(mpPlayer2);
 
 	for (int i = 0; i < 39; i++)
 	{
