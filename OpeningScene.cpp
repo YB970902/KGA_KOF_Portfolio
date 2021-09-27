@@ -67,8 +67,8 @@ void OpeningScene::Exit()
 {
 	for (int i = 0; i < 129; i++)
 	{
-		SAFE_RELEASE(mArrIntroAnim[i]);
+		mArrIntroAnim[i]->Release();
 	}
 
-	SAFE_RELEASE(mpDefaultBackground);
+	mpDefaultBackground->Release();
 }

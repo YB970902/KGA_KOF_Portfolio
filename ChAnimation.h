@@ -13,7 +13,7 @@ protected:
 	int mFrameX = 0, mFrameY = 0;
 	int mElapsedCount = 0;
 
-	bool mNotMove = false;
+	bool mbNotMove = false;
 
 	const int KnockBackPixel = 30;
 
@@ -33,16 +33,15 @@ public:
 	void MoveRight();
 
 	void HitTarget(int damage, float KnockBackPixel);
-	
+
 	inline void SetFrameX(int frame) { this->mFrameX = frame; }
 
 	inline int GetFrameX() { return this->mFrameX; }
 
-	inline void SetNotMove(bool b) { this->mNotMove = b; }
+	inline void SetNotMove(bool b) { this->mbNotMove = b; }
 
-	inline eLookat GetLookAt() {
-		return mpData->mPlayerLookat;
-	}
+	inline eLookat GetLookAt() { return mpData->mPlayerLookat; }
+	inline float CalculationAcceleration(float knockbackpixel) { return knockbackpixel * 0.3f; }
 
 	static void WeakPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Weak_Punch); }
 	static void StrongPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Strong_Punch); }

@@ -21,7 +21,7 @@ using namespace std;
 #define SAFE_RELEASE(p)	{ if (p) { p->Release(); delete p; p = nullptr; } }
 
 enum class eMoveDir { Left = -1, Right = 1, Up, Down, };
-enum class eSceneTag { CharacterSelectScene, HitBoxSnene, AnimationScene, };
+enum class eSceneTag { OpeningScene,CharacterSelectScene, HitBoxSnene, AnimationScene, };
 enum class eCharacterType { Null, Bluemary, Ralf, Leona, };
 
 extern HWND g_hWnd;

@@ -31,6 +31,7 @@ void HealthBar::Release()
 
 void HealthBar::SetValue(float val)
 {
+	if (val < 0) { val = 0; }
 	mpHealthBarFront->ResizeWidth((int)(mWidth * val));
 	if (mBarDir == eHealthBarDir::Left)
 	{

@@ -14,7 +14,7 @@ void MainGame::Init()
 	KeyManager::GetSingleton()->Init();
 	SceneManager::GetSingleton();
 
-	MGR_SCN->ChangeScene(eSceneTag::CharacterSelectScene);
+	MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
 
 	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
 

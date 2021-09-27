@@ -1,10 +1,12 @@
 #include "AnimationScene.h"
 #include "HitBoxScene.h"
 #include "SceneManager.h"
+#include "OpeningScene.h"
 #include "CharacterSelectScene.h"
 
 void SceneManager::Init()
 {
+	mScene[eSceneTag::OpeningScene] = new OpeningScene;
 	mScene[eSceneTag::CharacterSelectScene] = new CharacterSelectScene;
 	mScene[eSceneTag::AnimationScene] = new AnimationScene;
 	mScene[eSceneTag::HitBoxSnene] = new HitBoxScene;

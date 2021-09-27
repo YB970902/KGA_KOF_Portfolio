@@ -26,11 +26,13 @@ protected:
 	RECT mNearStrongKickHitBox = RECT();
 
 	int mFrame = 0;
+	int mMaxHP = 0;
 	int mHP = 0;
 
 	bool mIsHit = false;
 	float mAcceleration = 0.0f;
 	float mResistance = 0.0f;
+	bool mbPrintHitBox = false;
 
 	eMoveDir mDir = eMoveDir::Right;
 
@@ -71,16 +73,19 @@ public:
 	inline void SetIsHit(bool hit) { this->mIsHit = hit; }
 	inline void SetAcceleration(float val) { this->mAcceleration = val; }
 	inline void SetResistance(float val) { this->mResistance = val; }
+	inline void SetPrintHitBox(bool b) { this->mbPrintHitBox = b; }
 
 	inline Character* GetTarget() { return mpTarget; }
 	inline ChAnimData* GetmpmData() { return mpmData; }
 	inline ChAnimData* GetData() { return mpData; }
+	inline bool GetPrintHitBox() { return mbPrintHitBox; }
 
 	inline RECT GetShape() { return shape; }
 	inline int GetHP() { return mHP; }
 	inline RECT GetSmallHitBox() { return mWeakPunchHitBox; }
 	inline int GetFrame() { return mFrame; }
 	inline eMoveDir GetDir() { return mDir; }
+	inline float GetHPWeight() { return (float)mHP / (float)mMaxHP; }
 
 	inline void SetTarget(Character* ch) { this->mpTarget = ch; }
 

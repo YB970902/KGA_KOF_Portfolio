@@ -167,7 +167,7 @@ void LeonaAnimation::Init(eLookat dir)
 	pos.y = WIN_SIZE_Y / 2;
 	moveSpeed = 50.0f;
 
-	mHP = 100;
+	mMaxHP = mHP = 100;
 
 	shape.left = (int)pos.x - ((mpData->mSizeX[mpData->mPlayerStatus] / mpData->mAnimframe[mpData->mPlayerStatus]) / 2);
 	shape.top = (int)pos.y - (mpData->mSizeX[mpData->mPlayerStatus] / 2);

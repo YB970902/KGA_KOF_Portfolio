@@ -8,6 +8,7 @@
 #include "RalfAnimation.h"
 #include "Image.h"
 #include "HealthBar.h"
+#include "SceneManager.h"
 
 void AnimationScene::Enter()
 {
@@ -74,13 +75,13 @@ void AnimationScene::Enter()
 
 	mNearWeakPunch1 = new Command;
 	mNearWeakPunch1->Init(mPlayer1, ChAnimation::NearWeakPunchCommand);
-	 
+
 	mNearStrongPunch1 = new Command;
 	mNearStrongPunch1->Init(mPlayer1, ChAnimation::NearStrongPunchCommand);
-	 
+
 	mNearWeakKick1 = new Command;
 	mNearWeakKick1->Init(mPlayer1, ChAnimation::NearWeakKickCommand);
-	 
+
 	mNearStrongKick1 = new Command;
 	mNearStrongKick1->Init(mPlayer1, ChAnimation::NearStrongKickCommand);
 
@@ -135,6 +136,18 @@ void AnimationScene::Enter()
 		mpArrBackground[i]->Init(temp, WIN_SIZE_X * 2, WIN_SIZE_Y);
 	}
 
+	mpArrEffect = new Image * [8];
+	for (int i = 0; i < 8; i++)
+	{
+		mpArrEffect[i] = new Image();
+	}
+
+	for (int i = 0; i < 8; i++)
+	{
+		wsprintf(temp, "Image/Effect/frame_%d.bmp", i);
+		mpArrEffect[i]->Init(temp, 220, 213, true, RGB(255, 0, 255));
+	}
+
 	mPlayer1Bar = new HealthBar();
 	mPlayer1Bar->Init();
 	mPlayer1Bar->SetHealthBarDir(eHealthBarDir::Left);
@@ -152,7 +165,13 @@ void AnimationScene::Enter()
 	player2BarPos.y = 100;
 	mPlayer2Bar->SetPosition(player2BarPos);
 
+	mpEndImage = new Image;
+	mpEndImage->Init("Image/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 
+	bf.AlphaFormat = 0;
+	bf.BlendFlags = 0;
+	bf.BlendOp = AC_SRC_OVER;
+	bf.SourceConstantAlpha = 0;
 }
 
 void AnimationScene::Update()
@@ -164,7 +183,7 @@ void AnimationScene::Update()
 		mCurBackgroundFrame++;
 		if (mCurBackgroundFrame >= MaxBackGroundFrame)
 		{
-			mCurBackgroundFrame = 0;	
+			mCurBackgroundFrame = 0;
 		}
 	}
 
@@ -207,7 +226,7 @@ void AnimationScene::Update()
 		{
 			mDistance = abs(mPlayer1->GetShape().left) - abs(mPlayer2->GetShape().right);
 		}
-		
+
 		if (KeyManager::GetSingleton()->IsOnceKeyDown('G'))
 		{
 			if (abs(mPlayer1->GetData()->mHitboxShapeRight[eAnimStatus::Near_Weak_Punch]) > mDistance)
@@ -217,7 +236,7 @@ void AnimationScene::Update()
 			else
 			{
 				mWeakPunch1->Execute();
-			}			
+			}
 		}
 		else if (KeyManager::GetSingleton()->IsOnceKeyDown('Y'))
 		{
@@ -289,23 +308,23 @@ void AnimationScene::Update()
 
 		if (KeyManager::GetSingleton()->IsOnceKeyDown('N'))
 		{
-			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Weak_Punch]) > mDistance) {mNearWeakPunch2->Execute();}
-			else {mWeakPunch2->Execute();}
+			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Weak_Punch]) > mDistance) { mNearWeakPunch2->Execute(); }
+			else { mWeakPunch2->Execute(); }
 		}
 		else if (KeyManager::GetSingleton()->IsOnceKeyDown('J'))
 		{
-			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Strong_Punch]) > mDistance) {mNearStrongPunch2->Execute();}
-			else {mStrongPunch2->Execute();}
+			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Strong_Punch]) > mDistance) { mNearStrongPunch2->Execute(); }
+			else { mStrongPunch2->Execute(); }
 		}
 		else if (KeyManager::GetSingleton()->IsOnceKeyDown('M'))
 		{
-			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Weak_Kick]) > mDistance) {mNearWeakKick2->Execute();}
-			else{mWeakKick2->Execute();}
+			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Weak_Kick]) > mDistance) { mNearWeakKick2->Execute(); }
+			else { mWeakKick2->Execute(); }
 		}
 		else if (KeyManager::GetSingleton()->IsOnceKeyDown('K'))
 		{
-			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Strong_Kick]) > mDistance) {mNearStrongKick2->Execute();}
-			else {mStrongKick2->Execute();}
+			if (abs(mPlayer2->GetData()->mHitboxShapeRight[eAnimStatus::Near_Strong_Kick]) > mDistance) { mNearStrongKick2->Execute(); }
+			else { mStrongKick2->Execute(); }
 		}
 	}
 
@@ -330,27 +349,58 @@ void AnimationScene::Update()
 		}
 	}
 
-	if (MGR_KEY->IsOnceKeyDown('1')) { mPlayer2Bar->SetValue(1.0f); }
-	if (MGR_KEY->IsOnceKeyDown('2')) { mPlayer2Bar->SetValue(0.5f); }
-	if (MGR_KEY->IsOnceKeyDown('3')) { mPlayer2Bar->SetValue(0.25f); }
-	if (MGR_KEY->IsOnceKeyDown('4')) { mPlayer2Bar->SetValue(0.0f); }
+	mPlayer1Bar->SetValue(mPlayer1->GetHPWeight());
+	mPlayer2Bar->SetValue(mPlayer2->GetHPWeight());
 
 	mPlayer1->Update();
 
 	mPlayer2->Update();
+
+	if (mPlayer1->GetHP() <= 0 || mPlayer2->GetHP() <= 0)
+	{
+		SetTimer(g_hWnd, 0, 100, NULL);
+		if (bf.SourceConstantAlpha >= 250)
+		{
+			bf.SourceConstantAlpha = 255;
+			MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
+			SetTimer(g_hWnd, 0, 10, NULL);
+		}
+		else
+		{
+			bf.SourceConstantAlpha += 10;
+		}
+	}
+
+	if (MGR_KEY->IsOnceKeyDown('1'))
+	{
+		if (mPlayer1->GetPrintHitBox() == false)
+		{
+			mPlayer1->SetPrintHitBox(true);
+			mPlayer2->SetPrintHitBox(true);
+		}
+		else
+		{
+			mPlayer1->SetPrintHitBox(false);
+			mPlayer2->SetPrintHitBox(false);
+		}
+	}
 }
 
 void AnimationScene::Render(HDC hdc)
 {
 	mpArrBackground[mCurBackgroundFrame]->Render(hdc, WIN_SIZE_X / 2 + mBackgroundPosX, WIN_SIZE_Y / 2);
 
-	cout << "Player1LookAt : " << (int)mPlayer1->GetLookAt() << endl;
 	mPlayer1->Render(hdc);
-	
+
 	mPlayer2->Render(hdc);
 
 	mPlayer1Bar->Render(hdc);
 	mPlayer2Bar->Render(hdc);
+
+	if (mPrintEffect1) { mpArrEffect[mCurEffectFrame]->Render(hdc, (int)Player1HitPos.x, (int)Player1HitPos.y); }
+	if (mPrintEffect2) { mpArrEffect[mCurEffectFrame]->Render(hdc, (int)Player2HitPos.x, (int)Player2HitPos.y); }
+
+	mpEndImage->Render(hdc, bf);
 }
 
 void AnimationScene::Exit()
