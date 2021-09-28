@@ -6,18 +6,27 @@
 CharacterSelectScene::CharacterSelectScene()
 {
 	mpBackground = new Image();
+	mpBackground->Init("Image/UI/Select_Background.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 
 	mp1PMugshotBackground = new Image();
 	mp2PMugshotBackground = new Image();
+	mp1PMugshotBackground->Init("Image/UI/Select_MugshotBackground.bmp", 500, 350, true, RGB(255, 0, 255));
+	mp2PMugshotBackground->Init("Image/UI/Select_MugshotBackground.bmp", 500, 350, true, RGB(255, 0, 255));
 
 	mpLeonaMugshot = new Image();
 	mpMaryMugshot = new Image();
 	mpRalfMugshot = new Image();
+	mpLeonaMugshot->Init("Image/UI/LeonaMugshot.bmp", 490, 340, true, RGB(255, 0, 255));
+	mpMaryMugshot->Init("Image/UI/MaryMugshot.bmp", 490, 340, true, RGB(255, 0, 255));
+	mpRalfMugshot->Init("Image/UI/RalfMugshot.bmp", 490, 340, true, RGB(255, 0, 255));
 
 	mpRightSection = new Image();
+	mpRightSection->Init("Image/UI/Select_RightSection.bmp", 600, 800);
 
 	mp1PEdge = new Image();
 	mp2PEdge = new Image();
+	mp1PEdge->Init("Image/UI/Select_1P.bmp", 100, 114, true, RGB(255, 0, 255));
+	mp2PEdge->Init("Image/UI/Select_2P.bmp", 100, 114, true, RGB(255, 0, 255));
 }
 
 CharacterSelectScene::~CharacterSelectScene()
@@ -39,20 +48,6 @@ CharacterSelectScene::~CharacterSelectScene()
 
 void CharacterSelectScene::Enter()
 {
-	mpBackground->Init("Image/UI/Select_Background.bmp", WIN_SIZE_X, WIN_SIZE_Y);
-
-	mp1PMugshotBackground->Init("Image/UI/Select_MugshotBackground.bmp", 500, 350, true, RGB(255, 0, 255));
-	mp2PMugshotBackground->Init("Image/UI/Select_MugshotBackground.bmp", 500, 350, true, RGB(255, 0, 255));
-
-	mpLeonaMugshot->Init("Image/UI/LeonaMugshot.bmp", 490, 340, true, RGB(255, 0, 255));
-	mpMaryMugshot->Init("Image/UI/MaryMugshot.bmp", 490, 340, true, RGB(255, 0, 255));
-	mpRalfMugshot->Init("Image/UI/RalfMugshot.bmp", 490, 340, true, RGB(255, 0, 255));
-
-	mpRightSection->Init("Image/UI/Select_RightSection.bmp", 600, 800);
-
-	mp1PEdge->Init("Image/UI/Select_1P.bmp", 100, 114, true, RGB(255, 0, 255));
-	mp2PEdge->Init("Image/UI/Select_2P.bmp", 100, 114, true, RGB(255, 0, 255));
-
 	Player1 = (int)eCharacterType::Null;
 	Player2 = (int)eCharacterType::Null;
 }
@@ -209,4 +204,6 @@ void CharacterSelectScene::Render(HDC hdc)
 
 void CharacterSelectScene::Exit()
 {
+	mbIsPlayer1Selected = false;
+	mbIsPlayer2Selected = false;
 }
