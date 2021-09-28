@@ -391,6 +391,8 @@ void AnimationScene::Update()
 	mpPlayer1Bar->SetValue(mpPlayer1->GetHPWeight());
 	mpPlayer2Bar->SetValue(mpPlayer2->GetHPWeight());
 
+	mpTimer->Update();
+
 	mpPlayer1->Update();
 
 	mpPlayer2->Update();
@@ -405,6 +407,8 @@ void AnimationScene::Update()
 			Sleep(2000);
 			MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
 			SetTimer(g_hWnd, 0, 10, NULL);
+
+			return;
 		}
 		else
 		{
@@ -426,7 +430,6 @@ void AnimationScene::Update()
 		}
 	}
 
-	mpTimer->Update();
 }
 
 void AnimationScene::Render(HDC hdc)
