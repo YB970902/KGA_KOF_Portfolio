@@ -111,33 +111,33 @@ void LeonaAnimation::Init(eLookat dir)
 	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 6));
 	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 8));
 
-	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, -392));
-	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 392));
-	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, -100));
-	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 0));
-	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 4));
-	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 8));
+	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, -272));
+	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 272));
+	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, -153));
+	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, -71));
+	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 1));
+	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 2));
 
-	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, -392));
-	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 392));
-	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, -100));
-	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 0));
-	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 4));
-	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 8));
+	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, -329));
+	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 329));
+	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, -20));
+	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 61));
+	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 2));
+	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 4));
 
-	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, -392));
-	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 392));
-	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, -100));
-	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 0));
-	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 4));
-	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 8));
+	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, -245));
+	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 245));
+	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, -133));
+	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 41));
+	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 3));
+	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 5));
 
-	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, -392));
-	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 392));
+	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, -105));
+	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 105));
 	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, -100));
 	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 0));
-	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 4));
-	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 8));
+	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 2));
+	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 7));
 
 	mpData->mNotReverse = 1;
 

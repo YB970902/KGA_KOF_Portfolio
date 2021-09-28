@@ -10,7 +10,6 @@ class ChAnimation : public Character	// 상속관계
 {
 protected:
 	Image* img = nullptr;
-	int mFrameX = 0, mFrameY = 0;
 	int mElapsedCount = 0;
 
 	bool mbNotMove = false;
@@ -33,10 +32,6 @@ public:
 	void MoveRight();
 
 	void HitTarget(int damage, float KnockBackPixel);
-
-	inline void SetFrameX(int frame) { this->mFrameX = frame; }
-
-	inline int GetFrameX() { return this->mFrameX; }
 
 	inline void SetNotMove(bool b) { this->mbNotMove = b; }
 

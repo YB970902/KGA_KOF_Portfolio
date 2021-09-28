@@ -44,25 +44,25 @@ void ChAnimation::Update()
 	{
 		if (!CheckHitChar())
 		{
-			HitTarget(10, 10.0f);
+			HitTarget(5, 20.0f);
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpData->mIsDead == false)
+				if (mpTarget->GetData()->mIsDead == false)
 				{
-					mFrameX = 0;
+					mpTarget->SetFrameX(0);
 				}
 
-				mpData->mIsDead = true;
-				mpData->mPlayerAct = eActing::Dead;
-				mpData->mPlayerStatus = eAnimStatus::Dead;
+				mpTarget->GetData()->mIsDead = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Dead;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Dead;
 			}
 			else
 			{
 
 				if (mpTarget->GetData()->mIsDamaged == false)
 				{
-					mFrameX = 0;
+					mpTarget->SetFrameX(0);
 				}
 
 				mpTarget->GetData()->mIsDamaged = true;
@@ -104,25 +104,25 @@ void ChAnimation::Update()
 	{
 		if (!CheckHitChar())
 		{
-			HitTarget(20, 20.0f);
+			HitTarget(10, 30.0f);
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpData->mIsDead == false)
+				if (mpTarget->GetData()->mIsDead == false)
 				{
-					mFrameX = 0;
+					mpTarget->SetFrameX(0);
 				}
 
-				mpData->mIsDead = true;
-				mpData->mPlayerAct = eActing::Dead;
-				mpData->mPlayerStatus = eAnimStatus::Dead;
+				mpTarget->GetData()->mIsDead = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Dead;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Dead;
 			}
 			else
 			{
 
 				if (mpTarget->GetData()->mIsDamaged == false)
 				{
-					mFrameX = 0;
+					mpTarget->SetFrameX(0);
 				}
 
 				mpTarget->GetData()->mIsDamaged = true;
@@ -164,25 +164,25 @@ void ChAnimation::Update()
 	{
 		if (!CheckHitChar())
 		{
-			HitTarget(15, 20.0f);
+			HitTarget(8, 30.0f);
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpData->mIsDead == false)
+				if (mpTarget->GetData()->mIsDead == false)
 				{
-					mFrameX = 0;
+					mpTarget->SetFrameX(0);
 				}
 
-				mpData->mIsDead = true;
-				mpData->mPlayerAct = eActing::Dead;
-				mpData->mPlayerStatus = eAnimStatus::Dead;
+				mpTarget->GetData()->mIsDead = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Dead;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Dead;
 			}
 			else
 			{
 
 				if (mpTarget->GetData()->mIsDamaged == false)
 				{
-					mFrameX = 0;
+					mpTarget->SetFrameX(0);
 				}
 
 				mpTarget->GetData()->mIsDamaged = true;
@@ -224,25 +224,265 @@ void ChAnimation::Update()
 	{
 		if (!CheckHitChar())
 		{
-			HitTarget(30, 40.0f);
+			HitTarget(16, 40.0f);
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpData->mIsDead == false)
+				if (mpTarget->GetData()->mIsDead == false)
 				{
-					mFrameX = 0;
+					mpTarget->SetFrameX(0);
 				}
 
-				mpData->mIsDead = true;
-				mpData->mPlayerAct = eActing::Dead;
-				mpData->mPlayerStatus = eAnimStatus::Dead;
+				mpTarget->GetData()->mIsDead = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Dead;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Dead;
 			}
 			else
 			{
 
 				if (mpTarget->GetData()->mIsDamaged == false)
 				{
-					mFrameX = 0;
+					mpTarget->SetFrameX(0);
+				}
+
+				mpTarget->GetData()->mIsDamaged = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Damaged;
+
+				if (mpData->mPlayerLookat == eLookat::Right_Lookat)
+				{
+					if (mpTarget->GetShape().right >= WIN_SIZE_X)
+					{
+						if ((pos.x + mpData->mHitboxShapeRight[mpData->mPlayerStatus]) > mpTarget->GetShape().left)
+						{
+							mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeRight[mpData->mPlayerStatus]) - (mpTarget->GetShape().left - shape.right)) / 2));
+							mResistance = mAcceleration / 15;
+						}
+
+						mbNotMove = true;
+
+					}
+				}
+				else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
+				{
+					if (mpTarget->GetShape().left <= 0)
+					{
+						if ((pos.x + mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) < mpTarget->GetShape().right)
+						{
+							mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) - (shape.left - mpTarget->GetShape().right)) / 2));
+							mResistance = mAcceleration / 15;
+						}
+
+						mbNotMove = true;
+
+					}
+				}
+			}
+		}
+	}
+	else if (mpTarget && IsCollided(mNearWeakPunchHitBox, mpTarget->GetShape()))
+	{
+		if (!CheckHitChar())
+		{
+			HitTarget(5, 20.0f);
+
+			if (mpTarget->GetHP() <= 0)
+			{
+				if (mpTarget->GetData()->mIsDead == false)
+				{
+					mpTarget->SetFrameX(0);
+				}
+
+				mpTarget->GetData()->mIsDead = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Dead;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Dead;
+			}
+			else
+			{
+
+				if (mpTarget->GetData()->mIsDamaged == false)
+				{
+					mpTarget->SetFrameX(0);
+				}
+
+				mpTarget->GetData()->mIsDamaged = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Damaged;
+
+				if (mpData->mPlayerLookat == eLookat::Right_Lookat)
+				{
+					if (mpTarget->GetShape().right >= WIN_SIZE_X)
+					{
+						if ((pos.x + mpData->mHitboxShapeRight[mpData->mPlayerStatus]) > mpTarget->GetShape().left)
+						{
+							mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeRight[mpData->mPlayerStatus]) - (mpTarget->GetShape().left - shape.right)) / 2));
+							mResistance = mAcceleration / 15;
+						}
+
+						mbNotMove = true;
+
+					}
+				}
+				else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
+				{
+					if (mpTarget->GetShape().left <= 0)
+					{
+						if ((pos.x + mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) < mpTarget->GetShape().right)
+						{
+							mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) - (shape.left - mpTarget->GetShape().right)) / 2));
+							mResistance = mAcceleration / 15;
+						}
+
+						mbNotMove = true;
+
+					}
+				}
+			}
+		}
+	}
+	else if (mpTarget && IsCollided(mNearStrongPunchHitBox, mpTarget->GetShape()))
+	{
+		if (!CheckHitChar())
+		{
+			HitTarget(10, 30.0f);
+
+			if (mpTarget->GetHP() <= 0)
+			{
+				if (mpTarget->GetData()->mIsDead == false)
+				{
+					mpTarget->SetFrameX(0);
+				}
+
+				mpTarget->GetData()->mIsDead = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Dead;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Dead;
+			}
+			else
+			{
+
+				if (mpTarget->GetData()->mIsDamaged == false)
+				{
+					mpTarget->SetFrameX(0);
+				}
+
+				mpTarget->GetData()->mIsDamaged = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Damaged;
+
+				if (mpData->mPlayerLookat == eLookat::Right_Lookat)
+				{
+					if (mpTarget->GetShape().right >= WIN_SIZE_X)
+					{
+						if ((pos.x + mpData->mHitboxShapeRight[mpData->mPlayerStatus]) > mpTarget->GetShape().left)
+						{
+							mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeRight[mpData->mPlayerStatus]) - (mpTarget->GetShape().left - shape.right)) / 2));
+							mResistance = mAcceleration / 15;
+						}
+
+						mbNotMove = true;
+
+					}
+				}
+				else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
+				{
+					if (mpTarget->GetShape().left <= 0)
+					{
+						if ((pos.x + mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) < mpTarget->GetShape().right)
+						{
+							mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) - (shape.left - mpTarget->GetShape().right)) / 2));
+							mResistance = mAcceleration / 15;
+						}
+
+						mbNotMove = true;
+
+					}
+				}
+			}
+		}
+	}
+	else if (mpTarget && IsCollided(mNearWeakKickHitBox, mpTarget->GetShape()))
+	{
+		if (!CheckHitChar())
+		{
+			HitTarget(8, 40.0f);
+
+			if (mpTarget->GetHP() <= 0)
+			{
+				if (mpTarget->GetData()->mIsDead == false)
+				{
+					mpTarget->SetFrameX(0);
+				}
+
+				mpTarget->GetData()->mIsDead = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Dead;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Dead;
+			}
+			else
+			{
+
+				if (mpTarget->GetData()->mIsDamaged == false)
+				{
+					mpTarget->SetFrameX(0);
+				}
+
+				mpTarget->GetData()->mIsDamaged = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Damaged;
+
+				if (mpData->mPlayerLookat == eLookat::Right_Lookat)
+				{
+					if (mpTarget->GetShape().right >= WIN_SIZE_X)
+					{
+						if ((pos.x + mpData->mHitboxShapeRight[mpData->mPlayerStatus]) > mpTarget->GetShape().left)
+						{
+							mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeRight[mpData->mPlayerStatus]) - (mpTarget->GetShape().left - shape.right)) / 2));
+							mResistance = mAcceleration / 15;
+						}
+
+						mbNotMove = true;
+
+					}
+				}
+				else if (mpData->mPlayerLookat == eLookat::Left_Lookat)
+				{
+					if (mpTarget->GetShape().left <= 0)
+					{
+						if ((pos.x + mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) < mpTarget->GetShape().right)
+						{
+							mAcceleration = CalculationAcceleration((float)((abs(mpData->mHitboxShapeLeft[mpData->mPlayerStatus]) - (shape.left - mpTarget->GetShape().right)) / 2));
+							mResistance = mAcceleration / 15;
+						}
+
+						mbNotMove = true;
+
+					}
+				}
+			}
+		}
+	}
+	else if (mpTarget && IsCollided(mNearStrongKickHitBox, mpTarget->GetShape()))
+	{
+		if (!CheckHitChar())
+		{
+			HitTarget(16, 40.0f);
+
+			if (mpTarget->GetHP() <= 0)
+			{
+				if (mpTarget->GetData()->mIsDead == false)
+				{
+					mpTarget->SetFrameX(0);
+				}
+
+				mpTarget->GetData()->mIsDead = true;
+				mpTarget->GetData()->mPlayerAct = eActing::Dead;
+				mpTarget->GetData()->mPlayerStatus = eAnimStatus::Dead;
+			}
+			else
+			{
+
+				if (mpTarget->GetData()->mIsDamaged == false)
+				{
+					mpTarget->SetFrameX(0);
 				}
 
 				mpTarget->GetData()->mIsDamaged = true;
@@ -285,16 +525,14 @@ void ChAnimation::Update()
 	{
 		ImgUpdate(mpData->mPlayerStatus);
 		mElapsedCount++;
-		if (mElapsedCount >= 8)
+		if (mElapsedCount >= 1)
 		{
 			mFrameX++;
 
 			if (mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus])
 			{
-				mFrameX = 0;
-				mpData->mIsDead = false;/*
-				mpData->mPlayerAct = eActing::Act_Idle;
-				mpData->mPlayerStatus = eAnimStatus::Idle;*/
+				mFrameX = (int)mpData->mAnimframe[mpData->mPlayerStatus] - 1;
+				mpData->mIsDead = false;
 			}
 			mElapsedCount = 0;
 		}
@@ -489,11 +727,13 @@ void ChAnimation::Update()
 
 				if (mFrameX == (int)mpData->mHitboxOnFrame[mpData->mPlayerStatus])
 				{
-					OnNearWeakPunchHitBox((int)mpData->mPlayerLookat, mpData);
+					OnNearWeakKickHitBox((int)mpData->mPlayerLookat, mpData);
+					cout << mNearWeakKickHitBox.right << endl;
+					cout << shape.right << endl;
 				}
 				else if (mFrameX == mpData->mHitboxOffFrame[mpData->mPlayerStatus])
 				{
-					OffNearWeakPunchHitBox();
+					OffNearWeakKickHitBox();
 				}
 
 				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
@@ -648,7 +888,7 @@ void ChAnimation::Update()
 	baseX = mpData->mSizeX[mpData->mPlayerStatus] / (int)mpData->mAnimframe[eAnimStatus::Idle];
 	baseY = (int)mpData->mSizeY[eAnimStatus::Idle];
 
-	if (mIsHit)
+	if (mbIsHit || mAcceleration > 0)
 	{
 		if (mpData->mPlayerLookat == eLookat::Left_Lookat)
 		{
@@ -660,7 +900,7 @@ void ChAnimation::Update()
 			}
 			else
 			{
-				mIsHit = false;
+				mbIsHit = false;
 				mResistance = 0;
 				mAcceleration = 0;
 			}
@@ -675,7 +915,7 @@ void ChAnimation::Update()
 			}
 			else
 			{
-				mIsHit = false;
+				mbIsHit = false;
 				mResistance = 0;
 				mAcceleration = 0;
 			}
@@ -747,7 +987,7 @@ void ChAnimation::Update()
 			SetShape();
 		}
 	}
-	//
+	
 	//	// 각 캐릭터가 붙어 있고, 상대 캐릭터가 화면상에서 벽에 붙어있거나 붙게될시 현재 캐릭터가 공격할때 현재 캐릭터가 뒤로 밀려나는 로직
 	//	if (mpData->mPlayerLookat == eLookat::Right_Lookat)
 	//	{
@@ -786,6 +1026,10 @@ void ChAnimation::Render(HDC hdc)
 		Rectangle(hdc, mStrongPunchHitBox.left, mStrongPunchHitBox.top, mStrongPunchHitBox.right, mStrongPunchHitBox.bottom);
 		Rectangle(hdc, mWeakKickHitBox.left, mWeakKickHitBox.top, mWeakKickHitBox.right, mWeakKickHitBox.bottom);
 		Rectangle(hdc, mStrongKickHitBox.left, mStrongKickHitBox.top, mStrongKickHitBox.right, mStrongKickHitBox.bottom);
+		Rectangle(hdc, mNearWeakPunchHitBox.left, mNearWeakPunchHitBox.top, mNearWeakPunchHitBox.right, mNearWeakPunchHitBox.bottom);
+		Rectangle(hdc, mNearWeakKickHitBox.left, mNearWeakKickHitBox.top, mNearWeakKickHitBox.right, mNearWeakKickHitBox.bottom);
+		Rectangle(hdc, mNearStrongPunchHitBox.left, mNearStrongPunchHitBox.top, mNearStrongPunchHitBox.right, mNearStrongPunchHitBox.bottom);
+		Rectangle(hdc, mNearStrongKickHitBox.left, mNearStrongKickHitBox.top, mNearStrongKickHitBox.right, mNearStrongKickHitBox.bottom);
 	}
 
 	if (img)
