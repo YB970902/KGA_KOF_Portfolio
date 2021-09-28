@@ -220,7 +220,7 @@ void AnimationScene::Update()
 		}
 	}
 
-	if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && MGR_KEY->IsStayKeyDown(VK_LEFT))
+/*	if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && MGR_KEY->IsStayKeyDown(VK_LEFT))
 	{
 		mBackgroundPosX += 6;
 		mpPlayer1->SetNotMove(true);
@@ -232,7 +232,7 @@ void AnimationScene::Update()
 		mpPlayer1->SetNotMove(true);
 		mpPlayer2->SetNotMove(true);
 	}
-	else if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && mpPlayer1->GetShape().left == mCameraSize.left)
+	else*/ if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && mpPlayer1->GetShape().left == mCameraSize.left)
 	{
 		if (!(mpPlayer2->GetShape().right >= (mCameraSize.right)))
 		{
@@ -391,6 +391,8 @@ void AnimationScene::Update()
 	mpPlayer1Bar->SetValue(mpPlayer1->GetHPWeight());
 	mpPlayer2Bar->SetValue(mpPlayer2->GetHPWeight());
 
+	mpTimer->Update();
+	
 	mpPlayer1->Update();
 
 	mpPlayer2->Update();
@@ -405,6 +407,8 @@ void AnimationScene::Update()
 			Sleep(2000);
 			MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
 			SetTimer(g_hWnd, 0, 10, NULL);
+
+			return;
 		}
 		else
 		{
@@ -426,7 +430,6 @@ void AnimationScene::Update()
 		}
 	}
 
-	mpTimer->Update();
 }
 
 void AnimationScene::Render(HDC hdc)
