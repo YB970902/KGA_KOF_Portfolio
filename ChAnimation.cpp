@@ -517,7 +517,7 @@ void ChAnimation::Update()
 
 	if (mpData->mPlayerAct == eActing::Dead)
 	{
-		ImgUpdate(mpData->mPlayerStatus);
+
 		mElapsedCount++;
 		if (mElapsedCount >= 1)
 		{
@@ -533,7 +533,6 @@ void ChAnimation::Update()
 	}
 	else if (mpData->mPlayerAct == eActing::Damaged)
 	{
-		ImgUpdate(mpData->mPlayerStatus);
 		mElapsedCount++;
 		if (mElapsedCount >= 8)
 		{
@@ -553,7 +552,7 @@ void ChAnimation::Update()
 	{
 		if (mpData->mPlayerStatus == eAnimStatus::Weak_Punch)
 		{
-			ImgUpdate(mpData->mPlayerStatus);
+
 			mElapsedCount++;
 			if (mElapsedCount >= 4)
 			{
@@ -580,7 +579,7 @@ void ChAnimation::Update()
 		}
 		else if (mpData->mPlayerStatus == eAnimStatus::Weak_Kick)
 		{
-			ImgUpdate(mpData->mPlayerStatus);
+
 			mElapsedCount++;
 			if (mElapsedCount >= 4)
 			{
@@ -607,7 +606,7 @@ void ChAnimation::Update()
 		}
 		else if (mpData->mPlayerStatus == eAnimStatus::Strong_Punch)
 		{
-			ImgUpdate(mpData->mPlayerStatus);
+
 			mElapsedCount++;
 			if (mElapsedCount >= 4)
 			{
@@ -634,7 +633,7 @@ void ChAnimation::Update()
 		}
 		else if (mpData->mPlayerStatus == eAnimStatus::Strong_Kick)
 		{
-			ImgUpdate(mpData->mPlayerStatus);
+
 			mElapsedCount++;
 			if (mElapsedCount >= 4)
 			{
@@ -661,7 +660,7 @@ void ChAnimation::Update()
 		}
 		else if (mpData->mPlayerStatus == eAnimStatus::Near_Weak_Punch)
 		{
-			ImgUpdate(mpData->mPlayerStatus);
+
 			mElapsedCount++;
 			if (mElapsedCount >= 4)
 			{
@@ -687,7 +686,7 @@ void ChAnimation::Update()
 		}
 		else if (mpData->mPlayerStatus == eAnimStatus::Near_Strong_Punch)
 		{
-			ImgUpdate(mpData->mPlayerStatus);
+
 			mElapsedCount++;
 			if (mElapsedCount >= 4)
 			{
@@ -713,7 +712,7 @@ void ChAnimation::Update()
 		}
 		else if (mpData->mPlayerStatus == eAnimStatus::Near_Weak_Kick)
 		{
-			ImgUpdate(mpData->mPlayerStatus);
+			
 			mElapsedCount++;
 			if (mElapsedCount >= 4)
 			{
@@ -741,7 +740,7 @@ void ChAnimation::Update()
 		}
 		else if (mpData->mPlayerStatus == eAnimStatus::Near_Strong_Kick)
 		{
-			ImgUpdate(mpData->mPlayerStatus);
+			
 			mElapsedCount++;
 			if (mElapsedCount >= 4)
 			{
@@ -773,7 +772,7 @@ void ChAnimation::Update()
 			// 왼쪽으로 움직이기
 			if (mpData->mPlayerAct == eActing::Act_Left_Move)
 			{
-				ImgUpdate(mpData->mPlayerStatus);
+				
 				mElapsedCount++;
 				if (mElapsedCount >= 8)
 				{
@@ -818,7 +817,7 @@ void ChAnimation::Update()
 			// 오른쪽으로 움직이기
 			else if (mpData->mPlayerAct == eActing::Act_Right_Move)
 			{
-				ImgUpdate(mpData->mPlayerStatus);
+				
 
 				mElapsedCount++;
 				if (mElapsedCount >= 8)//(int)AnimSpeed[mpData->mPlayerStatus])
@@ -864,7 +863,7 @@ void ChAnimation::Update()
 
 		else if (mpData->mPlayerAct == eActing::Act_Idle) // Idle 일때
 		{
-			ImgUpdate(mpData->mPlayerStatus);
+			
 
 			mElapsedCount++;
 			if (mElapsedCount >= 8)
@@ -1026,15 +1025,14 @@ void ChAnimation::Render(HDC hdc)
 		Rectangle(hdc, mNearStrongKickHitBox.left, mNearStrongKickHitBox.top, mNearStrongKickHitBox.right, mNearStrongKickHitBox.bottom);
 	}
 
-	if (img)
-	{
+
 		MGR_IMG->GetImage((eImageTag)((int)mpData->mPlayerStatus + (int)mpData->mPlayerLookat + (int)mpData->mCharTag))->Render(hdc, (int)pos.x, (int)pos.y, mFrameX, mFrameY, mpData->mPlayerLookat);
-	}
+
 }
 
 void ChAnimation::Release()
 {
-	SAFE_RELEASE(img);
+	
 }
 
 FLOAT ChAnimation::moveAfterAction(FLOAT pos)
