@@ -73,6 +73,10 @@ void BluemaryAnimation::Init(eLookat dir)
 	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Weak_Punch, 0));
 	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 88));
 	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Punch, 96));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 0));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 0));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 0));
+	mpData->mMoveAfteraction.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 0));
 
 	mpData->mAnimSpeed.insert(pair<eAnimStatus, int>(eAnimStatus::Idle, 8));
 	mpData->mAnimSpeed.insert(pair<eAnimStatus, int>(eAnimStatus::Move_Forward, 6));

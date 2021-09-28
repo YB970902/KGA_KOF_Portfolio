@@ -34,6 +34,8 @@ void ChAnimation::Update()
 		mpData->mPlayerStatus = eAnimStatus::Dead;
 	}
 
+
+
 	if (mpTarget && IsCollided(mWeakPunchHitBox, mpTarget->GetShape()))
 	{
 		if (!CheckHitChar())
@@ -54,10 +56,10 @@ void ChAnimation::Update()
 			else
 			{
 
-				if (mpTarget->GetData()->mIsDamaged == false)
-				{
+				//if (mpTarget->GetData()->mIsDamaged == false)
+				//{
 					mpTarget->SetFrameX(0);
-				}
+				//}
 
 				mpTarget->GetData()->mIsDamaged = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
@@ -114,7 +116,7 @@ void ChAnimation::Update()
 			else
 			{
 
-				if (mpTarget->GetData()->mIsDamaged == false)
+				/*if (mpTarget->GetData()->mIsDamaged == false)*/
 				{
 					mpTarget->SetFrameX(0);
 				}
@@ -174,7 +176,7 @@ void ChAnimation::Update()
 			else
 			{
 
-				if (mpTarget->GetData()->mIsDamaged == false)
+				/*if (mpTarget->GetData()->mIsDamaged == false)*/
 				{
 					mpTarget->SetFrameX(0);
 				}
@@ -234,7 +236,7 @@ void ChAnimation::Update()
 			else
 			{
 
-				if (mpTarget->GetData()->mIsDamaged == false)
+				/*if (mpTarget->GetData()->mIsDamaged == false)*/
 				{
 					mpTarget->SetFrameX(0);
 				}
@@ -294,7 +296,7 @@ void ChAnimation::Update()
 			else
 			{
 
-				if (mpTarget->GetData()->mIsDamaged == false)
+				/*if (mpTarget->GetData()->mIsDamaged == false)*/
 				{
 					mpTarget->SetFrameX(0);
 				}
@@ -354,7 +356,7 @@ void ChAnimation::Update()
 			else
 			{
 
-				if (mpTarget->GetData()->mIsDamaged == false)
+				/*if (mpTarget->GetData()->mIsDamaged == false)*/
 				{
 					mpTarget->SetFrameX(0);
 				}
@@ -414,7 +416,7 @@ void ChAnimation::Update()
 			else
 			{
 
-				if (mpTarget->GetData()->mIsDamaged == false)
+				/*if (mpTarget->GetData()->mIsDamaged == false)*/
 				{
 					mpTarget->SetFrameX(0);
 				}
@@ -474,7 +476,7 @@ void ChAnimation::Update()
 			else
 			{
 
-				if (mpTarget->GetData()->mIsDamaged == false)
+				/*if (mpTarget->GetData()->mIsDamaged == false)*/
 				{
 					mpTarget->SetFrameX(0);
 				}
@@ -515,8 +517,9 @@ void ChAnimation::Update()
 		}
 	}
 
-	if (mpData->mPlayerAct == eActing::Act_Attack && mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus] - 1)
+	if ((mpData->mPlayerAct == eActing::Act_Attack || mpData->mPlayerAct == eActing::Damaged) && mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus] - 1)
 	{
+		pos.x = moveAfterAction(pos.x);
 		mpData->mPlayerAct = eActing::Act_Idle;
 		mpData->mPlayerStatus = eAnimStatus::Idle;
 		mFrameX = 0;
@@ -545,12 +548,12 @@ void ChAnimation::Update()
 		{
 			mFrameX++;
 
-			if (mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus])
+			if (mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus]- 1)
 			{
-				mFrameX = 0;
+				//mFrameX = 0;
 				mpData->mIsDamaged = false;
-				mpData->mPlayerAct = eActing::Act_Idle;
-				mpData->mPlayerStatus = eAnimStatus::Idle;
+				//mpData->mPlayerAct = eActing::Act_Idle;
+				//mpData->mPlayerStatus = eAnimStatus::Idle;
 			}
 			mElapsedCount = 0;
 		}
@@ -559,7 +562,6 @@ void ChAnimation::Update()
 	{
 		if (mpData->mPlayerStatus == eAnimStatus::Weak_Punch)
 		{
-
 			mElapsedCount++;
 			if (mElapsedCount >= 4)
 			{
@@ -579,7 +581,6 @@ void ChAnimation::Update()
 					//mFrameX = 0;
 					mpData->mIsAttack = false;
 					//mpData->mPlayerAct = eActing::Act_Idle;
-					pos.x = moveAfterAction(pos.x);
 				}
 				mElapsedCount = 0;
 			}
@@ -606,7 +607,6 @@ void ChAnimation::Update()
 					//mFrameX = 0;
 					mpData->mIsAttack = false;
 					//mpData->mPlayerAct = eActing::Act_Idle;
-					pos.x = moveAfterAction(pos.x);
 				}
 				mElapsedCount = 0;
 			}
@@ -633,7 +633,6 @@ void ChAnimation::Update()
 					//mFrameX = 0;
 					mpData->mIsAttack = false;
 					//mpData->mPlayerAct = eActing::Act_Idle;
-					pos.x = moveAfterAction(pos.x);
 				}
 				mElapsedCount = 0;
 			}
@@ -655,12 +654,11 @@ void ChAnimation::Update()
 					OffStrongKickHitBox();
 				}
 
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
 				{
 					//mFrameX = 0;
 					mpData->mIsAttack = false;
 					//mpData->mPlayerAct = eActing::Act_Idle;
-					pos.x = moveAfterAction(pos.x);
 				}
 				mElapsedCount = 0;
 			}
@@ -682,11 +680,12 @@ void ChAnimation::Update()
 					OffNearWeakPunchHitBox();
 				}
 
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
 				{
 					//mFrameX = 0;
 					mpData->mIsAttack = false;
 					//mpData->mPlayerAct = eActing::Act_Idle;
+
 				}
 				mElapsedCount = 0;
 			}
@@ -719,7 +718,7 @@ void ChAnimation::Update()
 		}
 		else if (mpData->mPlayerStatus == eAnimStatus::Near_Weak_Kick)
 		{
-			
+
 			mElapsedCount++;
 			if (mElapsedCount >= 4)
 			{
@@ -736,7 +735,7 @@ void ChAnimation::Update()
 					OffNearWeakKickHitBox();
 				}
 
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
 				{
 					//mFrameX = 0;
 					mpData->mIsAttack = false;
@@ -747,7 +746,7 @@ void ChAnimation::Update()
 		}
 		else if (mpData->mPlayerStatus == eAnimStatus::Near_Strong_Kick)
 		{
-			
+
 			mElapsedCount++;
 			if (mElapsedCount >= 4)
 			{
@@ -762,7 +761,7 @@ void ChAnimation::Update()
 					OffNearStrongKickHitBox();
 				}
 
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
 				{
 					//mFrameX = 0;
 					mpData->mIsAttack = false;
@@ -779,7 +778,7 @@ void ChAnimation::Update()
 			// 왼쪽으로 움직이기
 			if (mpData->mPlayerAct == eActing::Act_Left_Move)
 			{
-				
+
 				mElapsedCount++;
 				if (mElapsedCount >= 8)
 				{
@@ -824,7 +823,7 @@ void ChAnimation::Update()
 			// 오른쪽으로 움직이기
 			else if (mpData->mPlayerAct == eActing::Act_Right_Move)
 			{
-				
+
 
 				mElapsedCount++;
 				if (mElapsedCount >= 8)//(int)AnimSpeed[mpData->mPlayerStatus])
@@ -870,13 +869,13 @@ void ChAnimation::Update()
 
 		else if (mpData->mPlayerAct == eActing::Act_Idle) // Idle 일때
 		{
-			
+
 
 			mElapsedCount++;
 			if (mElapsedCount >= 8)
 			{
 				mFrameX++;
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
 				{
 					mFrameX = 0;
 				}
@@ -991,7 +990,7 @@ void ChAnimation::Update()
 	}
 
 #pragma endregion
-	
+
 	//	// 각 캐릭터가 붙어 있고, 상대 캐릭터가 화면상에서 벽에 붙어있거나 붙게될시 현재 캐릭터가 공격할때 현재 캐릭터가 뒤로 밀려나는 로직
 	//	if (mpData->mPlayerLookat == eLookat::Right_Lookat)
 	//	{
@@ -1037,13 +1036,14 @@ void ChAnimation::Render(HDC hdc)
 	}
 
 
-		MGR_IMG->GetImage((eImageTag)((int)mpData->mPlayerStatus + (int)mpData->mPlayerLookat + (int)mpData->mCharTag))->Render(hdc, (int)pos.x, (int)pos.y, mFrameX, mFrameY, mpData->mPlayerLookat);
-
+	MGR_IMG->GetImage((eImageTag)((int)mpData->mPlayerStatus + (int)mpData->mPlayerLookat + (int)mpData->mCharTag))->Render(hdc, (int)pos.x, (int)pos.y,
+		mpData->mPlayerLookat == eLookat::Left_Lookat ? mFrameX : mpData->mAnimframe[mpData->mPlayerStatus] - mFrameX - 1,
+		mFrameY, mpData->mPlayerLookat);
 }
 
 void ChAnimation::Release()
 {
-	
+
 }
 
 FLOAT ChAnimation::moveAfterAction(FLOAT pos)
@@ -1076,6 +1076,7 @@ void ChAnimation::Attack(eAnimStatus type)
 	{
 		mFrameX = 0;
 	}
+
 	mpData->mIsAttack = true;
 	mpData->mPlayerAct = eActing::Act_Attack;
 	mpData->mPlayerStatus = type;

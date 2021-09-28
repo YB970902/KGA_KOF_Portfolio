@@ -10,12 +10,10 @@ class ChAnimation : public Character	// 상속관계
 {
 protected:
 	//Image* img = nullptr;
-	int mFrameX = 0, mFrameY = 0;
+	
 	int mElapsedCount = 0;
 
 	bool mbNotMove = false;
-
-
 
 	const int KnockBackPixel = 30;
 
