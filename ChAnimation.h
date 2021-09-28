@@ -13,7 +13,9 @@ protected:
 	int mFrameX = 0, mFrameY = 0;
 	int mElapsedCount = 0;
 
-	bool mNotMove = false;
+	bool mbNotMove = false;
+
+
 
 	const int KnockBackPixel = 30;
 
@@ -38,7 +40,8 @@ public:
 
 	inline int GetFrameX() { return this->mFrameX; }
 
-	inline void SetNotMove(bool b) { this->mNotMove = b; }
+	inline void SetNotMove(bool b) { this->mbNotMove = b; }
+	inline float CalculationAcceleration(float knockbackpixel) { return knockbackpixel * 0.3f; }
 
 	inline eLookat GetLookAt() {
 		return mpData->mPlayerLookat;
@@ -56,6 +59,8 @@ public:
 
 	static void MoveLeftCommand(ChAnimation* character) { character->MoveLeft(); }
 	static void MoveRightCommand(ChAnimation* character) { character->MoveRight(); }
+
+
 };
 
 static int baseX;

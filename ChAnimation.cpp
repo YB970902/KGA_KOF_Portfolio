@@ -515,6 +515,13 @@ void ChAnimation::Update()
 		}
 	}
 
+	if (mpData->mPlayerAct == eActing::Act_Attack && mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus] - 1)
+	{
+		mpData->mPlayerAct = eActing::Act_Idle;
+		mpData->mPlayerStatus = eAnimStatus::Idle;
+		mFrameX = 0;
+	}
+
 	if (mpData->mPlayerAct == eActing::Dead)
 	{
 
@@ -567,11 +574,11 @@ void ChAnimation::Update()
 					OffWeakPunchHitBox();
 				}
 
-				if (mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus])
+				if (mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus] - 1)
 				{
-					mFrameX = 1;
+					//mFrameX = 0;
 					mpData->mIsAttack = false;
-					mpData->mPlayerAct = eActing::Act_Idle;
+					//mpData->mPlayerAct = eActing::Act_Idle;
 					pos.x = moveAfterAction(pos.x);
 				}
 				mElapsedCount = 0;
@@ -594,11 +601,11 @@ void ChAnimation::Update()
 					OffWeakKickHitBox();
 				}
 
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
 				{
-					mFrameX = 1;
+					//mFrameX = 0;
 					mpData->mIsAttack = false;
-					mpData->mPlayerAct = eActing::Act_Idle;
+					//mpData->mPlayerAct = eActing::Act_Idle;
 					pos.x = moveAfterAction(pos.x);
 				}
 				mElapsedCount = 0;
@@ -621,11 +628,11 @@ void ChAnimation::Update()
 					OffStrongPunchHitBox();
 				}
 
-				if (mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus]-1)
+				if (mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus] - 1)
 				{
-					mFrameX = 0;
+					//mFrameX = 0;
 					mpData->mIsAttack = false;
-					mpData->mPlayerAct = eActing::Act_Idle;
+					//mpData->mPlayerAct = eActing::Act_Idle;
 					pos.x = moveAfterAction(pos.x);
 				}
 				mElapsedCount = 0;
@@ -650,9 +657,9 @@ void ChAnimation::Update()
 
 				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
 				{
-					mFrameX = 0;
+					//mFrameX = 0;
 					mpData->mIsAttack = false;
-					mpData->mPlayerAct = eActing::Act_Idle;
+					//mpData->mPlayerAct = eActing::Act_Idle;
 					pos.x = moveAfterAction(pos.x);
 				}
 				mElapsedCount = 0;
@@ -677,9 +684,9 @@ void ChAnimation::Update()
 
 				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
 				{
-					mFrameX = 0;
+					//mFrameX = 0;
 					mpData->mIsAttack = false;
-					mpData->mPlayerAct = eActing::Act_Idle;
+					//mpData->mPlayerAct = eActing::Act_Idle;
 				}
 				mElapsedCount = 0;
 			}
@@ -701,11 +708,11 @@ void ChAnimation::Update()
 					OffNearStrongPunchHitBox();
 				}
 
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus] - 1)
 				{
-					mFrameX = 0;
+					//mFrameX = 0;
 					mpData->mIsAttack = false;
-					mpData->mPlayerAct = eActing::Act_Idle;
+					//mpData->mPlayerAct = eActing::Act_Idle;
 				}
 				mElapsedCount = 0;
 			}
@@ -731,9 +738,9 @@ void ChAnimation::Update()
 
 				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
 				{
-					mFrameX = 0;
+					//mFrameX = 0;
 					mpData->mIsAttack = false;
-					mpData->mPlayerAct = eActing::Act_Idle;
+					//mpData->mPlayerAct = eActing::Act_Idle;
 				}
 				mElapsedCount = 0;
 			}
@@ -757,9 +764,9 @@ void ChAnimation::Update()
 
 				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
 				{
-					mFrameX = 0;
+					//mFrameX = 0;
 					mpData->mIsAttack = false;
-					mpData->mPlayerAct = eActing::Act_Idle;
+					//mpData->mPlayerAct = eActing::Act_Idle;
 				}
 				mElapsedCount = 0;
 			}
@@ -917,6 +924,8 @@ void ChAnimation::Update()
 
 	SetShape();
 
+#pragma region 캐릭터_충돌체크
+
 	// 왼쪽으로 이동했을 때 충돌이 있다면
 	if (mpData->mPlayerAct == eActing::Act_Left_Move)
 	{
@@ -980,6 +989,8 @@ void ChAnimation::Update()
 			SetShape();
 		}
 	}
+
+#pragma endregion
 	
 	//	// 각 캐릭터가 붙어 있고, 상대 캐릭터가 화면상에서 벽에 붙어있거나 붙게될시 현재 캐릭터가 공격할때 현재 캐릭터가 뒤로 밀려나는 로직
 	//	if (mpData->mPlayerLookat == eLookat::Right_Lookat)

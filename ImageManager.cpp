@@ -147,7 +147,7 @@ void ImageManager::init()
 	mimageList[eImageTag::BluemaryLeftForward]->Init("Image/Bluemary_Database_IMG/Bluemary_Walk_Front.bmp", 600, 120, 10, 1, true, RGB(255, 0, 255));
 	mimageList[eImageTag::BluemaryLeftBackward]->Init("Image/Bluemary_Database_IMG/Bluemary_Walk_Back.bmp", 360, 120, 6, 1, true, RGB(255, 0, 255));
 	mimageList[eImageTag::BluemaryLeftDamaged]->Init("Image/Bluemary_Database_IMG/Bluemary_Damaged_2.bmp", 270, 100, 3, 1, true, RGB(255, 0, 255));
-	mimageList[eImageTag::BluemaryLeftDead]->Init("Image/Bluemary_Database_IMG/Bluemary_Dead_2.bmp", 2100, 130, 19, 14, true, RGB(255, 0, 255));
+	mimageList[eImageTag::BluemaryLeftDead]->Init("Image/Bluemary_Database_IMG/Bluemary_Dead_2.bmp", 2100, 130, 14, 1, true, RGB(255, 0, 255));
 	mimageList[eImageTag::BluemaryLeftWeakPunch]->Init("Image/Bluemary_Database_IMG/Bluemary_Weak_Punch.bmp", 400, 100, 4, 1, true, RGB(255, 0, 255));
 	mimageList[eImageTag::BluemaryLeftWeakKick]->Init("Image/Bluemary_Database_IMG/Bluemary_Weak_Kick.bmp", 1080, 120, 9, 1, true, RGB(255, 0, 255));
 	mimageList[eImageTag::BluemaryLeftStrongPunch]->Init("Image/Bluemary_Database_IMG/Bluemary_Strong_Punch.bmp", 4840, 120, 22, 1, true, RGB(255, 0, 255));
@@ -177,7 +177,7 @@ void ImageManager::init()
 	mimageList[eImageTag::BluemaryRightForward]->Init("Image/Bluemary_Database_IMG/Bluemary_Walk_Front.bmp", 600, 120, 10, 1, true, RGB(255, 0, 255),1);
 	mimageList[eImageTag::BluemaryRightBackward]->Init("Image/Bluemary_Database_IMG/Bluemary_Walk_Back.bmp", 360, 120, 6, 1, true, RGB(255, 0, 255),1);
 	mimageList[eImageTag::BluemaryRightDamaged]->Init("Image/Bluemary_Database_IMG/Bluemary_Damaged_2.bmp", 270, 100, 3, 1, true, RGB(255, 0, 255),1);
-	mimageList[eImageTag::BluemaryRightDead]->Init("Image/Bluemary_Database_IMG/Bluemary_Dead_2.bmp", 2100, 130, 19, 14, true, RGB(255, 0, 255),1);
+	mimageList[eImageTag::BluemaryRightDead]->Init("Image/Bluemary_Database_IMG/Bluemary_Dead_2.bmp", 2100, 130, 14, 1, true, RGB(255, 0, 255),1);
 	mimageList[eImageTag::BluemaryRightWeakPunch]->Init("Image/Bluemary_Database_IMG/Bluemary_Weak_Punch.bmp", 400, 100, 4, 1, true, RGB(255, 0, 255),1);
 	mimageList[eImageTag::BluemaryRightWeakKick]->Init("Image/Bluemary_Database_IMG/Bluemary_Weak_Kick.bmp", 1080, 120, 9, 1, true, RGB(255, 0, 255),1);
 	mimageList[eImageTag::BluemaryRightStrongPunch]->Init("Image/Bluemary_Database_IMG/Bluemary_Strong_Punch.bmp", 4840, 120, 22, 1, true, RGB(255, 0, 255),1);

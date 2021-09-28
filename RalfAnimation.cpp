@@ -161,13 +161,9 @@ void RalfAnimation::Init(eLookat dir)
 
 	//Player.selectedCharacter = ralf
 
-	img = new Image;
 
 	//"Image/Ralf_Database_IMG/Ralf_Walk_Cycle.bmp"
 	//Waystring = PlayerCharacter1.Import_Image(PlayerCharacter1.m_Setcharacter,PlayerCharacter1.m_Player.playerStatus);
-
-	img->Init(mpData->mPath[mpData->mPlayerStatus], (int)mpData->mSizeX[mpData->mPlayerStatus], (int)mpData->mSizeY[mpData->mPlayerStatus],
-		(int)mpData->mAnimframe[mpData->mPlayerStatus], 1, true, RGB(255, 0, 255));
 
 	//img->Init(Player.mpData->mPath[playerStatus], (int)Player.mpData->sizeX[playerStatus], (int)Player.mpData->sizeY[playerStatus],
 	//	(int)Player.mpData->Animframe[playerStatus], 1, true, RGB(255, 0, 255));

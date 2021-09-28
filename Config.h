@@ -45,8 +45,8 @@ enum class eAnimStatus
 	Strong_Kick,
 	Near_Weak_Punch,
 	Near_Weak_Kick,
+	Near_Strong_Punch,
 	Near_Strong_Kick,
-	Near_Strong_Punch
 };
 
 enum class eActing

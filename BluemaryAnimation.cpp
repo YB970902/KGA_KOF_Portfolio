@@ -33,8 +33,8 @@ void BluemaryAnimation::Init(eLookat dir)
 	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Punch, 22));
 	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Strong_Kick, 12));
 	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Punch, 5));
-	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 15));
-	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 7));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 7));
+	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 15));
 	mpData->mAnimframe.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Kick, 13));
 
 	mpData->mSizeX.insert(pair<eAnimStatus, int>(eAnimStatus::Idle, 720));
@@ -122,8 +122,8 @@ void BluemaryAnimation::Init(eLookat dir)
 	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 237));
 	mpData->mHitboxShapeTop.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, -249));
 	mpData->mHitboxShapeBottom.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 80));
-	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 4));
-	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 7));
+	mpData->mHitboxOnFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 1));
+	mpData->mHitboxOffFrame.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Weak_Kick, 3));
 
 	mpData->mHitboxShapeLeft.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, -132));
 	mpData->mHitboxShapeRight.insert(pair<eAnimStatus, int>(eAnimStatus::Near_Strong_Punch, 132));
@@ -191,13 +191,8 @@ void BluemaryAnimation::Init(eLookat dir)
 
 	//selectedCharacter = ralf
 
-	img = new Image;
-
 	//"Image/Ralf_Database_IMG/Ralf_Walk_Cycle.bmp"
 	//Waystring = PlayerCharacter1.Import_Image(PlayerCharacter1.m_Setcharacter,PlayerCharacter1.m_Player.playerStatus);
-
-	img->Init(mpData->mPath[mpData->mPlayerStatus], (int)mpData->mSizeX[mpData->mPlayerStatus], (int)mpData->mSizeY[mpData->mPlayerStatus],
-		(int)mpData->mAnimframe[mpData->mPlayerStatus], 1, true, RGB(255, 0, 255));
 
 	//img->Init(Player.mpData->mPath[playerStatus], (int)Player.mpData->sizeX[playerStatus], (int)Player.mpData->sizeY[playerStatus],
 	//	(int)Player.mpData->Animframe[playerStatus], 1, true, RGB(255, 0, 255));
