@@ -83,6 +83,7 @@ bool isTrans = false, COLORREF transColor = NULL); // File 프레임이 없는 이미지
 	void Render(HDC hdc);
 	void Render(HDC hdc, int destX, int destY);	// 이미지 데이터를 화면에 복사
 	void Render(HDC hdc, int destX, int destY, int frameX, int frameY, eLookat playerLookat);	// 이미지 데이터를 화면에 복사
+	void Render(HDC hdc, BLENDFUNCTION ftn);
 
 
 	HDC GetMemDC() { if (imageInfo) return imageInfo->hMemDc; return NULL; }

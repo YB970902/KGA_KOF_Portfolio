@@ -2,6 +2,7 @@
 #include "ChAnimData.h"
 #include "Image.h"
 #include "KeyManager.h"
+#include "ImageManager.h"
 #include <map>
 
 using namespace std;
@@ -1034,7 +1035,7 @@ void ChAnimation::Render(HDC hdc)
 
 	if (img)
 	{
-		img->Render(hdc, (int)pos.x, (int)pos.y, mFrameX, mFrameY, baseX, baseY, mpData->mPlayerStatus, mpData->mPlayerLookat);
+		MGR_IMG->GetImage((eImageTag)((int)mpData->mPlayerStatus + (int)mpData->mPlayerLookat + (int)mpData->mCharTag))->Render(hdc, (int)pos.x, (int)pos.y, mFrameX, mFrameY, mpData->mPlayerLookat);
 	}
 }
 

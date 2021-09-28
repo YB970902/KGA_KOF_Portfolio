@@ -185,4 +185,5 @@ void RalfAnimation::Init(eLookat dir)
 	shape.right = (int)pos.x + ((mpData->mSizeX[mpData->mPlayerStatus] / mpData->mAnimframe[mpData->mPlayerStatus]) / 2);
 	shape.bottom = (int)pos.y + (mpData->mSizeX[mpData->mPlayerStatus] / 2);
 
+	mpData->mCharTag = eCharacterTag::Ralf;
 }

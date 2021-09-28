@@ -44,4 +44,5 @@ public:
 	map<eAnimStatus, int> mHitboxShapeBottomChangeDownVal;
 	map<eAnimStatus, int> mHitboxShapebottomChangeDownFrame;
 
+	eCharacterTag mCharTag = eCharacterTag::Leona;
 };
