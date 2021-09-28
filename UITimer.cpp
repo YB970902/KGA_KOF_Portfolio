@@ -1,6 +1,7 @@
 #include "UITimer.h"
 #include "Image.h"
-#include "Command.h"
+#include "SceneManager.h"
+#include "Config.h"
 
 void UITimer::Init()
 {
@@ -31,7 +32,7 @@ void UITimer::Update()
 		mCurTime--;
 		if (mCurTime < 0)
 		{
-			if (mCom) { mCom->Execute(); }
+			MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
 		}
 	}
 }

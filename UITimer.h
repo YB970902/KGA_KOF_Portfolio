@@ -4,7 +4,6 @@
 
 using namespace std;
 
-class Command;
 class Image;
 class UITimer : public GameEntity
 {
@@ -16,7 +15,7 @@ protected:
 	map<int, Image*> mImgMap;
 	int mElapseTime = 0;
 	int mCurTime = 0;
-	Command* mCom = nullptr;
+
 public:
 	void Init();
 	void Release();
@@ -24,6 +23,5 @@ public:
 	void Render(HDC hdc);
 
 	inline void SetTime(int time) { mCurTime = time; }
-	inline void SetCommand(Command* com) { mCom = com; }
 };
 
