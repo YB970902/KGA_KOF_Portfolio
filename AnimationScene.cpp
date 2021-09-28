@@ -422,6 +422,8 @@ void AnimationScene::Update()
 			bf.SourceConstantAlpha = 255;
 
 			Sleep(2000);
+			mbPrintEffect1 = false;
+			mbPrintEffect2 = false;
 			MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
 			SetTimer(g_hWnd, 0, 10, NULL);
 
