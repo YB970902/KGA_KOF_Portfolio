@@ -23,14 +23,15 @@ using namespace std;
 #define SAFE_RELEASE(p)	{ if (p) { p->Release(); delete p; p = nullptr; } }
 
 enum class eMoveDir { Left = -1, Right = 1, Up, Down, };
-enum class eSceneTag { OpeningScene,CharacterSelectScene, HitBoxSnene, AnimationScene, };
+enum class eSceneTag { OpeningScene,CharacterSelectScene, HitBoxSnene, AnimationScene, EndingScene};
 enum class eCharacterType { Null, Bluemary, Ralf, Leona, };
 
 extern HWND g_hWnd;
 extern HINSTANCE g_hInstance;
 
-extern int Player1;
-extern int Player2;
+extern int g_Player1;
+extern int g_Player2;
+extern bool g_bWinner;
 
 enum class eAnimStatus
 {

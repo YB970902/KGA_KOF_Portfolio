@@ -2,6 +2,7 @@
 #include "HitBoxScene.h"
 #include "SceneManager.h"
 #include "OpeningScene.h"
+#include "EndingScene.h"
 #include "CharacterSelectScene.h"
 
 void SceneManager::Init()
@@ -10,6 +11,7 @@ void SceneManager::Init()
 	mScene[eSceneTag::CharacterSelectScene] = new CharacterSelectScene;
 	mScene[eSceneTag::AnimationScene] = new AnimationScene;
 	mScene[eSceneTag::HitBoxSnene] = new HitBoxScene;
+	mScene[eSceneTag::EndingScene] = new EndingScene;
 
 	mpCurScene = nullptr;
 }

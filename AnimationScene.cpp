@@ -15,7 +15,7 @@ void AnimationScene::Enter()
 	POINTFLOAT pos1;
 	POINTFLOAT pos2;
 
-	switch (Player1)
+	switch (g_Player1)
 	{
 	case 1:
 		mpPlayer1 = new BluemaryAnimation;
@@ -37,7 +37,7 @@ void AnimationScene::Enter()
 		break;
 	}
 
-	switch (Player2)
+	switch (g_Player2)
 	{
 	case 1:
 		mpPlayer2 = new BluemaryAnimation;
@@ -462,9 +462,17 @@ void AnimationScene::Update()
 			Sleep(2000);
 			mbPrintEffect1 = false;
 			mbPrintEffect2 = false;
-			MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
-			SetTimer(g_hWnd, 0, 10, NULL);
 
+			if (mpPlayer1->GetHP() <= 0)
+			{
+				g_bWinner = false;
+			}
+			else 
+			{
+				g_bWinner = true;
+			}
+			MGR_SCN->ChangeScene(eSceneTag::EndingScene);
+			SetTimer(g_hWnd, 0, 10, NULL);
 			return;
 		}
 		else

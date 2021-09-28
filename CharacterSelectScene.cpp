@@ -48,41 +48,41 @@ CharacterSelectScene::~CharacterSelectScene()
 
 void CharacterSelectScene::Enter()
 {
-	Player1 = (int)eCharacterType::Null;
-	Player2 = (int)eCharacterType::Null;
+	g_Player1 = (int)eCharacterType::Null;
+	g_Player2 = (int)eCharacterType::Null;
 }
 
 void CharacterSelectScene::Update()
 {
 	if (MGR_KEY->IsOnceKeyDown('1'))
 	{
-		Player1 = (int)eCharacterType::Bluemary;
+		g_Player1 = (int)eCharacterType::Bluemary;
 		cout << "블루마리" << endl;
 	}
 	else if (MGR_KEY->IsOnceKeyDown('2'))
 	{
-		Player1 = (int)eCharacterType::Ralf;
+		g_Player1 = (int)eCharacterType::Ralf;
 		cout << "랄프" << endl;
 	}
 	else if (MGR_KEY->IsOnceKeyDown('3'))
 	{
-		Player1 = (int)eCharacterType::Leona;
+		g_Player1 = (int)eCharacterType::Leona;
 		cout << "레오나" << endl;
 	}
 
 	if (MGR_KEY->IsOnceKeyDown('4'))
 	{
-		Player2 = (int)eCharacterType::Bluemary;
+		g_Player2 = (int)eCharacterType::Bluemary;
 		cout << "블루마리" << endl;
 	}
 	else if (MGR_KEY->IsOnceKeyDown('5'))
 	{
-		Player2 = (int)eCharacterType::Ralf;
+		g_Player2 = (int)eCharacterType::Ralf;
 		cout << "랄프" << endl;
 	}
 	else if (MGR_KEY->IsOnceKeyDown('6'))
 	{
-		Player2 = (int)eCharacterType::Leona;
+		g_Player2 = (int)eCharacterType::Leona;
 		cout << "레오나" << endl;
 	}
 
@@ -104,11 +104,11 @@ void CharacterSelectScene::Update()
 
 	if (!mbIsPlayer1Selected)
 	{
-		Player1 = mCurIndex;
+		g_Player1 = mCurIndex;
 	}
 	else if (!mbIsPlayer2Selected)
 	{
-		Player2 = mCurIndex;
+		g_Player2 = mCurIndex;
 	}
 
 	if (MGR_KEY->IsOnceKeyDown(VK_SPACE))
@@ -134,7 +134,7 @@ void CharacterSelectScene::Render(HDC hdc)
 	mp1PMugshotBackground->Render(hdc, 270, WIN_SIZE_Y - 650);
 	mp2PMugshotBackground->Render(hdc, 270, WIN_SIZE_Y - 200);
 
-	switch (Player1)
+	switch (g_Player1)
 	{
 	case (int)eCharacterType::Bluemary:
 		mpMaryMugshot->Render(hdc, 270, WIN_SIZE_Y - 650);
@@ -149,7 +149,7 @@ void CharacterSelectScene::Render(HDC hdc)
 		break;
 	}
 
-	switch (Player2)
+	switch (g_Player2)
 	{
 	case (int)eCharacterType::Bluemary:
 		mpMaryMugshot->Render(hdc, 270, WIN_SIZE_Y - 200);

@@ -147,6 +147,7 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommonFunction.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="EndingScene.h" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="HealthBar.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharacterSelectScene.cpp" />
     <ClCompile Include="Command.cpp" />
+    <ClCompile Include="EndingScene.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="HealthBar.cpp" />
