@@ -38,14 +38,14 @@ void MainGame::Update()
 
 	MGR_SCN->Update();
 
-	if (MGR_KEY->IsOnceKeyDown('O'))
-	{
-		MGR_SCN->ChangeScene(eSceneTag::HitBoxSnene);
-	}
-	else if (MGR_KEY->IsOnceKeyDown('P'))
-	{
-		MGR_SCN->ChangeScene(eSceneTag::AnimationScene);
-	}
+	//if (MGR_KEY->IsOnceKeyDown('O'))
+	//{
+	//	MGR_SCN->ChangeScene(eSceneTag::HitBoxSnene);
+	//}
+	//else if (MGR_KEY->IsOnceKeyDown('P'))
+	//{
+	//	MGR_SCN->ChangeScene(eSceneTag::AnimationScene);
+	//}
 }
 
 void MainGame::Render(HDC hdc)

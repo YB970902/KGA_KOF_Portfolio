@@ -409,6 +409,11 @@ void AnimationScene::Update()
 	mpPlayer2Bar->SetValue(mpPlayer2->GetHPWeight());
 
 	mpTimer->Update();
+	if (mpTimer->GetTime() < 0)
+	{
+		MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
+		return;
+	}
 	
 	mpPlayer1->Update();
 
