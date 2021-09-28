@@ -11,8 +11,9 @@ HINSTANCE	g_hInstance;
 HWND		g_hWnd;
 LPSTR		g_lpszClass = (LPSTR)TEXT("킹오파 포폴 팀 이영호");
 MainGame	g_mainGame;
-int Player1;
-int Player2;
+int g_Player1;
+int g_Player2;
+bool g_bWinner;
 
 void SetWindowSize(int startX, int startY, int sizeX, int sizeY);
 
