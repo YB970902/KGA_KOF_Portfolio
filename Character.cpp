@@ -331,6 +331,10 @@ void Character::AllOffHitBox()
 	mStrongPunchHitBox = RECT();
 	mWeakKickHitBox = RECT();
 	mStrongKickHitBox = RECT();
+	mNearWeakPunchHitBox = RECT();
+	mNearStrongPunchHitBox = RECT();
+	mNearWeakKickHitBox = RECT();
+	mNearStrongKickHitBox = RECT();
 	mHitChar.clear();
 }
 

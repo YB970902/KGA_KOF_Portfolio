@@ -44,10 +44,9 @@ void ChAnimation::Update()
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpTarget->GetData()->mIsDead == false)
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->SetFrameX(0);
+				
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDead = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Dead;
@@ -55,11 +54,9 @@ void ChAnimation::Update()
 			}
 			else
 			{
-
-				//if (mpTarget->GetData()->mIsDamaged == false)
-				//{
-					mpTarget->SetFrameX(0);
-				//}
+				mpTarget->SetFrameX(0);
+				
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDamaged = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
@@ -104,10 +101,9 @@ void ChAnimation::Update()
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpTarget->GetData()->mIsDead == false)
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->SetFrameX(0);
+				
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDead = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Dead;
@@ -115,11 +111,9 @@ void ChAnimation::Update()
 			}
 			else
 			{
+				mpTarget->SetFrameX(0);
 
-				/*if (mpTarget->GetData()->mIsDamaged == false)*/
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDamaged = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
@@ -164,10 +158,9 @@ void ChAnimation::Update()
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpTarget->GetData()->mIsDead == false)
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->SetFrameX(0);
+
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDead = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Dead;
@@ -175,11 +168,9 @@ void ChAnimation::Update()
 			}
 			else
 			{
+				mpTarget->SetFrameX(0);
 
-				/*if (mpTarget->GetData()->mIsDamaged == false)*/
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDamaged = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
@@ -224,10 +215,9 @@ void ChAnimation::Update()
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpTarget->GetData()->mIsDead == false)
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->SetFrameX(0);
+
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDead = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Dead;
@@ -235,11 +225,9 @@ void ChAnimation::Update()
 			}
 			else
 			{
+				mpTarget->SetFrameX(0);
 
-				/*if (mpTarget->GetData()->mIsDamaged == false)*/
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDamaged = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
@@ -284,10 +272,9 @@ void ChAnimation::Update()
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpTarget->GetData()->mIsDead == false)
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->SetFrameX(0);
+
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDead = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Dead;
@@ -295,11 +282,9 @@ void ChAnimation::Update()
 			}
 			else
 			{
+				mpTarget->SetFrameX(0);
 
-				/*if (mpTarget->GetData()->mIsDamaged == false)*/
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDamaged = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
@@ -344,10 +329,9 @@ void ChAnimation::Update()
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpTarget->GetData()->mIsDead == false)
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->SetFrameX(0);
+
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDead = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Dead;
@@ -355,11 +339,9 @@ void ChAnimation::Update()
 			}
 			else
 			{
+				mpTarget->SetFrameX(0);
 
-				/*if (mpTarget->GetData()->mIsDamaged == false)*/
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDamaged = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
@@ -404,10 +386,9 @@ void ChAnimation::Update()
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpTarget->GetData()->mIsDead == false)
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->SetFrameX(0);
+
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDead = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Dead;
@@ -415,11 +396,9 @@ void ChAnimation::Update()
 			}
 			else
 			{
+				mpTarget->SetFrameX(0);
 
-				/*if (mpTarget->GetData()->mIsDamaged == false)*/
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDamaged = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Damaged;
@@ -464,10 +443,9 @@ void ChAnimation::Update()
 
 			if (mpTarget->GetHP() <= 0)
 			{
-				if (mpTarget->GetData()->mIsDead == false)
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->SetFrameX(0);
+
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDead = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Dead;
@@ -475,11 +453,9 @@ void ChAnimation::Update()
 			}
 			else
 			{
+				mpTarget->SetFrameX(0);
 
-				/*if (mpTarget->GetData()->mIsDamaged == false)*/
-				{
-					mpTarget->SetFrameX(0);
-				}
+				mpTarget->AllOffHitBox();
 
 				mpTarget->GetData()->mIsDamaged = true;
 				mpTarget->GetData()->mPlayerAct = eActing::Damaged;

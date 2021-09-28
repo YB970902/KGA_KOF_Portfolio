@@ -12,16 +12,28 @@
 
 void AnimationScene::Enter()
 {
+	POINTFLOAT pos1;
+	POINTFLOAT pos2;
+
 	switch (Player1)
 	{
 	case 1:
 		mpPlayer1 = new BluemaryAnimation;
+
+		pos1.x = 200;
+		pos1.y = 640;
 		break;
 	case 2:
 		mpPlayer1 = new RalfAnimation;
+
+		pos1.x = 200;
+		pos1.y = 600;
 		break;
 	case 3:
 		mpPlayer1 = new LeonaAnimation;
+
+		pos1.x = 200;
+		pos1.y = 600;
 		break;
 	}
 
@@ -29,12 +41,21 @@ void AnimationScene::Enter()
 	{
 	case 1:
 		mpPlayer2 = new BluemaryAnimation;
+
+		pos2.x = 1000;
+		pos2.y = 640;
 		break;
 	case 2:
 		mpPlayer2 = new RalfAnimation;
+
+		pos2.x = 1000;
+		pos2.y = 600;
 		break;
 	case 3:
 		mpPlayer2 = new LeonaAnimation;
+
+		pos2.x = 1000;
+		pos2.y = 600;
 		break;
 	}
 
@@ -51,12 +72,8 @@ void AnimationScene::Enter()
 	mpPlayer1->Init(eLookat::Right_Lookat);
 	mpPlayer2->Init(eLookat::Left_Lookat);
 
-	POINTFLOAT pos;
-	pos.x = 200;
-	pos.y = 600;
-	mpPlayer1->SetPos(pos);
-	pos.x = 1000;
-	mpPlayer2->SetPos(pos);
+	mpPlayer1->SetPos(pos1);
+	mpPlayer2->SetPos(pos2);
 
 	mpPlayer1->SetTarget(mpPlayer2);
 	mpPlayer2->SetTarget(mpPlayer1);
@@ -232,7 +249,7 @@ void AnimationScene::Update()
 		mpPlayer1->SetNotMove(true);
 		mpPlayer2->SetNotMove(true);
 	}
-	else*/ if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && mpPlayer1->GetShape().left == mCameraSize.left)
+	else*/ if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('D') && mpPlayer1->GetShape().left == mCameraSize.left)
 	{
 		if (!(mpPlayer2->GetShape().right >= (mCameraSize.right)))
 		{
@@ -263,7 +280,7 @@ void AnimationScene::Update()
 				mDistance = abs(mpPlayer2->GetShape().left) - abs(mpPlayer1->GetShape().right);
 			}
 
-			if (MGR_KEY->IsOnceKeyDown('G'))
+			if (MGR_KEY->IsOnceKeyDown('A'))
 			{
 				if (NearMaxPixel > mDistance)
 				{
@@ -274,7 +291,7 @@ void AnimationScene::Update()
 					mpWeakPunch1->Execute();
 				}
 			}
-			else if (MGR_KEY->IsOnceKeyDown('Y'))
+			else if (MGR_KEY->IsOnceKeyDown('Q'))
 			{
 				if (NearMaxPixel > mDistance)
 				{
@@ -285,7 +302,7 @@ void AnimationScene::Update()
 					mpStrongPunch1->Execute();
 				}
 			}
-			else if (MGR_KEY->IsOnceKeyDown('H'))
+			else if (MGR_KEY->IsOnceKeyDown('S'))
 			{
 				if (NearMaxPixel > mDistance)
 				{
@@ -296,7 +313,7 @@ void AnimationScene::Update()
 					mpWeakKick1->Execute();
 				}
 			}
-			else if (MGR_KEY->IsOnceKeyDown('U'))
+			else if (MGR_KEY->IsOnceKeyDown('W'))
 			{
 				if (NearMaxPixel > mDistance)
 				{
@@ -311,11 +328,11 @@ void AnimationScene::Update()
 
 		if (mpPlayer1->GetData()->mPlayerAct != eActing::Act_Attack)
 		{
-			if (MGR_KEY->IsStayKeyDown('A'))
+			if (MGR_KEY->IsStayKeyDown('D'))
 			{
 				mpMoveLeft1->Execute();
 			}
-			else if (MGR_KEY->IsStayKeyDown('D'))
+			else if (MGR_KEY->IsStayKeyDown('G'))
 			{
 				mpMoveRight1->Execute();
 			}
@@ -344,22 +361,22 @@ void AnimationScene::Update()
 				mDistance = abs(mpPlayer2->GetShape().right) - abs(mpPlayer1->GetShape().left);
 			}
 
-			if (MGR_KEY->IsOnceKeyDown('N'))
+			if (MGR_KEY->IsOnceKeyDown('K'))
 			{
 				if (NearMaxPixel > mDistance) { mpNearWeakPunch2->Execute(); }
 				else { mpWeakPunch2->Execute(); }
 			}
-			else if (MGR_KEY->IsOnceKeyDown('J'))
+			else if (MGR_KEY->IsOnceKeyDown('I'))
 			{
 				if (NearMaxPixel > mDistance) { mpNearStrongPunch2->Execute(); }
 				else { mpStrongPunch2->Execute(); }
 			}
-			else if (MGR_KEY->IsOnceKeyDown('M'))
+			else if (MGR_KEY->IsOnceKeyDown('L'))
 			{
 				if (NearMaxPixel > mDistance) { mpNearWeakKick2->Execute(); }
 				else { mpWeakKick2->Execute(); }
 			}
-			else if (MGR_KEY->IsOnceKeyDown('K'))
+			else if (MGR_KEY->IsOnceKeyDown('O'))
 			{
 				if (NearMaxPixel > mDistance) { mpNearStrongKick2->Execute(); }
 				else { mpStrongKick2->Execute(); }
