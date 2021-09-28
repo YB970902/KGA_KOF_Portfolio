@@ -33,7 +33,7 @@ protected:
 	float mAcceleration = 0.0f;
 	float mResistance = 0.0f;
 	bool mbIsHit = false;
-	bool mbPrintHitBox = true;
+	bool mbPrintHitBox = false;
 
 	eMoveDir mDir = eMoveDir::Right;
 

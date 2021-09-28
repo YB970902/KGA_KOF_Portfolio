@@ -1104,6 +1104,7 @@ void ChAnimation::HitTarget(int damage, float acceleration)
 	mpTarget->SetIsHit(true);
 	mpTarget->SetAcceleration(acceleration);
 	mpTarget->SetResistance(acceleration / 15);
+	mpTarget->GetData()->mIsAttack = false;
 
 	cout << "HP - " << damage << " 상대 현재 체력 : " << mpTarget->GetHP() << endl;
 }
