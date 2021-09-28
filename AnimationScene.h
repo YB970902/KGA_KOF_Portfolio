@@ -52,6 +52,9 @@ private:
 
 	Image** mpArrEffect = nullptr;
 
+	Image* mpPlayer1Mugshot = nullptr;
+	Image* mpPlayer2Mugshot = nullptr;
+
 	const int MaxBackGroundFrame = 39;
 	int mCurBackgroundFrame = 0;
 	int mCurElapseTime = 0;

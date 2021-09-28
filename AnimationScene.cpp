@@ -186,6 +186,39 @@ void AnimationScene::Enter()
 	mpTimer->Init();
 	mpTimer->SetTime(60);
 
+	mpPlayer1Mugshot = new Image();
+	mpPlayer2Mugshot = new Image();
+
+	switch (Player1)
+	{
+	case 1:
+		mpPlayer1Mugshot->Init("Image/UI/Mary.bmp", 75, 100, true, RGB(255, 0, 255));
+		break;
+	case 2:
+		mpPlayer1Mugshot->Init("Image/UI/Ralf.bmp", 75, 100, true, RGB(255, 0, 255));
+		break;
+	case 3:
+		mpPlayer1Mugshot->Init("Image/UI/Leona.bmp", 75, 100, true, RGB(255, 0, 255));
+		break;
+	default:
+		break;
+	}
+
+	switch (Player2)
+	{
+	case 1:
+		mpPlayer2Mugshot->Init("Image/UI/Mary.bmp", 75, 100, 1, 1, true, RGB(255, 0, 255), true);
+		break;
+	case 2:
+		mpPlayer2Mugshot->Init("Image/UI/Ralf.bmp", 75, 100, 1, 1, true, RGB(255, 0, 255), true);
+		break;
+	case 3:
+		mpPlayer2Mugshot->Init("Image/UI/Leona.bmp", 75, 100, 1, 1, true, RGB(255, 0, 255), true);
+		break;
+	default:
+		break;
+	}
+
 	mpEndImage = new Image;
 	mpEndImage->Init("Image/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
 
@@ -467,6 +500,9 @@ void AnimationScene::Render(HDC hdc)
 	mpPlayer1Bar->Render(hdc);
 	mpPlayer2Bar->Render(hdc);
 
+	mpPlayer1Mugshot->Render(hdc, 50, 100);
+	mpPlayer2Mugshot->Render(hdc, WIN_SIZE_X - 50, 100);
+
 	mpTimer->Render(hdc);
 
 	if (mbPrintEffect1) { mpArrEffect[mCurEffectFrame]->Render(hdc, (int)Player1HitPos.x, (int)Player1HitPos.y); }
@@ -482,6 +518,9 @@ void AnimationScene::Exit()
 
 	SAFE_RELEASE(mpPlayer1Bar);
 	SAFE_RELEASE(mpPlayer2Bar);
+
+	SAFE_RELEASE(mpPlayer1Mugshot);
+	SAFE_RELEASE(mpPlayer2Mugshot);
 
 	SAFE_RELEASE(mpTimer);
 
