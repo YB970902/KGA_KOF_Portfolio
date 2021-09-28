@@ -3,6 +3,7 @@
 #include "Config.h"
 #include "Scene.h"
 
+class UITimer;
 class Image;
 class Command;
 class ChAnimation;
@@ -16,6 +17,7 @@ private:
 	RECT mCameraSize = RECT();
 	RECT mBackgroundSize = RECT();
 
+	UITimer* mpTimer = nullptr;
 	ChAnimation* mpPlayer1 = nullptr;
 	ChAnimation* mpPlayer2 = nullptr;
 

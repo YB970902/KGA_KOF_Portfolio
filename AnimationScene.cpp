@@ -8,6 +8,7 @@
 #include "LeonaAnimation.h"
 #include "RalfAnimation.h"
 #include "SceneManager.h"
+#include "UITimer.h"
 
 void AnimationScene::Enter()
 {
@@ -163,6 +164,10 @@ void AnimationScene::Enter()
 	player2BarPos.x = 900;
 	player2BarPos.y = 100;
 	mpPlayer2Bar->SetPosition(player2BarPos);
+
+	mpTimer = new UITimer;
+	mpTimer->Init();
+	mpTimer->SetTime(60);
 
 	mpEndImage = new Image;
 	mpEndImage->Init("Image/mapImage.bmp", WIN_SIZE_X, WIN_SIZE_Y);
@@ -420,6 +425,8 @@ void AnimationScene::Update()
 			mpPlayer2->SetPrintHitBox(false);
 		}
 	}
+
+	mpTimer->Update();
 }
 
 void AnimationScene::Render(HDC hdc)
@@ -433,6 +440,8 @@ void AnimationScene::Render(HDC hdc)
 	mpPlayer1Bar->Render(hdc);
 	mpPlayer2Bar->Render(hdc);
 
+	mpTimer->Render(hdc);
+
 	if (mbPrintEffect1) { mpArrEffect[mCurEffectFrame]->Render(hdc, (int)Player1HitPos.x, (int)Player1HitPos.y); }
 	if (mbPrintEffect2) { mpArrEffect[mCurEffectFrame]->Render(hdc, (int)Player2HitPos.x, (int)Player2HitPos.y); }
 
@@ -442,8 +451,12 @@ void AnimationScene::Render(HDC hdc)
 void AnimationScene::Exit()
 {
 	SAFE_RELEASE(mpPlayer1);
-
 	SAFE_RELEASE(mpPlayer2);
+
+	SAFE_RELEASE(mpPlayer1Bar);
+	SAFE_RELEASE(mpPlayer2Bar);
+
+	SAFE_RELEASE(mpTimer);
 
 	for (int i = 0; i < 39; i++)
 	{
