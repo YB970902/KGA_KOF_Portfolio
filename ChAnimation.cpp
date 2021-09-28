@@ -7,13 +7,6 @@
 
 using namespace std;
 
-void ChAnimation::ImgUpdate(eAnimStatus playerStatus)
-{
-	img->Release();
-	img->Init(mpData->mPath[mpData->mPlayerStatus], (int)mpData->mSizeX[mpData->mPlayerStatus], (int)mpData->mSizeY[mpData->mPlayerStatus],
-		(int)mpData->mAnimframe[mpData->mPlayerStatus], 1, true, RGB(255, 0, 255));
-}
-
 void ChAnimation::Update()
 {
 	if (MGR_KEY->IsOnceKeyDown('7'))
@@ -629,9 +622,9 @@ void ChAnimation::Update()
 					OffStrongPunchHitBox();
 				}
 
-				if (mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus])
+				if (mFrameX >= (int)mpData->mAnimframe[mpData->mPlayerStatus]-1)
 				{
-					mFrameX = 1;
+					mFrameX = 0;
 					mpData->mIsAttack = false;
 					mpData->mPlayerAct = eActing::Act_Idle;
 					pos.x = moveAfterAction(pos.x);
@@ -656,9 +649,9 @@ void ChAnimation::Update()
 					OffStrongKickHitBox();
 				}
 
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
 				{
-					mFrameX = 1;
+					mFrameX = 0;
 					mpData->mIsAttack = false;
 					mpData->mPlayerAct = eActing::Act_Idle;
 					pos.x = moveAfterAction(pos.x);
@@ -683,9 +676,9 @@ void ChAnimation::Update()
 					OffNearWeakPunchHitBox();
 				}
 
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
 				{
-					mFrameX = 1;
+					mFrameX = 0;
 					mpData->mIsAttack = false;
 					mpData->mPlayerAct = eActing::Act_Idle;
 				}
@@ -709,9 +702,9 @@ void ChAnimation::Update()
 					OffNearStrongPunchHitBox();
 				}
 
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
 				{
-					mFrameX = 1;
+					mFrameX = 0;
 					mpData->mIsAttack = false;
 					mpData->mPlayerAct = eActing::Act_Idle;
 				}
@@ -737,9 +730,9 @@ void ChAnimation::Update()
 					OffNearWeakKickHitBox();
 				}
 
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
 				{
-					mFrameX = 1;
+					mFrameX = 0;
 					mpData->mIsAttack = false;
 					mpData->mPlayerAct = eActing::Act_Idle;
 				}
@@ -763,9 +756,9 @@ void ChAnimation::Update()
 					OffNearStrongKickHitBox();
 				}
 
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
 				{
-					mFrameX = 1;
+					mFrameX = 0;
 					mpData->mIsAttack = false;
 					mpData->mPlayerAct = eActing::Act_Idle;
 				}
@@ -877,7 +870,7 @@ void ChAnimation::Update()
 			if (mElapsedCount >= 8)
 			{
 				mFrameX++;
-				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus])
+				if (mFrameX >= mpData->mAnimframe[mpData->mPlayerStatus]-1)
 				{
 					mFrameX = 0;
 				}

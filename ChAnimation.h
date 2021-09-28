@@ -9,17 +9,18 @@ class Image;	// 포함관계
 class ChAnimation : public Character	// 상속관계
 {
 protected:
-	Image* img = nullptr;
+	//Image* img = nullptr;
+	int mFrameX = 0, mFrameY = 0;
 	int mElapsedCount = 0;
 
-	bool mbNotMove = false;
+	bool mNotMove = false;
 
 	const int KnockBackPixel = 30;
 
 public:
 	virtual void Init(eLookat dir) {};
 
-	virtual void ImgUpdate(eAnimStatus playerStatus);
+	//virtual void ImgUpdate(eAnimStatus playerStatus);
 	virtual void Update();
 	virtual void Render(HDC hdc);
 	virtual void Release();
@@ -32,11 +33,16 @@ public:
 	void MoveRight();
 
 	void HitTarget(int damage, float KnockBackPixel);
+	
+	inline void SetFrameX(int frame) { this->mFrameX = frame; }
 
-	inline void SetNotMove(bool b) { this->mbNotMove = b; }
+	inline int GetFrameX() { return this->mFrameX; }
 
-	inline eLookat GetLookAt() { return mpData->mPlayerLookat; }
-	inline float CalculationAcceleration(float knockbackpixel) { return knockbackpixel * 0.3f; }
+	inline void SetNotMove(bool b) { this->mNotMove = b; }
+
+	inline eLookat GetLookAt() {
+		return mpData->mPlayerLookat;
+	}
 
 	static void WeakPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Weak_Punch); }
 	static void StrongPunchCommand(ChAnimation* character) { character->Attack(eAnimStatus::Strong_Punch); }
