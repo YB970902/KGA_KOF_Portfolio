@@ -23,5 +23,6 @@ public:
 	void Render(HDC hdc);
 
 	inline void SetTime(int time) { mCurTime = time; }
+	inline int GetTime() { return mCurTime; }
 };
 

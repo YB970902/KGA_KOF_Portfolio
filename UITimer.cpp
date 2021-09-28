@@ -30,10 +30,6 @@ void UITimer::Update()
 	{
 		mElapseTime = 0;
 		mCurTime--;
-		if (mCurTime < 0)
-		{
-			MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
-		}
 	}
 }
 
