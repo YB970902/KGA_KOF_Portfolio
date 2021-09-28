@@ -189,7 +189,7 @@ void AnimationScene::Enter()
 	mpPlayer1Mugshot = new Image();
 	mpPlayer2Mugshot = new Image();
 
-	switch (Player1)
+	switch (g_Player1)
 	{
 	case 1:
 		mpPlayer1Mugshot->Init("Image/UI/Mary.bmp", 75, 100, true, RGB(255, 0, 255));
@@ -204,7 +204,7 @@ void AnimationScene::Enter()
 		break;
 	}
 
-	switch (Player2)
+	switch (g_Player2)
 	{
 	case 1:
 		mpPlayer2Mugshot->Init("Image/UI/Mary.bmp", 75, 100, 1, 1, true, RGB(255, 0, 255), true);
