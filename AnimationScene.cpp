@@ -270,230 +270,305 @@ void AnimationScene::Update()
 		}
 	}
 
-/*	if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && MGR_KEY->IsStayKeyDown(VK_LEFT))
-	{
-		mBackgroundPosX += 6;
-		mpPlayer1->SetNotMove(true);
-		mpPlayer2->SetNotMove(true);
-	}
-	else if (mBackgroundPosX > -600 && MGR_KEY->IsStayKeyDown('D') && MGR_KEY->IsStayKeyDown(VK_RIGHT))
-	{
-		mBackgroundPosX -= 6;
-		mpPlayer1->SetNotMove(true);
-		mpPlayer2->SetNotMove(true);
-	}
-	else*/ if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('D') && mpPlayer1->GetShape().left == mCameraSize.left)
-	{
-		if (!(mpPlayer2->GetShape().right >= (mCameraSize.right)))
-		{
-			mpPlayer2->SetPosX(-6);
-			mBackgroundPosX += 6;
-		}
-	}
-	else if (mBackgroundPosX > -600 && MGR_KEY->IsStayKeyDown(VK_RIGHT) && mpPlayer2->GetShape().right == mCameraSize.right)
-	{
-		if (!(mpPlayer1->GetShape().left <= (mCameraSize.left)))
-		{
-			mpPlayer1->SetPosX(6);
-			mBackgroundPosX -= 6;
-		}
-	}
+	/*   if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('A') && MGR_KEY->IsStayKeyDown(VK_LEFT))
+	   {
+		  mBackgroundPosX += 6;
+		  mpPlayer1->SetNotMove(true);
+		  mpPlayer2->SetNotMove(true);
+	   }
+	   else if (mBackgroundPosX > -600 && MGR_KEY->IsStayKeyDown('D') && MGR_KEY->IsStayKeyDown(VK_RIGHT))
+	   {
+		  mBackgroundPosX -= 6;
+		  mpPlayer1->SetNotMove(true);
+		  mpPlayer2->SetNotMove(true);
+	   }
+	   else*/ if (mBackgroundPosX < 600 && MGR_KEY->IsStayKeyDown('D') && mpPlayer1->GetShape().left == mCameraSize.left)
+	   {
+		   if (!(mpPlayer2->GetShape().right >= (mCameraSize.right)))
+		   {
+			   mpPlayer2->SetPosX(-6);
+			   mBackgroundPosX += 6;
+		   }
+	   }
+	   else if (mBackgroundPosX > -600 && MGR_KEY->IsStayKeyDown(VK_RIGHT) && mpPlayer2->GetShape().right == mCameraSize.right)
+	   {
+		   if (!(mpPlayer1->GetShape().left <= (mCameraSize.left)))
+		   {
+			   mpPlayer1->SetPosX(6);
+			   mBackgroundPosX -= 6;
+		   }
+	   }
 
-	if (mpPlayer1->GetData()->mPlayerAct != eActing::Damaged && mpPlayer1->GetData()->mPlayerAct != eActing::Dead)
-	{
+	   if (mpPlayer1->GetData()->mPlayerAct != eActing::Damaged && mpPlayer1->GetData()->mPlayerAct != eActing::Dead)
+	   {
 
-		if (mpPlayer1->GetData()->mIsAttack == false)
-		{
-			if (mpPlayer1->GetData()->mPlayerLookat == eLookat::Left_Lookat)
-			{
-				mDistance = abs(mpPlayer1->GetShape().left) - abs(mpPlayer1->GetShape().right);
-			}
-			else if (mpPlayer1->GetData()->mPlayerLookat == eLookat::Right_Lookat)
-			{
-				mDistance = abs(mpPlayer2->GetShape().left) - abs(mpPlayer1->GetShape().right);
-			}
+		   if (mpPlayer1->GetData()->mIsAttack == false)
+		   {
+			   if (mpPlayer1->GetData()->mPlayerLookat == eLookat::Left_Lookat)
+			   {
+				   mDistance = abs(mpPlayer1->GetShape().left) - abs(mpPlayer1->GetShape().right);
+			   }
+			   else if (mpPlayer1->GetData()->mPlayerLookat == eLookat::Right_Lookat)
+			   {
+				   mDistance = abs(mpPlayer2->GetShape().left) - abs(mpPlayer1->GetShape().right);
+			   }
 
-			if (MGR_KEY->IsOnceKeyDown('A'))
-			{
-				if (NearMaxPixel > mDistance)
-				{
-					mpNearWeakPunch1->Execute();
-				}
-				else
-				{
-					mpWeakPunch1->Execute();
-				}
-			}
-			else if (MGR_KEY->IsOnceKeyDown('Q'))
-			{
-				if (NearMaxPixel > mDistance)
-				{
-					mpNearStrongPunch1->Execute();
-				}
-				else
-				{
-					mpStrongPunch1->Execute();
-				}
-			}
-			else if (MGR_KEY->IsOnceKeyDown('S'))
-			{
-				if (NearMaxPixel > mDistance)
-				{
-					mpNearWeakKick1->Execute();
-				}
-				else
-				{
-					mpWeakKick1->Execute();
-				}
-			}
-			else if (MGR_KEY->IsOnceKeyDown('W'))
-			{
-				if (NearMaxPixel > mDistance)
-				{
-					mpNearStrongKick1->Execute();
-				}
-				else
-				{
-					mpStrongKick1->Execute();
-				}
-			}
-		}
+			   if (MGR_KEY->IsOnceKeyDown('A'))
+			   {
+				   if (NearMaxPixel > mDistance)
+				   {
+					   mpNearWeakPunch1->Execute();
+				   }
+				   else
+				   {
+					   mpWeakPunch1->Execute();
+				   }
+			   }
+			   else if (MGR_KEY->IsOnceKeyDown('Q'))
+			   {
+				   if (NearMaxPixel > mDistance)
+				   {
+					   mpNearStrongPunch1->Execute();
+				   }
+				   else
+				   {
+					   mpStrongPunch1->Execute();
+				   }
+			   }
+			   else if (MGR_KEY->IsOnceKeyDown('S'))
+			   {
+				   if (NearMaxPixel > mDistance)
+				   {
+					   mpNearWeakKick1->Execute();
+				   }
+				   else
+				   {
+					   mpWeakKick1->Execute();
+				   }
+			   }
+			   else if (MGR_KEY->IsOnceKeyDown('W'))
+			   {
+				   if (NearMaxPixel > mDistance)
+				   {
+					   mpNearStrongKick1->Execute();
+				   }
+				   else
+				   {
+					   mpStrongKick1->Execute();
+				   }
+			   }
+		   }
 
-		if (mpPlayer1->GetData()->mPlayerAct != eActing::Act_Attack)
-		{
-			if (MGR_KEY->IsStayKeyDown('D'))
-			{
-				mpMoveLeft1->Execute();
-			}
-			else if (MGR_KEY->IsStayKeyDown('G'))
-			{
-				mpMoveRight1->Execute();
-			}
-			else
-			{
-				if (mpPlayer1->GetData()->mPlayerAct != eActing::Act_Idle)
-				{
-					mpPlayer1->SetFrameX(0);
-				}
-				mpPlayer1->GetData()->mPlayerAct = eActing::Act_Idle;
-				mpPlayer1->GetData()->mPlayerStatus = eAnimStatus::Idle;
-			}
-		}
-	}
+		   if (mpPlayer1->GetData()->mPlayerAct != eActing::Act_Attack)
+		   {
+			   if (MGR_KEY->IsStayKeyDown('D'))
+			   {
+				   mpMoveLeft1->Execute();
+			   }
+			   else if (MGR_KEY->IsStayKeyDown('G'))
+			   {
+				   mpMoveRight1->Execute();
+			   }
+			   else
+			   {
+				   if (mpPlayer1->GetData()->mPlayerAct != eActing::Act_Idle)
+				   {
+					   mpPlayer1->SetFrameX(0);
+				   }
+				   mpPlayer1->GetData()->mPlayerAct = eActing::Act_Idle;
+				   mpPlayer1->GetData()->mPlayerStatus = eAnimStatus::Idle;
+			   }
+		   }
+	   }
 
-	if (mpPlayer2->GetData()->mPlayerAct != eActing::Damaged && mpPlayer2->GetData()->mPlayerAct != eActing::Dead)
-	{
-		if (mpPlayer2->GetData()->mIsAttack == false)
-		{
-			if (mpPlayer2->GetData()->mPlayerLookat == eLookat::Left_Lookat)
-			{
-				mDistance = abs(mpPlayer2->GetShape().left) - abs(mpPlayer1->GetShape().right);
-			}
-			else if (mpPlayer2->GetData()->mPlayerLookat == eLookat::Right_Lookat)
-			{
-				mDistance = abs(mpPlayer2->GetShape().right) - abs(mpPlayer1->GetShape().left);
-			}
+	   if (mpPlayer2->GetData()->mPlayerAct != eActing::Damaged && mpPlayer2->GetData()->mPlayerAct != eActing::Dead)
+	   {
+		   if (mpPlayer2->GetData()->mIsAttack == false)
+		   {
+			   if (mpPlayer2->GetData()->mPlayerLookat == eLookat::Left_Lookat)
+			   {
+				   mDistance = abs(mpPlayer2->GetShape().left) - abs(mpPlayer1->GetShape().right);
+			   }
+			   else if (mpPlayer2->GetData()->mPlayerLookat == eLookat::Right_Lookat)
+			   {
+				   mDistance = abs(mpPlayer2->GetShape().right) - abs(mpPlayer1->GetShape().left);
+			   }
 
-			if (MGR_KEY->IsOnceKeyDown('K'))
-			{
-				if (NearMaxPixel > mDistance) { mpNearWeakPunch2->Execute(); }
-				else { mpWeakPunch2->Execute(); }
-			}
-			else if (MGR_KEY->IsOnceKeyDown('I'))
-			{
-				if (NearMaxPixel > mDistance) { mpNearStrongPunch2->Execute(); }
-				else { mpStrongPunch2->Execute(); }
-			}
-			else if (MGR_KEY->IsOnceKeyDown('L'))
-			{
-				if (NearMaxPixel > mDistance) { mpNearWeakKick2->Execute(); }
-				else { mpWeakKick2->Execute(); }
-			}
-			else if (MGR_KEY->IsOnceKeyDown('O'))
-			{
-				if (NearMaxPixel > mDistance) { mpNearStrongKick2->Execute(); }
-				else { mpStrongKick2->Execute(); }
-			}
-		}
+			   if (MGR_KEY->IsOnceKeyDown('K'))
+			   {
+				   if (NearMaxPixel > mDistance) { mpNearWeakPunch2->Execute(); }
+				   else { mpWeakPunch2->Execute(); }
+			   }
+			   else if (MGR_KEY->IsOnceKeyDown('I'))
+			   {
+				   if (NearMaxPixel > mDistance) { mpNearStrongPunch2->Execute(); }
+				   else { mpStrongPunch2->Execute(); }
+			   }
+			   else if (MGR_KEY->IsOnceKeyDown('L'))
+			   {
+				   if (NearMaxPixel > mDistance) { mpNearWeakKick2->Execute(); }
+				   else { mpWeakKick2->Execute(); }
+			   }
+			   else if (MGR_KEY->IsOnceKeyDown('O'))
+			   {
+				   if (NearMaxPixel > mDistance) { mpNearStrongKick2->Execute(); }
+				   else { mpStrongKick2->Execute(); }
+			   }
+		   }
 
-		if (mpPlayer2->GetData()->mPlayerAct != eActing::Act_Attack)
-		{
-			if (MGR_KEY->IsStayKeyDown(VK_LEFT))
-			{
-				mpMoveLeft2->Execute();
-			}
-			else if (MGR_KEY->IsStayKeyDown(VK_RIGHT))
-			{
-				mpMoveRight2->Execute();
-			}
-			else
-			{
-				if (mpPlayer2->GetData()->mPlayerAct != eActing::Act_Idle)
-				{
-					mpPlayer2->SetFrameX(0);
-				}
-				mpPlayer2->GetData()->mPlayerAct = eActing::Act_Idle;
-				mpPlayer2->GetData()->mPlayerStatus = eAnimStatus::Idle;
-			}
-		}
-	}
+		   if (mpPlayer2->GetData()->mPlayerAct != eActing::Act_Attack)
+		   {
+			   if (MGR_KEY->IsStayKeyDown(VK_LEFT))
+			   {
+				   mpMoveLeft2->Execute();
+			   }
+			   else if (MGR_KEY->IsStayKeyDown(VK_RIGHT))
+			   {
+				   mpMoveRight2->Execute();
+			   }
+			   else
+			   {
+				   if (mpPlayer2->GetData()->mPlayerAct != eActing::Act_Idle)
+				   {
+					   mpPlayer2->SetFrameX(0);
+				   }
+				   mpPlayer2->GetData()->mPlayerAct = eActing::Act_Idle;
+				   mpPlayer2->GetData()->mPlayerStatus = eAnimStatus::Idle;
+			   }
+		   }
+	   }
 
-	mpPlayer1Bar->SetValue(mpPlayer1->GetHPWeight());
-	mpPlayer2Bar->SetValue(mpPlayer2->GetHPWeight());
+	   mpPlayer1Bar->SetValue(mpPlayer1->GetHPWeight());
+	   mpPlayer2Bar->SetValue(mpPlayer2->GetHPWeight());
 
-	mpTimer->Update();
-	if (mpTimer->GetTime() < 0)
-	{
-		MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
-		return;
-	}
-	
-	mpPlayer1->Update();
+	   mpTimer->Update();
+	   if (mpTimer->GetTime() == 0)
+	   {
+		   mpTimer->SetTime(-1);
+		   if (mpPlayer1->GetHP() < mpPlayer2->GetHP())
+		   {
+			   mpPlayer1->SetFrameX(0);
 
-	mpPlayer2->Update();
+			   mpPlayer1->AllOffHitBox();
 
-	if (mpPlayer1->GetHP() <= 0 || mpPlayer2->GetHP() <= 0)
-	{
-		SetTimer(g_hWnd, 0, 200, NULL);
-		if (bf.SourceConstantAlpha >= 250)
-		{
-			bf.SourceConstantAlpha = 255;
+			   mpPlayer1->GetData()->mIsDead = true;
+			   mpPlayer1->GetData()->mPlayerAct = eActing::Dead;
+			   mpPlayer1->GetData()->mPlayerStatus = eAnimStatus::Dead;
+		   }
+		   else if (mpPlayer1->GetHP() > mpPlayer2->GetHP())
+		   {
+			   mpPlayer2->SetFrameX(0);
 
-			Sleep(2000);
-			mbPrintEffect1 = false;
-			mbPrintEffect2 = false;
+			   mpPlayer2->AllOffHitBox();
 
-			if (mpPlayer1->GetHP() <= 0)
-			{
-				g_bWinner = false;
-			}
-			else 
-			{
-				g_bWinner = true;
-			}
-			MGR_SCN->ChangeScene(eSceneTag::EndingScene);
-			SetTimer(g_hWnd, 0, 10, NULL);
-			return;
-		}
-		else
-		{
-			bf.SourceConstantAlpha += 10;
-		}
-	}
+			   mpPlayer2->GetData()->mIsDead = true;
+			   mpPlayer2->GetData()->mPlayerAct = eActing::Dead;
+			   mpPlayer2->GetData()->mPlayerStatus = eAnimStatus::Dead;
+		   }
+		   else
+		   {
+			   mpPlayer1->SetFrameX(0);
 
-	if (MGR_KEY->IsOnceKeyDown('1'))
-	{
-		if (mpPlayer1->GetPrintHitBox() == false)
-		{
-			mpPlayer1->SetPrintHitBox(true);
-			mpPlayer2->SetPrintHitBox(true);
-		}
-		else
-		{
-			mpPlayer1->SetPrintHitBox(false);
-			mpPlayer2->SetPrintHitBox(false);
-		}
-	}
+			   mpPlayer1->AllOffHitBox();
+
+			   mpPlayer1->GetData()->mIsDead = true;
+			   mpPlayer1->GetData()->mPlayerAct = eActing::Dead;
+			   mpPlayer1->GetData()->mPlayerStatus = eAnimStatus::Dead;
+
+			   mpPlayer2->SetFrameX(0);
+
+			   mpPlayer2->AllOffHitBox();
+
+			   mpPlayer2->GetData()->mIsDead = true;
+			   mpPlayer2->GetData()->mPlayerAct = eActing::Dead;
+			   mpPlayer2->GetData()->mPlayerStatus = eAnimStatus::Dead;
+		   }
+	   }
+	   else if (mpTimer->GetTime() < 0)
+	   {
+
+		   SetTimer(g_hWnd, 0, 200, NULL);
+		   if (bf.SourceConstantAlpha >= 250)
+		   {
+			   bf.SourceConstantAlpha = 255;
+
+			   Sleep(2000);
+			   mbPrintEffect1 = false;
+			   mbPrintEffect2 = false;
+
+			   if (mpPlayer1->GetHP() < mpPlayer2->GetHP())
+			   {
+				   SetTimer(g_hWnd, 0, 10, NULL);
+				   g_bWinner = false;
+				   MGR_SCN->ChangeScene(eSceneTag::EndingScene);
+				   return;
+			   }
+			   else if (mpPlayer1->GetHP() > mpPlayer2->GetHP())
+			   {
+				   SetTimer(g_hWnd, 0, 10, NULL);
+				   g_bWinner = true;
+				   MGR_SCN->ChangeScene(eSceneTag::EndingScene);
+				   return;
+			   }
+			   else
+			   {
+				   MGR_SCN->ChangeScene(eSceneTag::OpeningScene);
+				   SetTimer(g_hWnd, 0, 10, NULL);
+				   return;
+			   }
+		   }
+		   else
+		   {
+			   bf.SourceConstantAlpha += 10;
+		   }
+	   }
+
+	   mpPlayer1->Update();
+
+	   mpPlayer2->Update();
+
+	   if (mpPlayer1->GetHP() <= 0 || mpPlayer2->GetHP() <= 0)
+	   {
+		   SetTimer(g_hWnd, 0, 200, NULL);
+		   if (bf.SourceConstantAlpha >= 250)
+		   {
+			   bf.SourceConstantAlpha = 255;
+
+			   Sleep(2000);
+			   mbPrintEffect1 = false;
+			   mbPrintEffect2 = false;
+
+			   if (mpPlayer1->GetHP() <= 0)
+			   {
+				   g_bWinner = false;
+			   }
+			   else
+			   {
+				   g_bWinner = true;
+			   }
+			   MGR_SCN->ChangeScene(eSceneTag::EndingScene);
+			   SetTimer(g_hWnd, 0, 10, NULL);
+			   return;
+		   }
+		   else
+		   {
+			   bf.SourceConstantAlpha += 10;
+		   }
+	   }
+
+	   if (MGR_KEY->IsOnceKeyDown('1'))
+	   {
+		   if (mpPlayer1->GetPrintHitBox() == false)
+		   {
+			   mpPlayer1->SetPrintHitBox(true);
+			   mpPlayer2->SetPrintHitBox(true);
+		   }
+		   else
+		   {
+			   mpPlayer1->SetPrintHitBox(false);
+			   mpPlayer2->SetPrintHitBox(false);
+		   }
+	   }
 
 }
 
